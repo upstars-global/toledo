@@ -7,6 +7,7 @@
       "height": 900
     }
   ],
+  "openReport": false,
   "onBeforeScript": "puppet/onBefore.js",
   "onReadyScript": "puppet/onReady.js",
   "scenarios": [],

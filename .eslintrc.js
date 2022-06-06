@@ -16,15 +16,10 @@ module.exports = exports = {
         OneSignal: true,
     },
 
-    plugins: [
-        "testcafe",
-    ],
-
     extends: [
         "eslint:recommended",
-        "plugin:testcafe/recommended",
-        "plugin:vue/base",
-        "plugin:vue/recommended",
+        // "plugin:vue/base",
+        // "plugin:vue/recommended",
     ],
 
     parserOptions: {
@@ -231,45 +226,45 @@ module.exports = exports = {
         "spaced-comment": [ ERROR, "always" ],
         "wrap-regex": ERROR,
         "comma-dangle": [ WARN, "always-multiline" ],
-        "vue/html-closing-bracket-newline": [ OFF, {
-            singleline: "never",
-            multiline: "always",
-        } ],
-        "vue/max-attributes-per-line": [ OFF, {
-            singleline: {
-                max: 5,
-                allowFirstLine: true,
-            },
-            multiline: {
-                max: 1,
-                allowFirstLine: false,
-            },
-        } ],
-        "vue/no-multi-spaces": WARN,
-        "vue/array-bracket-spacing": [ WARN, "always", {
-            singleValue: true,
-            objectsInArrays: true,
-            arraysInArrays: true,
-        } ],
-        "vue/no-mutating-props": OFF,
-        "vue/return-in-computed-property": OFF,
-        "vue/no-unused-components": [ "error", {
-            ignoreWhenBindingPresent: true,
-        } ],
-        "vue/no-unused-vars": OFF,
-        "vue/require-prop-type-constructor": OFF,
-        "vue/valid-v-model": OFF,
-        "vue/no-use-v-if-with-v-for": OFF,
-        "vue/html-indent": [ "error", 4, {
-            attribute: 1,
-            baseIndent: 1,
-            closeBracket: 0,
-            alignAttributesVertically: true,
-            ignores: [],
-        } ],
-        "vue/multi-word-component-names": OFF,
-        "vue/no-v-html": OFF,
-        "vue/require-default-prop": OFF,
+        // "vue/html-closing-bracket-newline": [ OFF, {
+        //     singleline: "never",
+        //     multiline: "always",
+        // } ],
+        // "vue/max-attributes-per-line": [ OFF, {
+        //     singleline: {
+        //         max: 5,
+        //         allowFirstLine: true,
+        //     },
+        //     multiline: {
+        //         max: 1,
+        //         allowFirstLine: false,
+        //     },
+        // } ],
+        // "vue/no-multi-spaces": WARN,
+        // "vue/array-bracket-spacing": [ WARN, "always", {
+        //     singleValue: true,
+        //     objectsInArrays: true,
+        //     arraysInArrays: true,
+        // } ],
+        // "vue/no-mutating-props": OFF,
+        // "vue/return-in-computed-property": OFF,
+        // "vue/no-unused-components": [ "error", {
+        //     ignoreWhenBindingPresent: true,
+        // } ],
+        // "vue/no-unused-vars": OFF,
+        // "vue/require-prop-type-constructor": OFF,
+        // "vue/valid-v-model": OFF,
+        // "vue/no-use-v-if-with-v-for": OFF,
+        // "vue/html-indent": [ "error", 4, {
+        //     attribute: 1,
+        //     baseIndent: 1,
+        //     closeBracket: 0,
+        //     alignAttributesVertically: true,
+        //     ignores: [],
+        // } ],
+        // "vue/multi-word-component-names": OFF,
+        // "vue/no-v-html": OFF,
+        // "vue/require-default-prop": OFF,
         "no-prototype-builtins": OFF,
     },
 };
