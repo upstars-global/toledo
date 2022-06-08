@@ -11,7 +11,7 @@
   "onBeforeScript": "puppet/onBefore.js",
   "onReadyScript": "puppet/onReady.js",
   "scenarios": [],
-  "report": ["browser"],
+  "report": ["browser","CI"],
   "engine": "puppeteer",
   "engineOptions": {
     "args": ["--no-sandbox"]

@@ -9,6 +9,7 @@ file.paths = {
     bitmaps_reference: `test${ project }/bitmaps_reference`,
     bitmaps_test: `test${ project }/bitmaps_test`,
     html_report: `test${ project }/html_report`,
+    ci_report:  `test${ project }/ci_report`,
     engine_scripts: "backstop_data/engine_scripts",
 };
 
@@ -52,8 +53,8 @@ pagesConfig.forEach((config) => {
 //   config: file
 // });
 // return;
-module.exports = function() {
-    return backstop("test", {
+module.exports = function(command) {
+    return backstop(command, {
         config: file,
     });
 };
