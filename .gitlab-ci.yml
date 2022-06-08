@@ -1,0 +1,19 @@
+stages:
+  - build
+
+variables:
+  DO_REGISTRY: registry.digitalocean.com/bbq
+  DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
+  DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
+  GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+
+build-package:
+  stage: build
+  script:
+    - echo "Building BackstopJS"
+    - docker build --tag ${GITLAB_IMAGE_TAG} --tag ${DO_IMAGE_TAG} --tag ${DO_IMAGE_TAG_ALTERNATIVE} .
+
+    - docker login -u ${DO_TOKEN} -p ${DO_TOKEN} ${DO_REGISTRY}
+    - docker push ${DO_IMAGE_TAG}
+    - docker push ${DO_IMAGE_TAG_ALTERNATIVE}
+    - docker logout ${DO_REGISTRY}
