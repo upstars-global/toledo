@@ -1,59 +1,64 @@
 const backstop = require("backstopjs");
 const fs = require("fs");
 
-const file = JSON.parse(fs.readFileSync("./defaultConfig.json"));
 const defaultScenarios = JSON.parse(fs.readFileSync("./defaultScenarios.json"));
 
-const project = "alpa";
-file.paths = {
-    bitmaps_reference: `test${ project }/bitmaps_reference`,
-    bitmaps_test: `test${ project }/bitmaps_test`,
-    html_report: `test${ project }/html_report`,
-    ci_report:  `test${ project }/ci_report`,
-    engine_scripts: "backstop_data/engine_scripts",
-};
+function getPaths(project) {
+    return {
+        bitmaps_reference: `test${ project }/bitmaps_reference`,
+        bitmaps_test: `test${ project }/bitmaps_test`,
+        html_report: `test${ project }/html_report`,
+        ci_report:  `test${ project }/ci_report`,
+        engine_scripts: "backstop_data/engine_scripts",
+    };
+}
 
-const hostName = "rocketplay.com";
-const pagesConfig = [
-    {
-        label: "BackstopJS Homepage",
-        url: `https://${ hostName }/`,
-    },
-    {
-        label: "BackstopJS Login",
-        url: "https://rocketplay.com/",
-        clickSelector: ".enter-btns-log",
-        postInteractionWait: 1500,
-    },
-    {
-        label: "BackstopJS Registration",
-        url: "https://rocketplay.com/",
-        clickSelector: ".enter-btns-reg",
-        postInteractionWait: 1500,
-    },
-    {
-        label: "BackstopJS Tournaments",
-        url: "https://rocketplay.com/tournaments/all",
-    },
-    {
-        label: "BackstopJS Quest",
-        url: "https://rocketplay.com/action/gravity-rise",
-    },
-];
+function getScenarios(hostName) {
+    const pagesConfig = [
+        {
+            label: "BackstopJS Homepage",
+            url: `https://${ hostName }/`,
+        },
+        {
+            label: "BackstopJS Login",
+            url: `https://${ hostName }/`,
+            clickSelector: ".enter-btns-log",
+            postInteractionWait: 1500,
+        },
+        {
+            label: "BackstopJS Registration",
+            url: `https://${ hostName }/`,
+            clickSelector: ".enter-btns-reg",
+            postInteractionWait: 1500,
+        },
+        {
+            label: "BackstopJS Tournaments",
+            url: `https://${ hostName }/tournaments/all`,
+        },
+        {
+            label: "BackstopJS Quest",
+            url: `https://${ hostName }/action/gravity-rise`,
+        },
+    ];
+    const scenarios = [];
 
-pagesConfig.forEach((config) => {
-    file.scenarios.push({
-        ...defaultScenarios,
-        ...config,
+    pagesConfig.forEach((config) => {
+        scenarios.push({
+            ...defaultScenarios,
+            ...config,
+        });
     });
-});
+
+    return scenarios;
+}
 
 
-// backstop("reference", {
-//   config: file
-// });
-// return;
-module.exports = function(command) {
+module.exports = function(command, { hostName, project }) {
+    const file = JSON.parse(fs.readFileSync("./defaultConfig.json"));
+
+    file.paths = getPaths(project);
+    file.scenarios = getScenarios(hostName);
+
     return backstop(command, {
         config: file,
     });

@@ -22,6 +22,11 @@
             margin: 0 1rem;
         }
 
+        table {
+            display: inline-table;
+            margin-right: 1rem;
+        }
+
         .fe-preloader {
             position: absolute;
             top: 0;
@@ -54,17 +59,28 @@
     </style>
     <script>
       window.testList = [];
-      fetch("/api/test-list").then((res) => {
+      fetch("/api/test-list?project=alpa").then((res) => {
         return res.json();
       }).then((res) => {
         res.forEach((test) => {
           let row = document.createElement('tr');
           const dateString = test.slice(0, 4) + "-" + test.slice(4, 6) + "-" + test.slice(6, 8) + "T" + test.slice(9, 11) + ":" + test.slice(11, 13) + ":" + test.slice(13, 15);
-          row.innerHTML = `<th><a href="/report/${test}">${ dateString }</a></th>`;
+          row.innerHTML = `<th><a href="/report/${test}?project=alpa">${ dateString }</a></th>`;
 
-          window.tableBody.append(row);
+          window.tableBodyAlpa.append(row);
         })
-        testList = res;
+      });
+
+      fetch("/api/test-list?project=thor").then((res) => {
+        return res.json();
+      }).then((res) => {
+        res.forEach((test) => {
+          let row = document.createElement('tr');
+          const dateString = test.slice(0, 4) + "-" + test.slice(4, 6) + "-" + test.slice(6, 8) + "T" + test.slice(9, 11) + ":" + test.slice(11, 13) + ":" + test.slice(13, 15);
+          row.innerHTML = `<th><a href="/report/${test}?project=thor">${ dateString }</a></th>`;
+
+          window.tableBodyThor.append(row);
+        })
       });
 
       function showPreloader() {
@@ -75,9 +91,13 @@
 <body>
 <header>
     <form action="/start">
+        <input type="text" name="hostName" value="staging-mock.rocketplay.com">
+        <input type="text" name="project" value="alpa">
         <button type="submit" onclick="showPreloader()">Start new test</button>
     </form>
     <form action="/reference">
+        <input type="text" name="hostName" value="staging-mock.rocketplay.com">
+        <input type="text" name="project" value="alpa">
         <button type="submit" onclick="showPreloader()">Create new reference</button>
     </form>
 </header>
@@ -85,10 +105,20 @@
     <table>
         <thead>
             <tr>
-                <th><h2>Test</h2></th>
+                <th><h2>Test alpa</h2></th>
             </tr>
         </thead>
-        <tbody id="tableBody">
+        <tbody id="tableBodyAlpa">
+
+        </tbody>
+    </table>
+    <table>
+        <thead>
+        <tr>
+            <th><h2>Test thor</h2></th>
+        </tr>
+        </thead>
+        <tbody id="tableBodyThor">
 
         </tbody>
     </table>
