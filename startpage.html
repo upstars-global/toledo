@@ -91,13 +91,25 @@
 <body>
 <header>
     <form action="/start">
-        <input type="text" name="hostName" value="staging-mock.rocketplay.com">
-        <input type="text" name="project" value="alpa">
+        <select name="hostName">
+            <option value="staging-mock.rocketplay.com">staging-mock.rocketplay.com</option>
+            <option value="winspirit.com">winspirit.com</option>
+        </select>
+        <select name="project">
+            <option value="alpa">alpa</option>
+            <option value="thor">thor</option>
+        </select>
         <button type="submit" onclick="showPreloader()">Start new test</button>
     </form>
     <form action="/reference">
-        <input type="text" name="hostName" value="staging-mock.rocketplay.com">
-        <input type="text" name="project" value="alpa">
+        <select name="hostName">
+            <option value="staging-mock.rocketplay.com">staging-mock.rocketplay.com</option>
+            <option value="winspirit.com">winspirit.com</option>
+        </select>
+        <select name="project">
+            <option value="alpa">alpa</option>
+            <option value="thor">thor</option>
+        </select>
         <button type="submit" onclick="showPreloader()">Create new reference</button>
     </form>
 </header>

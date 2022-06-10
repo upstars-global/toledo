@@ -1,4 +1,3 @@
 node_modules/
-testalpa/bitmaps_test
-testalpa/html_report
-testalpa/ci_report
+bitmaps_test
+ci_report

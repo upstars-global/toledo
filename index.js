@@ -5,10 +5,9 @@ const defaultScenarios = JSON.parse(fs.readFileSync("./defaultScenarios.json"));
 
 function getPaths(project) {
     return {
-        bitmaps_reference: `test${ project }/bitmaps_reference`,
-        bitmaps_test: `test${ project }/bitmaps_test`,
-        html_report: `test${ project }/html_report`,
-        ci_report:  `test${ project }/ci_report`,
+        bitmaps_reference: `bitmaps_reference/${ project }`,
+        bitmaps_test: `bitmaps_test/${ project }`,
+        ci_report:  `ci_report/${ project }`,
         engine_scripts: "backstop_data/engine_scripts",
     };
 }
