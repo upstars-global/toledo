@@ -2,3 +2,31 @@ node_modules/
 backstop/test
 backstop/data/ci_report
 backstop/data/html_report
+
+.DS_Store
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode/*
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+!.vscode/*.code-snippets
+
+# script
+/vuexy-scripts
+
+# Docs
+/docs/.temp
