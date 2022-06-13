@@ -3,10 +3,17 @@ export default [
     title: 'Home',
     route: 'home',
     icon: 'HomeIcon',
-  },
-  {
-    title: 'Second Page',
-    route: 'second-page',
-    icon: 'FileIcon',
+    children: [
+      {
+        title: 'Project alpa',
+        route: { name: 'project-alpa' },
+        icon: 'FileIcon',
+      },
+      {
+        title: 'Project thor',
+        route: { name: 'project-thor' },
+        icon: 'FileIcon',
+      },
+    ],
   },
 ]

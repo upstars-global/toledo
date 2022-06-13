@@ -70,7 +70,6 @@
   }
 
   .navbar-header {
-    height: 100%;
     width: $menu-expanded-width;
     height: $navbar-height;
     position: relative;
@@ -79,7 +78,7 @@
     .navbar-brand {
       display: flex;
       align-items: center;
-      margin-top: 1.35rem;
+      margin-top: 1.05rem;
       font-size: inherit;
       .brand-logo img {
         max-width: 36px;

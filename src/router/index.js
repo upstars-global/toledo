@@ -25,25 +25,45 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/second-page',
-      name: 'second-page',
-      component: () => import('@/views/SecondPage.vue'),
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/Login.vue'),
       meta: {
-        pageTitle: 'Second Page',
+        layout: 'full',
+      },
+    },
+    {
+      path: '/alpa',
+      name: 'project-alpa',
+      component: () => import('@/views/ProjectPage.vue'),
+      props: {
+        project: 'alpa',
+      },
+      meta: {
+        pageTitle: 'Project alpa',
         breadcrumb: [
           {
-            text: 'Second Page',
+            text: 'Project Page',
             active: true,
           },
         ],
       },
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/Login.vue'),
+      path: '/thor',
+      name: 'project-thor',
+      component: () => import('@/views/ProjectPage.vue'),
+      props: {
+        project: 'thor',
+      },
       meta: {
-        layout: 'full',
+        pageTitle: 'Project thor',
+        breadcrumb: [
+          {
+            text: 'Project Page',
+            active: true,
+          },
+        ],
       },
     },
     {
