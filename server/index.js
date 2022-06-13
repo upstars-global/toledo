@@ -3,14 +3,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-const command = require('../backstop/index')
 const path = require('path')
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../startpage.html'))
-})
-
 const fs = require('fs')
+const command = require('../backstop/index')
 
 app.get('/api/test-list', (req, res) => {
   const tests = []
