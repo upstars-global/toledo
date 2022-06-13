@@ -1,14 +1,15 @@
 const backstop = require("backstopjs");
 const fs = require("fs");
 
-const defaultScenarios = JSON.parse(fs.readFileSync("./defaultScenarios.json"));
+const defaultScenarios = JSON.parse(fs.readFileSync("./backstop/config/defaultScenarios.json"));
 
 function getPaths(project) {
     return {
-        bitmaps_reference: `bitmaps_reference/${ project }`,
-        bitmaps_test: `bitmaps_test/${ project }`,
-        ci_report:  `ci_report/${ project }`,
-        engine_scripts: "backstop_data/engine_scripts",
+        bitmaps_reference: `backstop/reference/${ project }`,
+        bitmaps_test: `backstop/test/${ project }`,
+        html_report: `backstop/data/html_report/${ project }`,
+        ci_report:  `backstop/data/ci_report/${ project }`,
+        engine_scripts: "backstop/data/engine_scripts",
     };
 }
 
@@ -53,7 +54,7 @@ function getScenarios(hostName) {
 
 
 module.exports = function(command, { hostName, project }) {
-    const file = JSON.parse(fs.readFileSync("./defaultConfig.json"));
+    const file = JSON.parse(fs.readFileSync("./backstop/config/defaultConfig.json"));
 
     file.paths = getPaths(project);
     file.scenarios = getScenarios(hostName);

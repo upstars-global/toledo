@@ -1,5 +1,5 @@
 {
-  "cookiePath": "backstop_data/engine_scripts/cookies.json",
+  "cookiePath": "backstop/data/engine_scripts/cookies.json",
   "referenceUrl": "",
   "readyEvent": "",
   "readySelector": "",
