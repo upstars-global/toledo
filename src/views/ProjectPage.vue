@@ -29,6 +29,7 @@ import {
   BButton,
   BTable,
 } from 'bootstrap-vue'
+import { mapGetters } from 'vuex'
 
 // import { TableField } from '@core/components/table-fields/model'
 
@@ -48,23 +49,34 @@ export default {
     },
   },
 
-  data() {
-    return {
-      apiAddr: 'http://localhost:3000/',
-    }
+  computed: {
+    ...mapGetters('app', {
+      apiAddr: 'apiAddr',
+    }),
   },
 
   methods: {
     startNewTest() {
-      fetch(`${this.apiAddr}start?hostName=staging-mock.rocketplay.com&project=${this.project}`)
+      let hostName = 'staging-mock.rocketplay.com'
+      if (this.project === 'thor') {
+        hostName = 'winspirit.com'
+      }
+      fetch(`${this.apiAddr}api/start?hostName=${hostName}&project=${this.project}`)
     },
 
     createReference() {
-      fetch(`${this.apiAddr}reference?hostName=staging-mock.rocketplay.com&project=${this.project}`)
+      fetch(`${this.apiAddr}api/reference?hostName=staging-mock.rocketplay.com&project=${this.project}`)
     },
 
     onRowClick(row) {
-      window.location = `${this.apiAddr}report/${row.origin}?project=${this.project}`
+      this.$router.push({
+        name: 'report-page',
+        params: {
+          test: row.origin,
+          project: this.project,
+        },
+      })
+      // window.location = `${this.apiAddr}report/${row.origin}?project=${this.project}`
     },
 
     fetchTable(_, callback) {

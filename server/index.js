@@ -48,29 +48,33 @@ app.use('/reference', express.static('backstop/reference'))
 
 app.use(express.json())
 app.get('/report/:test', (req, res) => {
-  res.send(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title><style>body {margin: 0;}iframe {width: 100%;height: 100vh;border: 0;}</style></head><body><iframe src="/report?test=${req.params.test}&project=${req.query.project}"></iframe></body></html>`)
+  res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title><style>body {margin: 0;}iframe {width: 100%;height: 100vh;border: 0;}</style></head><body></body></html>')
 })
 
 app.get('/report', (req, res) => {
   res.sendFile(path.join(__dirname, '../assets/index.html'))
 })
 
-app.get('/reference', (req, res) => {
+app.get('/api/reference', (req, res) => {
   command('reference', req.query).then(() => {
     console.log('complete')
   }).catch(err => {
+    console.log(err)
     console.log('error')
   }).finally(() => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
     res.redirect('/')
   })
 })
-app.get('/start', async (req, res) => {
+app.get('/api/start', async (req, res) => {
   command('test', req.query).then(() => {
     console.log('complete')
   }).catch(err => {
+    console.log(err)
     console.log('error')
   }).finally(() => {
-    res.redirect('/')
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.send('ok')
   })
 })
 

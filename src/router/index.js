@@ -67,6 +67,25 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/report/:project/:test',
+      name: 'report-page',
+      component: () => import('@/views/ReportPage.vue'),
+      props: true,
+      meta: {
+        pageTitle: 'Report page',
+        breadcrumb: [
+          {
+            to: { name: 'LogList' },
+            text: 'Project page',
+          },
+          {
+            text: 'Report page',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
       path: '/error-404',
       name: 'error-404',
       component: () => import('@/views/error/Error404.vue'),

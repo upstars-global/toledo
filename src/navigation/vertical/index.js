@@ -5,12 +5,12 @@ export default [
     icon: 'HomeIcon',
     children: [
       {
-        title: 'Project alpa',
+        title: 'Alpa',
         route: { name: 'project-alpa' },
         icon: 'FileIcon',
       },
       {
-        title: 'Project thor',
+        title: 'Thor',
         route: { name: 'project-thor' },
         icon: 'FileIcon',
       },
