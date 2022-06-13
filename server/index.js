@@ -47,9 +47,6 @@ app.use('/test', express.static('backstop/test'))
 app.use('/reference', express.static('backstop/reference'))
 
 app.use(express.json())
-app.get('/report/:test', (req, res) => {
-  res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Title</title><style>body {margin: 0;}iframe {width: 100%;height: 100vh;border: 0;}</style></head><body></body></html>')
-})
 
 app.get('/report', (req, res) => {
   res.sendFile(path.join(__dirname, '../assets/index.html'))
@@ -77,6 +74,8 @@ app.get('/api/start', async (req, res) => {
     res.send('ok')
   })
 })
+
+app.use(express.static('dist'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

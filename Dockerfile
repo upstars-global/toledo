@@ -4,6 +4,7 @@ WORKDIR /data
 COPY ./ ./
 
 RUN yarn
+RUN yarn build
 RUN apk add chromium
 
 EXPOSE 3000
