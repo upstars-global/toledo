@@ -1,12 +1,12 @@
 {
   "name": "backstopjs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "backstop/index.js",
   "scripts": {
     "backstop": "node backstop/index.js",
     "server:debug": "node --inspect index",
-    "server": "node server"
+    "server": "node index"
   },
   "keywords": [],
   "author": "",
