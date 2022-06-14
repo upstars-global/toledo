@@ -29,5 +29,7 @@ export default {
 </script>
 
 <style>
-
+button {
+  margin-right: 1rem;
+}
 </style>

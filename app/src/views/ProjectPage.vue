@@ -13,13 +13,14 @@
     </b-card>
     <b-card no-body>
       <b-table
-        v-slot="{ }"
+        ref="table"
         hover
         :fields="selectedTableFields()"
         :items="fetchTable"
         @row-clicked="onRowClick"
       />
     </b-card>
+    <Preloader v-if="loading" />
   </div>
 </template>
 
@@ -31,7 +32,7 @@ import {
 } from 'bootstrap-vue'
 import { mapGetters } from 'vuex'
 
-// import { TableField } from '@core/components/table-fields/model'
+import Preloader from '@/components/Preloader.vue'
 
 export default {
   name: 'ProjectPage',
@@ -40,6 +41,7 @@ export default {
     BCard,
     BButton,
     BTable,
+    Preloader,
   },
 
   props: {
@@ -49,23 +51,41 @@ export default {
     },
   },
 
+  data() {
+    return {
+      loading: false,
+    }
+  },
+
   computed: {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
     }),
-  },
 
-  methods: {
-    startNewTest() {
+    hostName() {
       let hostName = 'staging-mock.rocketplay.com'
       if (this.project === 'thor') {
         hostName = 'winspirit.com'
       }
-      fetch(`${this.apiAddr}api/start?hostName=${hostName}&project=${this.project}`)
+
+      return hostName
+    },
+  },
+
+  methods: {
+    startNewTest() {
+      this.loading = true
+      fetch(`${this.apiAddr}api/start?hostName=${this.hostName}&project=${this.project}`).then(() => {
+        this.loading = false
+        this.$refs.table.refresh()
+      })
     },
 
     createReference() {
-      fetch(`${this.apiAddr}api/reference?hostName=staging-mock.rocketplay.com&project=${this.project}`)
+      this.loading = true
+      fetch(`${this.apiAddr}api/reference?hostName=${this.hostName}&project=${this.project}`).then(() => {
+        this.loading = false
+      })
     },
 
     onRowClick(row) {
