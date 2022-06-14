@@ -15,7 +15,7 @@ export default {
       if (windowWidth >= $themeBreakpoints.sm) return 'sm'
       return 'xs'
     },
-    apiAddr: () => '/',
+    apiAddr: () => 'http://localhost:3000/',
   },
   mutations: {
     UPDATE_WINDOW_WIDTH(state, val) {

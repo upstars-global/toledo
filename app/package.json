@@ -1,12 +1,9 @@
 {
-  "name": "backstopjs",
+  "name": "toledo-publick",
   "version": "1.0.0",
   "description": "",
-  "main": "backstop/index.js",
+  "main": "src/main.js",
   "scripts": {
-    "backstop": "node backstop/index.js",
-    "server:debug": "node --inspect server",
-    "server": "node server",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -15,8 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "backstopjs": "^5.4.3",
-    "express": "^4.18.1",
     "@casl/ability": "4.1.6",
     "@casl/vue": "1.1.1",
     "@fullcalendar/common": "5.x",

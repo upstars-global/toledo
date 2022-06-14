@@ -1,10 +1,11 @@
-node_modules/
-backstop/test
-backstop/data/ci_report
-backstop/data/html_report
+app/node_modules/
+server/node_modules/
+server/backstop/test
+server/backstop/data/ci_report
+server/backstop/data/html_report
 
 .DS_Store
-/dist
+app/dist
 
 # local env files
 .env.local

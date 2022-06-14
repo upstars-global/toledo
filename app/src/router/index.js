@@ -60,6 +60,10 @@ const router = new VueRouter({
         pageTitle: 'Project thor',
         breadcrumb: [
           {
+            text: 'Home',
+            to: '/',
+          },
+          {
             text: 'Project Page',
             active: true,
           },
@@ -75,7 +79,11 @@ const router = new VueRouter({
         pageTitle: 'Report page',
         breadcrumb: [
           {
-            to: { name: 'LogList' },
+            text: 'Home',
+            to: '/',
+          },
+          {
+            to: { name: 'project-alpa' },
             text: 'Project page',
           },
           {

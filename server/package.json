@@ -1,0 +1,21 @@
+{
+  "name": "backstopjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backstop/index.js",
+  "scripts": {
+    "backstop": "node backstop/index.js",
+    "server:debug": "node --inspect index",
+    "server": "node server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "backstopjs": "^5.4.3",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0"
+  }
+}
