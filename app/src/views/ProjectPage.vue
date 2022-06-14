@@ -72,6 +72,15 @@ export default {
     },
   },
 
+  watch: {
+    $route: {
+      immediate: true,
+      handler() {
+        this.$refs.table.refresh()
+      },
+    },
+  },
+
   methods: {
     startNewTest() {
       this.loading = true
