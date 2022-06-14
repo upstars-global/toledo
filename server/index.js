@@ -56,7 +56,7 @@ app.get('/api/reference', (req, res) => {
     console.log('error')
   }).finally(() => {
     res.setHeader('Access-Control-Allow-Origin', '*')
-    res.redirect('/')
+    res.send('ok')
   })
 })
 app.get('/api/start', async (req, res) => {
