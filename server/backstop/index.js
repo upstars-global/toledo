@@ -39,6 +39,10 @@ function getScenarios(hostName) {
             label: "BackstopJS Quest",
             url: `https://${ hostName }/action/gravity-rise`,
         },
+        {
+            label: "BackstopJS vip page",
+            url: `https://${ hostName }/vip`,
+        },
     ];
     const scenarios = [];
 
