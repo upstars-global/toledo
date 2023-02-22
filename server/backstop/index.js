@@ -17,15 +17,15 @@ function getScenarios(hostName) {
     const pagesConfig = [
         {
             label: "BackstopJS Homepage",
-            url: `https://${ hostName }/`,
+            url: `http://${ hostName }/`,
         },
         {
             label: "BackstopJS Login",
-            url: `https://${ hostName }/login`,
+            url: `http://${ hostName }/login`,
         },
         {
             label: "BackstopJS Registration",
-            url: `https://${ hostName }/registration`,
+            url: `http://${ hostName }/registration`,
         },
         // {
         //     label: "BackstopJS Tournaments",

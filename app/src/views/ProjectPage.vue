@@ -63,7 +63,7 @@ export default {
     }),
 
     hostName() {
-      let hostName = 'staging-mock.rocketplay.com'
+      let hostName = 'frontera-alpa-staging.alpa.svc.cluster.local:2004'
       if (this.project === 'thor') {
         hostName = 'winspirit.com'
       }
