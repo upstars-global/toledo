@@ -65,7 +65,7 @@ export default {
     hostName() {
       let hostName = 'staging-mock.rocketplay.com'
       if (this.project === 'thor') {
-        hostName = 'thor-staging.isitdomain.com'
+        hostName = 'winspirit.com'
       }
 
       return hostName

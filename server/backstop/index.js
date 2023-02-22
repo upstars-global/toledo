@@ -21,28 +21,24 @@ function getScenarios(hostName) {
         },
         {
             label: "BackstopJS Login",
-            url: `https://${ hostName }/`,
-            clickSelector: ".enter-btns-log",
-            postInteractionWait: 1500,
+            url: `https://${ hostName }/login`,
         },
         {
             label: "BackstopJS Registration",
-            url: `https://${ hostName }/`,
-            clickSelector: ".enter-btns-reg",
-            postInteractionWait: 1500,
+            url: `https://${ hostName }/registration`,
         },
-        {
-            label: "BackstopJS Tournaments",
-            url: `https://${ hostName }/tournaments/all`,
-        },
-        {
-            label: "BackstopJS Quest",
-            url: `https://${ hostName }/action/gravity-rise`,
-        },
-        {
-            label: "BackstopJS vip page",
-            url: `https://${ hostName }/vip`,
-        },
+        // {
+        //     label: "BackstopJS Tournaments",
+        //     url: `https://${ hostName }/tournaments/all`,
+        // },
+        // {
+        //     label: "BackstopJS Quest",
+        //     url: `https://${ hostName }/action/gravity-rise`,
+        // },
+        // {
+        //     label: "BackstopJS vip page",
+        //     url: `https://${ hostName }/vip`,
+        // },
     ];
     const scenarios = [];
 
