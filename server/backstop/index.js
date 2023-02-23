@@ -45,15 +45,15 @@ function getScenarios(hostName) {
         },
         {
             label: "support",
-            url: `https://${ hostName }/support`,
+            url: `http://${ hostName }/support`,
         },
         {
             label: "sport/registration",
-            url: `https://${ hostName }/sport/registration`,
+            url: `http://${ hostName }/sport/registration`,
         },
         {
             label: "sport/login",
-            url: `https://${ hostName }/sport/login`,
+            url: `http://${ hostName }/sport/login`,
         },
     ];
     const scenarios = [];
