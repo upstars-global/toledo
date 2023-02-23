@@ -5,6 +5,11 @@
       "label": "desktop",
       "width": 1440,
       "height": 900
+    },
+    {
+      "label": "mobile",
+      "width": 360,
+      "height": 800
     }
   ],
   "openReport": false,
