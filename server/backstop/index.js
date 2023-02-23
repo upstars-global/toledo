@@ -16,29 +16,45 @@ function getPaths(project) {
 function getScenarios(hostName) {
     const pagesConfig = [
         {
-            label: "BackstopJS Homepage",
+            label: "Homepage",
             url: `http://${ hostName }/`,
         },
         {
-            label: "BackstopJS Login",
+            label: "Login",
             url: `http://${ hostName }/login`,
         },
         {
-            label: "BackstopJS Registration",
+            label: "Registration",
             url: `http://${ hostName }/registration`,
         },
-        // {
-        //     label: "BackstopJS Tournaments",
-        //     url: `https://${ hostName }/tournaments/all`,
-        // },
-        // {
-        //     label: "BackstopJS Quest",
-        //     url: `https://${ hostName }/action/gravity-rise`,
-        // },
-        // {
-        //     label: "BackstopJS vip page",
-        //     url: `https://${ hostName }/vip`,
-        // },
+        {
+            label: "terms-and-conditions",
+            url: `http://${ hostName }/terms-and-conditions`,
+        },
+        {
+            label: "vip",
+            url: `http://${ hostName }/vip`,
+        },
+        {
+            label: "benefits-of-crypto",
+            url: `http://${ hostName }/benefits-of-crypto`,
+        },
+        {
+            label: "faq",
+            url: `http://${ hostName }/faq`,
+        },
+        {
+            label: "support",
+            url: `https://${ hostName }/support`,
+        },
+        {
+            label: "sport/registration",
+            url: `https://${ hostName }/sport/registration`,
+        },
+        {
+            label: "sport/login",
+            url: `https://${ hostName }/sport/login`,
+        },
     ];
     const scenarios = [];
 
