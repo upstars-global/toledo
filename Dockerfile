@@ -34,4 +34,5 @@ COPY --from=dev-server /data/node_modules /data/server/node_modules
 COPY --from=build /data/dist /data/app/dist
 
 EXPOSE 3000
-CMD cd server && yarn server
+EXPOSE 9229
+CMD cd server && yarn server:debug
