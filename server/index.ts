@@ -1,4 +1,5 @@
-const express = require('express')
+import express, { Request, Response } from "express";
+// const { startRoute } = require("./routes/start")
 
 const app = express()
 const port = 3000
@@ -8,9 +9,9 @@ const path = require('path')
 const fs = require('fs')
 const command = require('./backstop/index')
 
-app.get('/api/test-list', (req, res) => {
+app.get('/api/test-list', (req: Request, res: Response) => {
   const tests = []
-  fs.readdir(path.join(__dirname, `./backstop/test/${req.query.project}`), null, (err, files) => {
+  fs.readdir(path.join(__dirname, `./backstop/test/${req.query.project}`), null, (err: Error, files: string[]) => {
     if (err) {
       throw err
     }
@@ -23,18 +24,18 @@ app.get('/api/test-list', (req, res) => {
   })
 })
 
-app.get('/config.js', (req, res) => {
-  const referrer = new URL(req.headers.referer)
+app.get('/config.js', (req: Request, res: Response) => {
+  const referrer = new URL(String(req.headers.referer))
 
   fs.readFile(path.join(
     __dirname,
     `./backstop/test/${referrer.searchParams.get('project')}`,
     referrer.searchParams.get('test'),
     'report.json',
-  ), { encoding: 'utf8' }, (err, string) => {
+  ), { encoding: 'utf8' }, (err: Error, file: string) => {
     // string = string.replace(/\.\./bitmaps_reference/, "");
     res.setHeader('Content-Type', 'application/javascript')
-    res.send(`report(${string})`)
+    res.send(`report(${ file })`)
   })
 })
 
@@ -44,14 +45,14 @@ app.use('/reference', express.static('./backstop/reference'))
 
 app.use(express.json())
 
-app.get('/report', (req, res) => {
+app.get('/report', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, './assets/index.html'))
 })
 
-app.get('/api/reference', (req, res) => {
+app.get('/api/reference', (req: Request, res: Response) => {
   command('reference', req.query).then(() => {
     console.log('complete')
-  }).catch(err => {
+  }).catch((err: Error) => {
     console.log(err)
     console.log('error')
   }).finally(() => {
@@ -59,10 +60,10 @@ app.get('/api/reference', (req, res) => {
     res.send('ok')
   })
 })
-app.get('/api/start', async (req, res) => {
+app.get('/api/start', (req: Request, res: Response) => {
   command('test', req.query).then(() => {
     console.log('complete')
-  }).catch(err => {
+  }).catch((err: Error) => {
     console.log(err)
     console.log('error')
   }).finally(() => {
@@ -73,7 +74,7 @@ app.get('/api/start', async (req, res) => {
 
 app.use(express.static('../app/dist'))
 
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '../app/dist/index.html'))
 })
 

@@ -1,11 +1,20 @@
 module.exports = {
     root: true,
     env: {
+        es6: true,
+        amd: true,
         node: true,
+        jest: true,
+        browser: true,
     },
     extends: [],
     parserOptions: {
-        parser: 'babel-eslint',
+        parser: {
+            ts: "@typescript-eslint/parser",
+            js: "espree",
+        },
+        project: "./tsconfig.json",
+        extraFileExtensions: [ ".vue" ],
     },
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
