@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-// const { startRoute } = require("./routes/start")
+const startRoute = require("./routes/start")
 
 const app = express()
 const port = 3000
@@ -7,7 +7,7 @@ const port = 3000
 const path = require('path')
 
 const fs = require('fs')
-const command = require('./backstop/index')
+const command = require('./backstop')
 
 app.get('/api/test-list', (req: Request, res: Response) => {
   const tests = []
@@ -60,17 +60,8 @@ app.get('/api/reference', (req: Request, res: Response) => {
     res.send('ok')
   })
 })
-app.get('/api/start', (req: Request, res: Response) => {
-  command('test', req.query).then(() => {
-    console.log('complete')
-  }).catch((err: Error) => {
-    console.log(err)
-    console.log('error')
-  }).finally(() => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.send('ok')
-  })
-})
+
+app.get('/api/start', startRoute)
 
 app.use(express.static('../app/dist'))
 

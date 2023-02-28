@@ -69,11 +69,15 @@ function getScenarios(hostName) {
 }
 
 
-module.exports = function(command, { hostName, project }) {
+module.exports = function(command, { hostName, project, testId }) {
     const file = JSON.parse(fs.readFileSync("./backstop/config/defaultConfig.json"));
 
     file.paths = getPaths(project);
     file.scenarios = getScenarios(hostName);
+
+    if (testId) {
+        file.dynamicTestId = testId;
+    }
 
     return backstop(command, {
         config: file,
