@@ -15,7 +15,6 @@ function getPaths(project) {
 
 const getPages = require("./config/scenarios");
 function getScenarios(project, hostName) {
-    debugger;
     const pagesConfig = getPages.default(project)(hostName);
     const scenarios = [];
 

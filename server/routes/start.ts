@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import command from '../backstop'
+import SlackService from "../services/SlackService";
 
 module.exports = function startRoute(req: Request, res: Response) {
     const {
@@ -15,6 +16,7 @@ module.exports = function startRoute(req: Request, res: Response) {
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
+        SlackService.send(project as string, testId as string);
         console.log(err)
         console.log('error')
     }).finally(() => {
