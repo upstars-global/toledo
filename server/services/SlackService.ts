@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const chanelHook = "https://hooks.slack.com/services/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";
+
 export default {
     send: function send(project: string, testId: string) {
         if (!testId) {
@@ -10,7 +12,7 @@ export default {
             return;
         }
 
-        axios.post("https://hooks.slack.com/services/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", {
+        axios.post(chanelHook, {
             "text": `Test ${ testId } ended with errors`,
             "pretty": 1,
             "blocks": [
