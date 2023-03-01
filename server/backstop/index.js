@@ -13,49 +13,10 @@ function getPaths(project) {
     };
 }
 
-function getScenarios(hostName) {
-    const pagesConfig = [
-        {
-            label: "Homepage",
-            url: `http://${ hostName }/`,
-        },
-        {
-            label: "Login",
-            url: `http://${ hostName }/login`,
-        },
-        {
-            label: "Registration",
-            url: `http://${ hostName }/registration`,
-        },
-        {
-            label: "terms-and-conditions",
-            url: `http://${ hostName }/terms-and-conditions`,
-        },
-        {
-            label: "vip",
-            url: `http://${ hostName }/vip`,
-        },
-        {
-            label: "benefits-of-crypto",
-            url: `http://${ hostName }/benefits-of-crypto`,
-        },
-        {
-            label: "faq",
-            url: `http://${ hostName }/faq`,
-        },
-        {
-            label: "support",
-            url: `http://${ hostName }/support`,
-        },
-        {
-            label: "sport/registration",
-            url: `http://${ hostName }/sport/registration`,
-        },
-        {
-            label: "sport/login",
-            url: `http://${ hostName }/sport/login`,
-        },
-    ];
+const getPages = require("./config/scenarios");
+function getScenarios(project, hostName) {
+    debugger;
+    const pagesConfig = getPages.default(project)(hostName);
     const scenarios = [];
 
     pagesConfig.forEach((config) => {
@@ -73,7 +34,7 @@ module.exports = function(command, { hostName, project, testId }) {
     const file = JSON.parse(fs.readFileSync("./backstop/config/defaultConfig.json"));
 
     file.paths = getPaths(project);
-    file.scenarios = getScenarios(hostName);
+    file.scenarios = getScenarios(project, hostName);
 
     if (testId) {
         file.dynamicTestId = testId;
