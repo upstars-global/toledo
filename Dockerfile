@@ -35,4 +35,4 @@ COPY --from=build /data/dist /data/app/dist
 
 EXPOSE 3000
 EXPOSE 9229
-CMD cd server && yarn server:debug
+CMD cd server && yarn server
