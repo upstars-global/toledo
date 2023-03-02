@@ -33,7 +33,7 @@ export default {
                                 "text": "Result"
                             },
                             "style": "primary",
-                            "url": `https://toledo-staging.os.show/report/alpa/${ testId }`
+                            "url": `https://toledo-staging.upstr.to/report/alpa/${ testId }`
                         }
                     ]
                 }
