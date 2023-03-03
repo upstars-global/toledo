@@ -65,7 +65,7 @@ export default {
     hostName() {
       let hostName = 'frontera-alpa-staging-mock.alpa.svc.cluster.local:2004'
       if (this.project === 'thor') {
-        hostName = 'frontera-thor-staging.thor.svc.cluster.local:2004'
+        hostName = 'frontera-thor-staging-mock.thor.svc.cluster.local:2004'
       }
 
       return hostName
