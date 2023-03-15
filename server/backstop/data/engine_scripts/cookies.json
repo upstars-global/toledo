@@ -1,9 +1,9 @@
 [
   {
-    "domain": ".www.yourdomain.com",
+    "domain": "frontera-thor-staging-mock.thor.svc.cluster.local",
     "path": "/",
-    "name": "yourCookieName",
-    "value": "yourCookieValue",
+    "name": "_casino_session",
+    "value": "testpass@bbq.agency",
     "expirationDate": 1798790400,
     "hostOnly": false,
     "httpOnly": false,
