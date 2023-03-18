@@ -22,8 +22,8 @@
     "executablePath": "/usr/bin/chromium-browser",
     "args": ["--no-sandbox"]
   },
-  "asyncCaptureLimit": 5,
-  "asyncCompareLimit": 5,
+  "asyncCaptureLimit": 3,
+  "asyncCompareLimit": 3,
   "debug": false,
   "debugWindow": false
 }
