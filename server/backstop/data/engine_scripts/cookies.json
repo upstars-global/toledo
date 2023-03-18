@@ -1,6 +1,6 @@
 [
   {
-    "domain": "http://frontera-thor-staging-mock.thor.svc.cluster.local",
+    "domain": "http://frontera-alpa-staging-mock.alpa.svc.cluster.local",
     "path": "/",
     "name": "_casino_session",
     "value": "testpass@bbq.agency",
