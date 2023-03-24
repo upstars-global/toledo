@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 const startRoute = require("./routes/start")
+const testList = require("./routes/api/test-list")
 
 const app = express()
 const port = 3000
@@ -9,20 +10,7 @@ const path = require('path')
 const fs = require('fs')
 const command = require('./backstop')
 
-app.get('/api/test-list', (req: Request, res: Response) => {
-  const tests = []
-  fs.readdir(path.join(__dirname, `./backstop/test/${req.query.project}`), null, (err: Error, files: string[]) => {
-    if (err) {
-      throw err
-    }
-
-    const index = files.indexOf('.gitkeep')
-    files.splice(index, 1)
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader('Content-Type', 'application/json')
-    res.send(files)
-  })
-})
+app.get('/api/test-list', testList)
 
 app.get('/config.js', (req: Request, res: Response) => {
   const referrer = new URL(String(req.headers.referer))
