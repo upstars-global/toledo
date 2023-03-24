@@ -21,6 +21,22 @@ export default function getScenarios(hostName: string) {
         //     delay: 3000,
         // },
         {
+            label: "Quest",
+            url: `http://${ hostName }/action/quick-snatch`,
+            delay: 3000,
+        },
+        {
+            label: "Tournament",
+            url: `http://${ hostName }/tournaments/1017`,
+            delay: 3000,
+        },
+        {
+            label: "Lootbox auth",
+            url: `http://${ hostName }/rocket-wheel`,
+            cookiePath: "backstop/data/engine_scripts/cookies.json",
+            delay: 3000,
+        },
+        {
             label: "Profile",
             url: `http://${ hostName }/users/`,
             cookiePath: "backstop/data/engine_scripts/cookies.json",
