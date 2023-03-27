@@ -24,17 +24,5 @@ export default function getScenarios(hostName: string) {
             label: "Producer 'Playn & go'",
             url: `http://${ hostName }/producers/playngo`,
         },
-        {
-            label: "Active Promotions (Arena)",
-            url: `http://${ hostName }/arena`,
-        },
-        {
-            label: "Tournament page",
-            url: `http://${ hostName }/tournaments/1622532519rubi-s-Ruby-Play`,
-        },
-        {
-            label: "Action page (Mili)",
-            url: `http://${ hostName }/promo/letnij-rozygrysh`,
-        }
     ];
 }
