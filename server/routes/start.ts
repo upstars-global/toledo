@@ -1,16 +1,18 @@
+import { config } from 'dotenv'
 import { Request, Response } from 'express'
+config()
 import command from '../backstop'
 import SlackService from "../services/SlackService";
 import * as process from "process";
 
-const HOST_CONFIG: Record<string, string> = {
+export const HOST_CONFIG: Record<string, string> = {
     "alpa": String(process.env.ALPA_ADDR),
     "thor": String(process.env.THOR_ADDR)
 }
 
 console.log(HOST_CONFIG)
 
-module.exports = function startRoute(req: Request, res: Response) {
+export default function startRoute(req: Request, res: Response) {
     const {
         hostName,
         project,

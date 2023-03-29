@@ -90,10 +90,9 @@ export default {
 
     onRowClick(row) {
       this.$router.push({
-        name: 'report-page',
+        name: `report-page-${this.project}`,
         params: {
           test: row.origin,
-          project: this.project,
         },
       })
       // window.location = `${this.apiAddr}report/${row.origin}?project=${this.project}`

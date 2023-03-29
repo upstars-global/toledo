@@ -1,11 +1,10 @@
 import express, { Request, Response } from 'express'
-import { config } from 'dotenv'
+
 import path from 'path'
 import fs from 'fs'
 
-config()
+import startRoute, { HOST_CONFIG } from './routes/start'
 
-const startRoute = require('./routes/start.ts')
 const testList = require('./routes/api/test-list.ts')
 
 const app = express()
@@ -40,7 +39,15 @@ app.get('/report', (req: Request, res: Response) => {
 })
 
 app.get('/api/reference', (req: Request, res: Response) => {
-  command('reference', req.query).then(() => {
+  const {
+    hostName,
+    project,
+  } = req.query
+
+  command('reference', {
+    hostName: hostName || HOST_CONFIG[String(project)],
+    project,
+  }).then(() => {
     console.log('complete')
   }).catch((err: Error) => {
     console.log(err)

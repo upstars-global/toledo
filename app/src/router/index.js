@@ -72,7 +72,7 @@ const router = new VueRouter({
     },
     {
       path: '/report/thor/:test',
-      name: 'report-page',
+      name: 'report-page-thor',
       component: () => import('@/views/ReportPage.vue'),
       props: true,
       meta: {
@@ -96,7 +96,7 @@ const router = new VueRouter({
     },
     {
       path: '/report/alpa/:test',
-      name: 'report-page',
+      name: 'report-page-alpa',
       component: () => import('@/views/ReportPage.vue'),
       props: true,
       meta: {
