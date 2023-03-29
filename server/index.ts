@@ -1,13 +1,15 @@
-import express, { Request, Response } from "express";
-const startRoute = require("./routes/start")
-const testList = require("./routes/api/test-list")
+import express, { Request, Response } from 'express'
+import { config } from 'dotenv'
+import path from 'path'
+import fs from 'fs'
+
+config()
+
+const startRoute = require('./routes/start.ts')
+const testList = require('./routes/api/test-list.ts')
 
 const app = express()
 const port = 3000
-
-const path = require('path')
-
-const fs = require('fs')
 const command = require('./backstop')
 
 app.get('/api/test-list', testList)
@@ -18,12 +20,12 @@ app.get('/config.js', (req: Request, res: Response) => {
   fs.readFile(path.join(
     __dirname,
     `./backstop/test/${referrer.searchParams.get('project')}`,
-    referrer.searchParams.get('test'),
+    String(referrer.searchParams.get('test')),
     'report.json',
-  ), { encoding: 'utf8' }, (err: Error, file: string) => {
+  ), { encoding: 'utf8' }, (err: any, file: string) => {
     // string = string.replace(/\.\./bitmaps_reference/, "");
     res.setHeader('Content-Type', 'application/javascript')
-    res.send(`report(${ file })`)
+    res.send(`report(${file})`)
   })
 })
 
