@@ -61,15 +61,6 @@ export default {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
     }),
-
-    hostName() {
-      let hostName = 'frontera-alpa-staging-mock.alpa.svc.cluster.local:2004'
-      if (this.project === 'thor') {
-        hostName = 'frontera-thor-staging-mock.thor.svc.cluster.local:2004'
-      }
-
-      return hostName
-    },
   },
 
   watch: {
@@ -84,7 +75,7 @@ export default {
   methods: {
     startNewTest() {
       this.loading = true
-      fetch(`${this.apiAddr}api/start?hostName=${this.hostName}&project=${this.project}`).then(() => {
+      fetch(`${this.apiAddr}api/start?project=${this.project}`).then(() => {
         this.loading = false
         this.$refs.table.refresh()
       })
@@ -92,17 +83,16 @@ export default {
 
     createReference() {
       this.loading = true
-      fetch(`${this.apiAddr}api/reference?hostName=${this.hostName}&project=${this.project}`).then(() => {
+      fetch(`${this.apiAddr}api/reference?project=${this.project}`).then(() => {
         this.loading = false
       })
     },
 
     onRowClick(row) {
       this.$router.push({
-        name: 'report-page',
+        name: `report-page-${this.project}`,
         params: {
           test: row.origin,
-          project: this.project,
         },
       })
       // window.location = `${this.apiAddr}report/${row.origin}?project=${this.project}`
