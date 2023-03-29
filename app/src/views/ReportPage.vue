@@ -9,10 +9,6 @@ export default {
   name: 'ReportPage',
 
   props: {
-    project: {
-      type: String,
-      default: '',
-    },
     test: {
       type: String,
       default: '',
@@ -23,6 +19,9 @@ export default {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
     }),
+    project() {
+      return this.$route.meta.project
+    },
   },
 }
 </script>
