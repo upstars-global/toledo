@@ -20,5 +20,9 @@ export default function getScenarios(hostName: string) {
             label: "Category 'Top'",
             url: `http://${ hostName }/slots/top`,
         },
+        {
+            label: "Producer 'Playn & go'",
+            url: `http://${ hostName }/producers/playngo`,
+        },
     ];
 }
