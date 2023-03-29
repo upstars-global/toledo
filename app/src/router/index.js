@@ -71,12 +71,37 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/report/:project/:test',
+      path: '/report/thor/:test',
       name: 'report-page',
       component: () => import('@/views/ReportPage.vue'),
       props: true,
       meta: {
         pageTitle: 'Report page',
+        project: 'thor',
+        breadcrumb: [
+          {
+            text: 'Home',
+            to: '/',
+          },
+          {
+            to: { name: 'project-thor' },
+            text: 'Project page',
+          },
+          {
+            text: 'Report page',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/report/alpa/:test',
+      name: 'report-page',
+      component: () => import('@/views/ReportPage.vue'),
+      props: true,
+      meta: {
+        pageTitle: 'Report page',
+        project: 'alpa',
         breadcrumb: [
           {
             text: 'Home',
