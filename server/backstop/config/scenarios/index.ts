@@ -1,8 +1,15 @@
+import alpa from './alpa'
+import thor from './thor'
+
 const configs = {
-    "alpa": require("./alpa").default,
-    "thor": require("./thor").default,
+  alpa,
+  thor,
 }
 
-export default function (project: "alpa" | "thor") {
-    return configs[project];
+export default function getScenarios(project: "alpa" | "thor", host: string) {
+  let baseUrl = host
+  if (!baseUrl.startsWith('http')) {
+    baseUrl = `http://${baseUrl}`
+  }
+  return configs[project](baseUrl)
 }
