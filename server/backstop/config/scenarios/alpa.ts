@@ -1,4 +1,13 @@
 export default function getScenarios(host: string) {
+  let cookiePath = 'backstop/config/cookies/'
+  if (host === 'http://frontera-alpa-develop-mock.alpa.svc.cluster.local:2004') {
+    cookiePath = 'cookies-alpa-develop.json'
+  } else if (host === 'http://frontera-alpa-staging-mock.alpa.svc.cluster.local:2004') {
+    cookiePath = 'cookies-alpa-staging.json'
+  } else {
+    cookiePath += 'cookies-alpa-local.json'
+  }
+
   return [
     {
       label: 'Homepage',
@@ -9,17 +18,33 @@ export default function getScenarios(host: string) {
     {
       label: 'Homepage auth',
       url: `${host}/`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
       readySelector: '.jackpot-item',
     },
-    // {
-    //     label: "Deposit",
-    //     url: `${ host }/`,
-    //     cookiePath: "backstop/data/engine_scripts/cookies.json",
-    //     clickSelector: "[data-test=\"header__deposit-btn\"]",
-    //     delay: 3000,
-    // },
+    {
+      label: 'Deposit',
+      url: `${host}/`,
+      cookiePath,
+      clickSelector: '[data-test="header__deposit-btn"]',
+      postInteractionWait: 3000,
+      delay: 3000,
+    },
+    {
+      label: 'Balance dropdown',
+      url: `${host}/`,
+      cookiePath,
+      clickSelector: '.header__user-balance-arrow',
+      postInteractionWait: 3000,
+      delay: 3000,
+    },
+    {
+      label: 'Search popup',
+      url: `${host}/`,
+      clickSelector: '.games-list-toolbar-search',
+      postInteractionWait: 3000,
+      delay: 3000,
+    },
     {
       label: 'Quest',
       url: `${host}/action/quick-snatch`,
@@ -33,49 +58,49 @@ export default function getScenarios(host: string) {
     {
       label: 'Lootbox auth',
       url: `${host}/rocket-wheel`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile',
       url: `${host}/users/`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile level',
       url: `${host}/users/level`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile gifts',
       url: `${host}/users/gifts`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile verification',
       url: `${host}/users/verification`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile limits',
       url: `${host}/users/limits`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile security',
       url: `${host}/users/security`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
       label: 'Profile games-history',
       url: `${host}/users/games-history`,
-      cookiePath: 'backstop/data/engine_scripts/cookies.json',
+      cookiePath,
       delay: 3000,
     },
     {
