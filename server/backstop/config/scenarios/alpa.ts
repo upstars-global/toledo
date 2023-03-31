@@ -1,9 +1,9 @@
 export default function getScenarios(host: string) {
   let cookiePath = 'backstop/config/cookies/'
   if (host === 'http://frontera-alpa-develop-mock.alpa.svc.cluster.local:2004') {
-    cookiePath = 'cookies-alpa-develop.json'
+    cookiePath += 'cookies-alpa-develop.json'
   } else if (host === 'http://frontera-alpa-staging-mock.alpa.svc.cluster.local:2004') {
-    cookiePath = 'cookies-alpa-staging.json'
+    cookiePath += 'cookies-alpa-staging.json'
   } else {
     cookiePath += 'cookies-alpa-local.json'
   }
