@@ -20,7 +20,8 @@
   "engine": "puppeteer",
   "engineOptions": {
     "executablePath": "/usr/bin/chromium-browser",
-    "args": ["--no-sandbox"]
+    "args": ["--no-sandbox", "--disable-animations"],
+    "headless": true
   },
   "asyncCaptureLimit": 3,
   "asyncCompareLimit": 3,
