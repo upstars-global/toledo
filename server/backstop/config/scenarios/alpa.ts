@@ -63,7 +63,7 @@ export default function getScenarios(host: string) {
       // scrollToSelector: '.footer__copyright',
     },
     {
-      label: 'Tournament',
+      label: 'Tournament all',
       url: `${host}/tournaments/all`,
       delay: 3000,
       // scrollToSelector: '.footer__copyright',
