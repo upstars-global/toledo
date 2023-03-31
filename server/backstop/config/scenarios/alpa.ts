@@ -29,7 +29,7 @@ export default function getScenarios(host: string) {
       url: `${host}/`,
       cookiePath,
       clickSelector: '[data-test="header__deposit-btn"]',
-      postInteractionWait: 3000,
+      postInteractionWait: 5000,
       delay: 3000,
       // scrollToSelector: '.footer__copyright',
     },
