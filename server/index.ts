@@ -4,12 +4,12 @@ import path from 'path'
 import fs from 'fs'
 
 import startRoute, { HOST_CONFIG } from './routes/start'
+import command from './backstop'
 
 const testList = require('./routes/api/test-list.ts')
 
 const app = express()
 const port = 3000
-const command = require('./backstop')
 
 app.get('/api/test-list', testList)
 
@@ -47,6 +47,7 @@ app.get('/api/reference', (req: Request, res: Response) => {
   command('reference', {
     hostName: hostName || HOST_CONFIG[String(project)],
     project,
+    testId: '',
   }).then(() => {
     console.log('complete')
   }).catch((err: Error) => {
