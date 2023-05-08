@@ -45,7 +45,7 @@ export default function getScenarios(host: string) {
     {
       label: 'Search popup',
       url: `${host}/`,
-      clickSelector: '.games-list-toolbar-search',
+      clickSelector: "[data-test='open-search-button']",
       postInteractionWait: 3000,
       delay: 3000,
       // scrollToSelector: '.footer__copyright',
