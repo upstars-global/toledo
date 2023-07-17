@@ -9,11 +9,10 @@ variables:
 
 build-package:
   stage: build
+  image: gcr.io/kaniko-project/executor:debug
+  variables:
+    DOCKER_BUILD_CONTEXT: "."
   script:
     - echo "Building BackstopJS"
-    - docker build --tag ${GITLAB_IMAGE_TAG} --tag ${DO_IMAGE_TAG} --tag ${DO_IMAGE_TAG_ALTERNATIVE} .
-
-    - docker login -u ${DO_TOKEN} -p ${DO_TOKEN} ${DO_REGISTRY}
-    - docker push ${DO_IMAGE_TAG}
-    - docker push ${DO_IMAGE_TAG_ALTERNATIVE}
-    - docker logout ${DO_REGISTRY}
+    - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
+    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}"
