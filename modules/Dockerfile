@@ -1,6 +1,6 @@
 ARG NODE_BASE_VERSION="node:14.21.2"
 
-FROM ${NODE_BASE_VERSION} AS dev
+FROM ${NODE_BASE_VERSION}-alpine AS dev
 
 WORKDIR /data
 COPY app/package.json ./app/package.json
