@@ -5,7 +5,7 @@ function getChanelHook(project: string): string {
         return "https://hooks.slack.com/services/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"
     }
 
-    return "https://hooks.slack.com/services/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"
+    return "https://hooks.slack.com/services/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"
 };
 
 function getText(project: string, testId: string): string {
