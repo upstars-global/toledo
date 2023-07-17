@@ -13,4 +13,4 @@ build-package:
   script:
     - echo "Building BackstopJS"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
-    - /kaniko/executor --tag ${GITLAB_IMAGE_TAG} --tag ${DO_IMAGE_TAG} --tag ${DO_IMAGE_TAG_ALTERNATIVE} .
+    - /kaniko/executor --tag ${GITLAB_IMAGE_TAG} --tag ${DO_IMAGE_TAG} --tag ${DO_IMAGE_TAG_ALTERNATIVE}
