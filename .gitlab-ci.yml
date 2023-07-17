@@ -9,6 +9,7 @@ variables:
 
 build-package:
   stage: build
+  image: gcr.io/kaniko-project/executor:debug
   script:
     - echo "Building BackstopJS"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
