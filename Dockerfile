@@ -4,11 +4,13 @@ FROM ${NODE_BASE_VERSION} AS prod
 
 RUN apk add chromium
 
-WORKDIR /data
-COPY app ./app
-RUN cd app && yarn build
+WORKDIR /data/app
+COPY app ./
+RUN yarn build
 
-CMD cd /data/server && yarn server
+WORKDIR /data/server
+COPY server ./
+CMD yarn server
 
 EXPOSE 3000
 EXPOSE 9229
