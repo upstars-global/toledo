@@ -15,4 +15,20 @@ build-package:
   script:
     - echo "Building BackstopJS"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
-    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot --snapshot-mode=redo
+    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot
+
+build-source:
+  stage: build
+  image: gcr.io/kaniko-project/executor:debug
+  variables:
+    DOCKER_BUILD_CONTEXT: "."
+  script:
+    - echo "Building source container"
+    - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
+    - /kaniko/executor --dockerfile "./modules/Dockerfile" --destination ${DO_IMAGE_TAG}-modules --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot
+  only:
+    refs:
+      - merge_requests
+    changes:
+      - "**/package.json"
+      - "**/yarn.lock"
