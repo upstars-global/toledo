@@ -15,4 +15,4 @@ build-package:
   script:
     - echo "Building BackstopJS"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
-    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot --snapshot-mode=time
+    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot --snapshot-mode=redo
