@@ -1,16 +1,19 @@
 import axios from "axios";
 
-const chanelHook = {
-    alpa: "https://hooks.slack.com/services/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",
-    thor: "https://hooks.slack.com/services/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"
+function getChanelHook(project: string): string {
+    if (project === 'alpa') {
+        return "https://hooks.slack.com/services/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"
+    }
+
+    return "https://hooks.slack.com/services/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"
 };
 
 function getText(project: string, testId: string): string {
-    if (project === "alpa") {
-        return `Test new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended with errors`;
+    if (project === 'alpa') {
+        return `Test new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended with errors`
     }
 
-    return `Test new release ${ testId } ended with errors`;
+    return `Test new release "${ testId }" ended with errors`
 }
 
 export default {
@@ -19,11 +22,7 @@ export default {
             return;
         }
 
-        if (project !== "alpa") {
-            return;
-        }
-
-        axios.post(chanelHook[project], {
+        axios.post(getChanelHook(project), {
             "text": `Test ${ testId } ended with errors`,
             "pretty": 1,
             "blocks": [
