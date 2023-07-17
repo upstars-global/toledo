@@ -8,7 +8,7 @@ WORKDIR /data
 COPY app ./app
 RUN cd app && yarn build
 
-CMD cd /deta/server && yarn server
+CMD cd /data/server && yarn server
 
 EXPOSE 3000
 EXPOSE 9229
