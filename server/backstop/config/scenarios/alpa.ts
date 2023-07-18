@@ -69,6 +69,11 @@ export default function getScenarios(host: string) {
       // scrollToSelector: '.footer__copyright',
     },
     {
+      label: 'Promotions',
+      url: `${host}/promotions`,
+      delay: 3000,
+    },
+    {
       label: 'Lootbox auth',
       url: `${host}/rocket-wheel`,
       cookiePath,
