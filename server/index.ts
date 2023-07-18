@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 
 import path from 'path'
 import fs from 'fs'
@@ -10,6 +10,11 @@ const testList = require('./routes/api/test-list.ts')
 
 const app = express()
 const port = 3000
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.setHeader('Cache-Control', 'private')
+  next()
+})
 
 app.get('/api/test-list', testList)
 
