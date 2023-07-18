@@ -69,6 +69,11 @@ export default function getScenarios(host: string) {
       // scrollToSelector: '.footer__copyright',
     },
     {
+      label: 'Promotions',
+      url: `${host}/promotions`,
+      delay: 3000,
+    },
+    {
       label: 'Lootbox auth',
       url: `${host}/rocket-wheel`,
       cookiePath,
@@ -145,6 +150,26 @@ export default function getScenarios(host: string) {
       url: `${host}/vip`,
       delay: 3000,
       // scrollToSelector: '.footer__copyright',
+    },
+    {
+      label: 'mystic-jackpots',
+      url: `${host}/mystic-jackpots`,
+      delay: 3000,
+    },
+    {
+      label: 'gift-for-review',
+      url: `${host}/gift-for-review`,
+      delay: 3000,
+    },
+    {
+      label: 'share-your-experience',
+      url: `${host}/share-your-experience`,
+      delay: 3000,
+    },
+    {
+      label: 'rocketplay-vipclub',
+      url: `${host}/rocketplay-vipclub`,
+      delay: 3000,
     },
     {
       label: 'benefits-of-crypto',
