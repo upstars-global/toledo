@@ -17,16 +17,25 @@ export default function startRoute(req: Request, res: Response) {
         hostName,
         project,
         testId,
+        dyn,
     } = req.query;
 
+    let test_id = testId;
+    let host = HOST_CONFIG[String(project)]
+    if (dyn) {
+        test_id = String(dyn);
+        host = `frontera-${ test_id.toLowerCase() }-ss-alpa-develop-mock.alpa.svc.cluster.local`
+        // host = `https://mock-${ test_id.toLowerCase() }-ss.develop.rocketplay.com`
+    }
+
     command('test', {
-        hostName: hostName || HOST_CONFIG[String(project)],
+        hostName: hostName || host,
         project,
-        testId,
+        testId: test_id,
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
-        SlackService.send(project as string, testId as string);
+        SlackService.send(project as string, test_id as string);
         console.log(err)
         console.log('error')
     }).finally(() => {

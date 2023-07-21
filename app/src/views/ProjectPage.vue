@@ -5,6 +5,20 @@
         Старт
       </b-button>
     </b-card>
+    <b-card
+      v-if="project === 'alpa'"
+      title="Запуск нового теста на динамическом окружении"
+    >
+      <b-form-input
+        v-model="dynEnv"
+        :state="null"
+        class="form-control-merge mb-1"
+        placeholder="ALPA-XXX"
+      />
+      <b-button @click="startNewDynTest">
+        Старт
+      </b-button>
+    </b-card>
 
     <b-card title="Признание новых эталонов">
       <b-button @click="createReference">
@@ -29,6 +43,7 @@ import {
   BCard,
   BButton,
   BTable,
+  BFormInput,
 } from 'bootstrap-vue'
 import { mapGetters } from 'vuex'
 
@@ -41,6 +56,7 @@ export default {
     BCard,
     BButton,
     BTable,
+    BFormInput,
     Preloader,
   },
 
@@ -54,6 +70,7 @@ export default {
   data() {
     return {
       loading: false,
+      dynEnv: 'ALPA-',
     }
   },
 
@@ -81,6 +98,18 @@ export default {
       })
     },
 
+    startNewDynTest() {
+      if (!this.dynEnv || this.dynEnv === 'ALPA-') {
+        return
+      }
+
+      this.loading = true
+      fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${this.dynEnv}`).then(() => {
+        this.loading = false
+        this.$refs.table.refresh()
+      })
+    },
+
     createReference() {
       this.loading = true
       fetch(`${this.apiAddr}api/reference?project=${this.project}`).then(() => {
@@ -101,7 +130,7 @@ export default {
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/test-list?project=${this.project}`).then(res => res.json()).then(res => {
         callback(res.map(folder => {
-          const dateString = folder.startsWith('v') || folder.startsWith('master')
+          const dateString = folder.startsWith('v') || folder.startsWith('master') || folder.startsWith('ALPA-')
             ? folder
             : `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
           return {
