@@ -24,7 +24,7 @@ export default function startRoute(req: Request, res: Response) {
     let host = HOST_CONFIG[String(project)]
     if (dyn) {
         test_id = String(dyn);
-        host = `frontera-${ test_id.toLowerCase() }-ss-alpa-develop-mock.alpa.svc.cluster.local`
+        host = `frontera-${ test_id.toLowerCase() }-ss-alpa-develop-mock.alpa.svc.cluster.local:2004`
         // host = `https://mock-${ test_id.toLowerCase() }-ss.develop.rocketplay.com`
     }
 
