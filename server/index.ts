@@ -3,8 +3,9 @@ import express, { NextFunction, Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
 
-import startRoute, { HOST_CONFIG } from './routes/start'
+import startRoute from './routes/start'
 import command from './backstop'
+import { getTestUrlByTask } from "helpers/hostHelper";
 
 const testList = require('./routes/api/test-list.ts')
 
@@ -50,7 +51,9 @@ app.get('/api/reference', (req: Request, res: Response) => {
   } = req.query
 
   command('reference', {
-    hostName: hostName || HOST_CONFIG[String(project)],
+    hostName: hostName || getTestUrlByTask({
+      project: String(project),
+    }),
     project,
     testId: '',
   }).then(() => {

@@ -3,14 +3,7 @@ import { Request, Response } from 'express'
 config()
 import command from '../backstop'
 import SlackService from "../services/SlackService";
-import * as process from "process";
-
-export const HOST_CONFIG: Record<string, string> = {
-    "alpa": String(process.env.ALPA_ADDR),
-    "thor": String(process.env.THOR_ADDR)
-}
-
-console.log(HOST_CONFIG)
+import { getTestUrlByTask} from "helpers/hostHelper";
 
 export default function startRoute(req: Request, res: Response) {
     const {
@@ -20,22 +13,22 @@ export default function startRoute(req: Request, res: Response) {
         dyn,
     } = req.query;
 
-    let test_id = testId;
-    let host = HOST_CONFIG[String(project)]
-    if (dyn) {
-        test_id = String(dyn);
-        host = `frontera-${ test_id.toLowerCase() }-ss-alpa-develop-mock.alpa.svc.cluster.local:2004`
-        // host = `https://mock-${ test_id.toLowerCase() }-ss.develop.rocketplay.com`
-    }
+    let taskId = String(dyn || '') || String(testId);
+    const host = getTestUrlByTask({
+        task: String(dyn) || '',
+        project: String(project),
+    })
+
+    console.log('Host: ', host)
 
     command('test', {
         hostName: hostName || host,
         project,
-        testId: test_id,
+        testId: taskId,
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
-        SlackService.send(project as string, test_id as string);
+        SlackService.send(project as string, taskId);
         console.log(err)
         console.log('error')
     }).finally(() => {
