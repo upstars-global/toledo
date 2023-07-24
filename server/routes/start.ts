@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 config()
 import command from '../backstop'
 import SlackService from "../services/SlackService";
-import { getTestUrlByTask} from "helpers/hostHelper";
+import { getTestUrlByTask} from "../helpers/hostHelper";
 
 export default function startRoute(req: Request, res: Response) {
     const {
