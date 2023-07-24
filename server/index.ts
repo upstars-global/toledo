@@ -5,7 +5,7 @@ import fs from 'fs'
 
 import startRoute from './routes/start'
 import command from './backstop'
-import { getTestUrlByTask } from "helpers/hostHelper";
+import { getTestUrlByTask } from "./helpers/hostHelper";
 
 const testList = require('./routes/api/test-list.ts')
 
