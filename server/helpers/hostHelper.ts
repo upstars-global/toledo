@@ -4,9 +4,15 @@ interface IHost {
 }
 
 function getCookieUrlByTask(config: IHost): string {
-    let task = config.task ? `-${ config.task.toLowerCase() }-ss` : ''
+    let task = ''
+    let env = String(process.env.ENVIRONMENT)
 
-    return `http://frontera${ task }-${ config.project }-${ String(process.env.ENVIRONMENT) }-mock.${ config.project }.svc.cluster.local`;
+    if (config.task) {
+        task = `-${ config.task.toLowerCase() }-ss`
+        env = 'develop'
+    }
+
+    return `http://frontera${ task }-${ config.project }-${ env }-mock.${ config.project }.svc.cluster.local`;
 }
 export function getTestUrlByTask(config: IHost): string {
     return `${ getCookieUrlByTask(config) }:2004`;
