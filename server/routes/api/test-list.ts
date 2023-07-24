@@ -3,7 +3,7 @@ import path from 'path'
 
 const fs = require('fs')
 
-module.exports = function startRoute(req: Request, res: Response) {
+export default function testList(req: Request, res: Response) {
   fs.readdir(path.join(__dirname, `../../backstop/test/${req.query.project}`), null, (err: Error, files: string[]) => {
     if (err) {
       throw err

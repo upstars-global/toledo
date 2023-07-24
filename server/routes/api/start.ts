@@ -1,32 +1,34 @@
 import { config } from 'dotenv'
 import { Request, Response } from 'express'
 config()
-import command from '../backstop'
-import SlackService from "../services/SlackService";
-import * as process from "process";
-
-export const HOST_CONFIG: Record<string, string> = {
-    "alpa": String(process.env.ALPA_ADDR),
-    "thor": String(process.env.THOR_ADDR)
-}
-
-console.log(HOST_CONFIG)
+import command from '../../backstop'
+import SlackService from '../../services/SlackService';
+import { getTestUrlByTask } from '../../helpers/hostHelper';
 
 export default function startRoute(req: Request, res: Response) {
     const {
         hostName,
         project,
         testId,
+        dyn,
     } = req.query;
 
+    let taskId = String(dyn || '') || String(testId || '');
+    const host = getTestUrlByTask({
+        task: String(dyn || ''),
+        project: String(project),
+    })
+
+    console.log('Host: ', host)
+
     command('test', {
-        hostName: hostName || HOST_CONFIG[String(project)],
+        hostName: hostName || host,
         project,
-        testId,
+        testId: taskId,
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
-        SlackService.send(project as string, testId as string);
+        SlackService.send(project as string, taskId);
         console.log(err)
         console.log('error')
     }).finally(() => {
