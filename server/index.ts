@@ -3,11 +3,7 @@ import express, { NextFunction, Request, Response } from 'express'
 import path from 'path'
 import fs from 'fs'
 
-import startRoute from './routes/start'
-import command from './backstop'
-import { getTestUrlByTask } from "./helpers/hostHelper";
-
-const testList = require('./routes/api/test-list.ts')
+import apiRouter from './routes/api'
 
 const app = express()
 const port = 3000
@@ -17,7 +13,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next()
 })
 
-app.get('/api/test-list', testList)
+app.use(express.json())
+app.use('/api', apiRouter())
 
 app.get('/config.js', (req: Request, res: Response) => {
   const referrer = new URL(String(req.headers.referer))
@@ -38,36 +35,9 @@ app.use('/assets', express.static('./assets'))
 app.use('/test', express.static('./backstop/test'))
 app.use('/reference', express.static('./backstop/reference'))
 
-app.use(express.json())
-
 app.get('/report', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, './assets/index.html'))
 })
-
-app.get('/api/reference', (req: Request, res: Response) => {
-  const {
-    hostName,
-    project,
-  } = req.query
-
-  command('reference', {
-    hostName: hostName || getTestUrlByTask({
-      project: String(project),
-    }),
-    project,
-    testId: '',
-  }).then(() => {
-    console.log('complete')
-  }).catch((err: Error) => {
-    console.log(err)
-    console.log('error')
-  }).finally(() => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.send('ok')
-  })
-})
-
-app.get('/api/start', startRoute)
 
 app.use(express.static('../app/dist'))
 

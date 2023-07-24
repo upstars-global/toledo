@@ -1,9 +1,9 @@
 import { config } from 'dotenv'
 import { Request, Response } from 'express'
 config()
-import command from '../backstop'
-import SlackService from "../services/SlackService";
-import { getTestUrlByTask } from "../helpers/hostHelper";
+import command from '../../backstop'
+import SlackService from '../../services/SlackService';
+import { getTestUrlByTask } from '../../helpers/hostHelper';
 
 export default function startRoute(req: Request, res: Response) {
     const {
@@ -13,9 +13,9 @@ export default function startRoute(req: Request, res: Response) {
         dyn,
     } = req.query;
 
-    let taskId = String(dyn || '') || String(testId);
+    let taskId = String(dyn || '') || String(testId || '');
     const host = getTestUrlByTask({
-        task: String(dyn) || '',
+        task: String(dyn || ''),
         project: String(project),
     })
 
