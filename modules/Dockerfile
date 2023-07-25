@@ -1,4 +1,4 @@
-ARG NODE_BASE_VERSION="node:14.21.2"
+ARG NODE_BASE_VERSION="node:16.19.1"
 
 FROM ${NODE_BASE_VERSION}-alpine AS dev
 
@@ -13,3 +13,5 @@ RUN yarn
 
 WORKDIR /data/server
 RUN yarn
+
+RUN apk add chromium

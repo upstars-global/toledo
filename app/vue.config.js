@@ -8,6 +8,26 @@ module.exports = {
         changeOrigin: true,
         target: 'http://localhost:3000',
       },
+      '/config': {
+        changeOrigin: true,
+        target: 'http://localhost:3000',
+      },
+      'assets': {
+        changeOrigin: true,
+        target: 'http://localhost:3000',
+      },
+      'test': {
+        changeOrigin: true,
+        target: 'http://localhost:3000',
+      },
+      'reference': {
+        changeOrigin: true,
+        target: 'http://localhost:3000',
+      },
+      'report': {
+        changeOrigin: true,
+        target: 'http://localhost:3000',
+      },
     },
   },
   css: {

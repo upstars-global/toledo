@@ -34,5 +34,6 @@ build-source:
     refs:
       - merge_requests
     changes:
+      - modules/Dockerfile
       - "**/package.json"
       - "**/yarn.lock"
