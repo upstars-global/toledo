@@ -5,9 +5,9 @@ const fs = require('fs')
 
 const defaultScenarios = JSON.parse(fs.readFileSync('./backstop/config/defaultScenarios.json'))
 
-function getPaths(project) {
+function getPaths(project, folder) {
   return {
-    bitmaps_reference: `backstop/reference/${project}`,
+    bitmaps_reference: `backstop/test/${project}/${folder}/reference`,
     bitmaps_test: `backstop/test/${project}`,
     html_report: `backstop/data/html_report/${project}`,
     ci_report: `backstop/data/ci_report/${project}`,
@@ -32,7 +32,7 @@ function getScenarios(project, hostName) {
 export default function commandFn(command, { hostName, project, testId }) {
   const file = JSON.parse(fs.readFileSync('./backstop/config/defaultConfig.json'))
 
-  file.paths = getPaths(project)
+  file.paths = getPaths(project, testId)
   file.scenarios = getScenarios(project, hostName)
 
   if (testId) {
