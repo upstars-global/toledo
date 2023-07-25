@@ -32,8 +32,37 @@
         :fields="selectedTableFields()"
         :items="fetchTable"
         @row-clicked="onRowClick"
-      />
+      >
+        <template #cell(actions)="{ item }">
+          <b-button
+            variant="danger"
+            @click.stop="showModal(item)"
+          >
+            Удалить
+          </b-button>
+        </template>
+      </b-table>
     </b-card>
+    <b-modal
+      ref="my-modal"
+      hide-footer
+    >
+      <div class="mb-1">
+        Удалить?
+      </div>
+      <b-button
+        variant="danger"
+        class="mr-1"
+        @click="deleteTest"
+      >
+        Удалить
+      </b-button>
+      <b-button
+        @click="hideModal"
+      >
+        Отмена
+      </b-button>
+    </b-modal>
     <Preloader v-if="loading" />
   </div>
 </template>
@@ -44,6 +73,7 @@ import {
   BButton,
   BTable,
   BFormInput,
+  BModal,
 } from 'bootstrap-vue'
 import { mapGetters } from 'vuex'
 
@@ -57,6 +87,7 @@ export default {
     BButton,
     BTable,
     BFormInput,
+    BModal,
     Preloader,
   },
 
@@ -147,6 +178,24 @@ export default {
           key: 'Id', label: 'Тесты', sortable: false,
         },
       ]
+    },
+
+    showModal(item) {
+      this.item = item
+      this.$refs['my-modal'].show()
+    },
+
+    hideModal() {
+      this.$refs['my-modal'].hide()
+    },
+
+    deleteTest() {
+      this.loading = true
+      fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`).then(() => {
+        this.$refs.table.refresh()
+        this.loading = false
+      })
+      this.hideModal()
     },
   },
 }
