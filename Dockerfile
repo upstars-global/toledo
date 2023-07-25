@@ -2,8 +2,6 @@ ARG NODE_BASE_VERSION="registry.digitalocean.com/bbq/toledo:develop-modules"
 
 FROM ${NODE_BASE_VERSION} AS prod
 
-RUN apk add chromium
-
 WORKDIR /data/app
 COPY app ./
 RUN yarn build

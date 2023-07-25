@@ -13,3 +13,5 @@ RUN yarn
 
 WORKDIR /data/server
 RUN yarn
+
+RUN apk add chromium
