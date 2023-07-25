@@ -177,6 +177,9 @@ export default {
         {
           key: 'Id', label: 'Тесты', sortable: false,
         },
+        {
+          key: 'actions', label: 'Действия',
+        },
       ]
     },
 
