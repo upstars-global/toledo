@@ -112,8 +112,7 @@ export default {
   },
 
   watch: {
-    $route: {
-      immediate: true,
+    project: {
       handler() {
         this.$refs.table.refresh()
       },
