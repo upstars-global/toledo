@@ -17,7 +17,10 @@ function getText(project: string, testId: string): string {
 }
 
 export default {
-    send: function send(project: string, testId: string) {
+    send: function send(project: string, testId: string, result: {
+        passed: number,
+        failed: number
+    }) {
         if (!testId) {
             return;
         }
@@ -32,6 +35,43 @@ export default {
                         "text": getText(project, testId),
                         "type": "mrkdwn"
                     }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Results:"
+                    }
+                },
+                {
+                    "type": "rich_text",
+                    "elements": [
+                        {
+                            "type": "rich_text_list",
+                            "elements": [
+                                {
+                                    "type": "rich_text_section",
+                                    "elements": [
+                                        {
+                                            "type": "text",
+                                            "text": `Passed: ${ result.passed }`
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "rich_text_section",
+                                    "elements": [
+                                        {
+                                            "type": "text",
+                                            "text": `Failed: ${ result.failed }`
+                                        }
+                                    ]
+                                }
+                            ],
+                            "style": "bullet",
+                            "indent": 0
+                        }
+                    ]
                 },
                 {
                     "type": "actions",
