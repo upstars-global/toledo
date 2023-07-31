@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
-import command from "../../backstop";
-import { getTestUrlByTask } from "../../helpers/hostHelper";
+import { Request, Response } from 'express'
+import command from '../../backstop'
+import { getTestUrlByTask } from '../../helpers/hostHelper'
+import {MOCK_ADDR}from '@config'
 
 export default function reference(req: Request, res: Response) {
     const {
-        hostName,
         project,
     } = req.query
 
     command('reference', {
-        hostName: hostName || getTestUrlByTask({
+        hostName: MOCK_ADDR || getTestUrlByTask({
             project: String(project),
         }),
         project,

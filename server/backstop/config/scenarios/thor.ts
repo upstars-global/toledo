@@ -1,6 +1,7 @@
-import { processHost } from '../../../helpers/cookiesHelper';
+import { processHost } from '../../../helpers/cookiesHelper'
+import {MOCK_ADDR}from '@config'
 export default function getScenarios(host: string) {
-  const cookiePath = processHost(host);
+  const cookiePath = MOCK_ADDR ? '' : processHost(host)
 
   return [
     {
