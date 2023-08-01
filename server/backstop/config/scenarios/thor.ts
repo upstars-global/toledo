@@ -55,10 +55,26 @@ export default function getScenarios(host: string) {
       //
     {
       label: 'Homepage auth',
-      url: `${host}/`,
+      url: `${host}`,
       cookiePath,
       delay: 3000,
       readySelector: '.header__wrapper'
+    },
+    {
+      label: 'Cashbox auth',
+      url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      clickSelector: '.header__cashbox',
+      postInteractionWait: 3000,
+    },
+    {
+      label: 'Balance dropdown',
+      url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      clickSelector: '.header__user-balance',
+      postInteractionWait: 1000,
     },
     {
       label: 'Login',
