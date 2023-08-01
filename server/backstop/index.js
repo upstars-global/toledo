@@ -31,8 +31,11 @@ function getScenarios(project, hostName) {
   return scenarios
 }
 
+import {NODE_ENV}from '@config'
 export default function commandFn(command, { hostName, project, testId }) {
-  const file = JSON.parse(fs.readFileSync('./backstop/config/defaultConfig.json'))
+  const file = JSON.parse(
+      fs.readFileSync(`./backstop/config/${NODE_ENV ? 'defaultConfigDev' : 'defaultConfig'}.json`)
+  )
 
   file.paths = getPaths(command, project, testId)
   file.scenarios = getScenarios(project, hostName)

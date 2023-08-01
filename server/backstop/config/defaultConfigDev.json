@@ -1,0 +1,28 @@
+{
+  "id": "backstop_default",
+  "viewports": [
+    {
+      "label": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "label": "mobile",
+      "width": 360,
+      "height": 800
+    }
+  ],
+  "openReport": false,
+  "onBeforeScript": "puppet/onBefore.js",
+  "onReadyScript": "puppet/onReady.js",
+  "scenarios": [],
+  "report": ["CI"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": ["--no-sandbox", "--disable-animations"]
+  },
+  "asyncCaptureLimit": 3,
+  "asyncCompareLimit": 3,
+  "debug": false,
+  "debugWindow": true
+}

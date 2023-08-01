@@ -12,7 +12,10 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "resolveJsonModule": true,
-        "skipLibCheck" : true
+        "skipLibCheck" : true,
+        "paths": {
+            "@config": [ "./config" ]
+        }
     },
     "include": [
         "./**/*"

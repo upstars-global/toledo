@@ -1,12 +1,10 @@
-import {config} from 'dotenv'
 import {Request, Response} from 'express'
 import command from '../../backstop'
-import SlackService from '../../services/SlackService';
-import {getTestUrlByTask} from '../../helpers/hostHelper';
+import SlackService from '../../services/SlackService'
+import {getTestUrlByTask} from '../../helpers/hostHelper'
 import fs from 'fs'
 import path from 'path'
-
-config()
+import {MOCK_ADDR}from '@config'
 
 function getCurrentFormattedTime() {
     const now = new Date();
@@ -63,7 +61,6 @@ function getResults(testPath: string): ITestResult {
 
 export default function startRoute(req: Request, res: Response) {
     const {
-        hostName,
         project,
         testId,
         dyn,
@@ -81,7 +78,7 @@ export default function startRoute(req: Request, res: Response) {
 
     console.log('Host: ', host)
     command('test', {
-        hostName: hostName || host,
+        hostName: MOCK_ADDR || host,
         project: projectName,
         testId: folder,
     }).then(() => {
