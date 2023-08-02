@@ -61,6 +61,27 @@ export default function getScenarios(host: string) {
       readySelector: '.header__wrapper'
     },
     {
+      label: 'Profile auth',
+      url: `${host}/users/cabinet`,
+      cookiePath,
+      delay: 3000,
+      readySelector: '.header__wrapper'
+    },
+    {
+      label: 'Personal data auth',
+      url: `${host}/users/cabinet`,
+      cookiePath,
+      clickSelector: '.user-data__row--pointer:nth-child(6)',
+      postInteractionWait: 3000,
+    },
+    {
+      label: 'Personal address auth',
+      url: `${host}/users/cabinet`,
+      cookiePath,
+      clickSelector: '.user-data__row--pointer:nth-child(7)',
+      postInteractionWait: 3000,
+    },
+    {
       label: 'Cashbox auth',
       url: `${host}`,
       cookiePath,
