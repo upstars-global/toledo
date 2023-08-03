@@ -8,49 +8,55 @@ export default function getScenarios(host: string) {
       label: 'Homepage',
       url: `${host}/`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Casino',
       url: `${host}/casino`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Live',
       url: `${host}/live`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Arena',
       url: `${host}/arena`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Quests',
       url: `${host}/quests`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Bonus',
       url: `${host}/bonus`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Bonus sport',
       url: `${host}/bonus/sport`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
     },
     {
       label: 'Vip',
       url: `${host}/vip`,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Producer 'Playn & go'",
+      url: `${host}/producers/playngo`,
+      delay: 3000,
+      readySelector: '.promo-banner'
     },
       //
     {
@@ -118,11 +124,6 @@ export default function getScenarios(host: string) {
     {
       label: "404",
       url: `${host}/sdfsdfsfsdf`,
-    },
-    {
-      label: "Producer 'Playn & go'",
-      url: `${host}/producers/playngo`,
-      delay: 3000,
     },
   ]
 }
