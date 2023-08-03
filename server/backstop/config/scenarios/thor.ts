@@ -77,14 +77,14 @@ export default function getScenarios(host: string) {
       label: 'Personal data auth',
       url: `${host}/users/cabinet`,
       cookiePath,
-      clickSelector: '.user-data__row--pointer:nth-child(6)',
+      clickSelector: "[data-test='user-data-personal']",
       postInteractionWait: 3000,
     },
     {
       label: 'Personal address auth',
       url: `${host}/users/cabinet`,
       cookiePath,
-      clickSelector: '.user-data__row--pointer:nth-child(7)',
+      clickSelector: "[data-test='user-data-address']",
       postInteractionWait: 3000,
     },
     {
