@@ -1,6 +1,7 @@
-module.exports = async (page, scenario) => {
+module.exports = async (page, scenario, vp) => {
   const hoverSelector = scenario.hoverSelectors || scenario.hoverSelector;
-  const clickSelector = scenario.clickSelectors || scenario.clickSelector;
+  let clickSelector = scenario.clickSelectors || scenario.clickSelector;
+  const clickSelectorMobile = scenario.clickSelectorsMobile || scenario.clickSelectorMobile;
   const keyPressSelector = scenario.keyPressSelectors || scenario.keyPressSelector;
   const scrollToSelector = scenario.scrollToSelector;
   const postInteractionWait = scenario.postInteractionWait; // selector [str] | ms [int]
@@ -17,6 +18,10 @@ module.exports = async (page, scenario) => {
       await page.waitForSelector(hoverSelectorIndex);
       await page.hover(hoverSelectorIndex);
     }
+  }
+
+  if (vp.label === "mobile" && clickSelectorMobile) {
+    clickSelector = clickSelectorMobile;
   }
 
   if (clickSelector) {
