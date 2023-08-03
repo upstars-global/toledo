@@ -53,6 +53,24 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Terms',
+      url: `${host}/terms-and-conditions`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Promotion fs-review',
+      url: `${host}/fs-review`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Tournament page',
+      url: `${host}/tournaments/1690879800Newbies-Cup`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
       label: "Producer 'Playn & go'",
       url: `${host}/producers/playngo`,
       delay: 3000,
