@@ -71,6 +71,12 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Promo page',
+      url: `${host}/promo/marvel-stars`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
       label: "Producer 'Playn & go'",
       url: `${host}/producers/playngo`,
       delay: 3000,
