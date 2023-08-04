@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import axios from 'axios'
 
-const PROMETHEUS_ADDR = 'prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090'
+const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090'
 export default function appList(req: Request, res: Response) {
     const currentTime = new Date();
     currentTime.setUTCMinutes(currentTime.getUTCMinutes() - 1);
