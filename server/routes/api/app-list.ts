@@ -11,7 +11,7 @@ export default function appList(req: Request, res: Response) {
             res.send(data.data.data.result.map((item: any) => {
                 return item.metric.name
             }).filter((item: string) => {
-                return item.startsWith("frontera-alpa-")
+                return /[0-9]/.test(item)
             }))
         }).catch((err) => {
         console.log(err)
