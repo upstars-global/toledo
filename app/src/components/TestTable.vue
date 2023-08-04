@@ -44,6 +44,14 @@ export default {
     }),
   },
 
+  watch: {
+    project: {
+      handler() {
+        this.$refs.table.refresh()
+      },
+    },
+  },
+
   methods: {
     selectedTableFields() {
       return [
