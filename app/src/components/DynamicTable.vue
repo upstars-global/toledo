@@ -7,7 +7,7 @@
   >
     <template #cell(id)="{ item }">
       <a
-        :href="`https://mock-${ item.id }-ss.develop.rocketplay.com`"
+        :href="`https://mock-${ item.id }-ss.rocketplay.com`"
         target="_blank"
       >
         {{ item.id.toUpperCase() }}

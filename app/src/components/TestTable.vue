@@ -68,6 +68,10 @@ export default {
       this.$emit('show-modal', item)
     },
 
+    refresh() {
+      this.$refs.table.refresh()
+    },
+
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/test-list?project=${this.project}`).then(res => res.json()).then(res => {
         callback(res.map(folder => {

@@ -25,6 +25,7 @@
     >
       <TestTable
         :project="project"
+        ref="table"
         @show-modal="showModal"
       />
     </b-card>
@@ -124,8 +125,8 @@ export default {
     deleteTest() {
       this.loading = true
       fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`).then(() => {
-        this.$refs.table.refresh()
         this.loading = false
+        this.$refs.table.refresh()
       })
       this.hideModal()
     },
