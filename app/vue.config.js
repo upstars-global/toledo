@@ -1,34 +1,30 @@
 const path = require('path')
 
+const proxy_headers = {
+  'CF_AppSession': 'n6014587925875801',
+  'CF_Authorization': 'eyJhbGciOiJSUzI1NiIsImtpZCI6ImM4NDBlMDhhOGU2YzYyYWM5NGY0Y2JmYzJhMWVlOTJlMDIyY2U1MzczNGExYzJjZTczZjAwMWRkOGQ5ZjU5YjgifQ.eyJhdWQiOlsiMTRkMTY4ODFmNjljMjU0MjM4MzBkYjY5NWY5NWFkMTdiZjE2N2ZhZGNiZjg5ZjhhMDA5YzA1NjI2YzYzZDAxMyJdLCJlbWFpbCI6InNvbGFyaXNAdXBzdGFycy5jb20iLCJleHAiOjE2OTM2NTcyMjUsImlhdCI6MTY5MzU3MDgyNSwibmJmIjoxNjkzNTcwODI1LCJpc3MiOiJodHRwczovL3Vwc3RhcnMuY2xvdWRmbGFyZWFjY2Vzcy5jb20iLCJ0eXBlIjoiYXBwIiwiaWRlbnRpdHlfbm9uY2UiOiJvQXBaM1FPUFhsZXdYWXZMIiwic3ViIjoiZmMwOTFlY2ItOTQ2Zi01YjhmLTk4NDUtZWFkM2Q3NTFmYjM4IiwiY291bnRyeSI6IkdCIn0.FfZV2ciL8be5PsQzYYUlAFMD4zuBGWVcPaPQj7COzzL4evtYSsnxc7NLkbd68gOAx4nFOfk4pEigOsf-W-qPXDrmIQ1MRJw_8K2krnvFYGjfcV6o7p6diHLUQyh-YY5_YzxbsPDJNXhlitfFtCI433dBLsqKdGtyLPjgEGScuLYkWUWchCjRWy4gflHWG4f34xVH7hF6bTNNWi51fXIkdgZ2OD0139pzwq4d_TgI3ue2GpqQPS_Teh-Rq71VbIjnn6yYnDgYwqbqr7e-gaI9D6ldjDWhsjDMGCHNgwKG7OdwwEzES2MhgRH3brDlOJcHwQWHh17SsXd5hStroy1Z0Q',
+}
+
+const proxy = [
+  '/api',
+  '/config',
+  '/assets',
+  '/test',
+  '/reference',
+  '/report',
+].reduce((accumulator, item) => {
+  accumulator[item] = {
+    changeOrigin: true,
+    target: 'http://localhost:3000',
+    headers: proxy_headers,
+  }
+  return accumulator
+}, {})
+
 module.exports = {
   publicPath: '/',
   devServer: {
-    proxy: {
-      '/api': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-      '/config': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-      'assets': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-      'test': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-      'reference': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-      'report': {
-        changeOrigin: true,
-        target: 'http://localhost:3000',
-      },
-    },
+    proxy,
   },
   css: {
     loaderOptions: {
