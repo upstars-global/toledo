@@ -21,7 +21,6 @@
       </b-button>
     </b-card>
     <b-card
-      v-if="project === 'alpa'"
       class="project-page__one-column"
       no-body
     >

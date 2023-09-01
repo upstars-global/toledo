@@ -100,7 +100,7 @@ export default {
 
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/app-list?project=${this.project}`).then(res => res.json()).then(res => {
-        callback(res.map(folder => ({ id: folder.match(/alpa-[0-9]*/)[0], origin: folder })))
+        callback(res.map(folder => ({ id: folder.match(/[a-z]+-[0-9]+/)[0], origin: folder })))
       })
     },
 
