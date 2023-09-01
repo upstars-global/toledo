@@ -32,6 +32,7 @@ export default function getScenarios(host: string) {
       label: 'Quests',
       url: `${host}/quests`,
       delay: 3000,
+      cookiePath,
       readySelector: '.promo-banner'
     },
     {
