@@ -7,7 +7,7 @@
   >
     <template #cell(id)="{ item }">
       <a
-        :href="`https://mock-${ item.id }-ss.rocketplay.com`"
+        :href="getEnvUrl(item.id)"
         target="_blank"
       >
         {{ item.id.toUpperCase() }}
@@ -17,12 +17,14 @@
       <div class="buttons">
         <b-button
           variant="success"
+          :disabled="project === 'thor'"
           @click.stop="startNewDynTest(item)"
         >
           Запуск теста
         </b-button>
         <b-button
           variant="secondary"
+          :disabled="project === 'thor'"
           @click.stop="openReport(item)"
         >
           Результаты
@@ -90,6 +92,14 @@ export default {
       ]
     },
 
+    getEnvUrl(key) {
+      if (this.project === 'alpa') {
+        return `https://mock-${key}-ss.rocketplay.com`
+      }
+
+      return `https://${key}-thor.thor-develop.upstr.to`
+    },
+
     startNewDynTest(item) {
       this.loading = true
       fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${item.id.toUpperCase()}`).then(() => {
@@ -100,7 +110,7 @@ export default {
 
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/app-list?project=${this.project}`).then(res => res.json()).then(res => {
-        callback(res.map(folder => ({ id: folder.match(/alpa-[0-9]*/)[0], origin: folder })))
+        callback(res.map(folder => ({ id: folder.match(/[a-z]+-[0-9]+/)[0], origin: folder })))
       })
     },
 
