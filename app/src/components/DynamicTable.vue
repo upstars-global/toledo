@@ -7,7 +7,7 @@
   >
     <template #cell(id)="{ item }">
       <a
-        :href="`https://mock-${ item.id }-ss.rocketplay.com`"
+        :href="getEnvUrl(item.id)"
         target="_blank"
       >
         {{ item.id.toUpperCase() }}
@@ -17,12 +17,14 @@
       <div class="buttons">
         <b-button
           variant="success"
+          :disabled="project === 'thor'"
           @click.stop="startNewDynTest(item)"
         >
           Запуск теста
         </b-button>
         <b-button
           variant="secondary"
+          :disabled="project === 'thor'"
           @click.stop="openReport(item)"
         >
           Результаты
@@ -88,6 +90,14 @@ export default {
           key: 'actions', label: 'Действия',
         },
       ]
+    },
+
+    getEnvUrl(key) {
+      if (this.project === 'alpa') {
+        return `https://mock-${key}-ss.rocketplay.com`
+      }
+
+      return `https://${key}-thor.thor-develop.upstr.to`
     },
 
     startNewDynTest(item) {
