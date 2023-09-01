@@ -112,12 +112,12 @@ export default {
 
     testDiskUsageClass() {
       const usage = Number(this.spaseUsage.testFolderSize)
-      if (usage < 1400) {
+      if (usage < 1500) {
         return 'green'
       }
 
       if (usage < 1800) {
-        return 'yellow'
+        return 'orange'
       }
 
       return 'red'
@@ -186,8 +186,8 @@ export default {
     color: green;
   }
 
-  & .yellow {
-    color: yellow;
+  & .orange {
+    color: orange;
   }
 
   & .red {
