@@ -1,5 +1,15 @@
 <template>
   <div class="project-page">
+    <b-card
+      title="Использование дискового места"
+      class="project-page__one-column"
+    >
+      <div>
+        <b>Tests: </b>
+        <span :class="testDiskUsageClass">{{ Number(spaseUsage.testFolderSize).toFixed(2) }}</span> / 2000 mb
+      </div>
+      <div><b>References: </b>{{ Number(spaseUsage.referenceFolderSize).toFixed(2) }} / 1000 mb</div>
+    </b-card>
     <b-card title="Запуск нового теста">
       <b-button @click="startNewTest">
         Старт
@@ -24,8 +34,8 @@
       no-body
     >
       <TestTable
-        :project="project"
         ref="table"
+        :project="project"
         @show-modal="showModal"
       />
     </b-card>
@@ -87,6 +97,10 @@ export default {
   data() {
     return {
       loading: false,
+      spaseUsage: {
+        testFolderSize: 0,
+        referenceFolderSize: 0,
+      },
       item: {},
     }
   },
@@ -95,9 +109,32 @@ export default {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
     }),
+
+    testDiskUsageClass() {
+      const usage = Number(this.spaseUsage.testFolderSize)
+      if (usage < 1400) {
+        return 'green'
+      }
+
+      if (usage < 1800) {
+        return 'yellow'
+      }
+
+      return 'red'
+    },
+  },
+
+  created() {
+    this.loadSpaseUsage()
   },
 
   methods: {
+    loadSpaseUsage() {
+      fetch(`${this.apiAddr}api/spase-usage`).then(res => res.json()).then(res => {
+        this.spaseUsage = res
+      })
+    },
+
     startNewTest() {
       this.loading = true
       fetch(`${this.apiAddr}api/start?project=${this.project}`).then(() => {
@@ -126,6 +163,7 @@ export default {
       this.loading = true
       fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`).then(() => {
         this.loading = false
+        this.loadSpaseUsage()
         this.$refs.table.refresh()
       })
       this.hideModal()
@@ -142,6 +180,18 @@ export default {
 
   &__one-column {
     grid-column: 1 / 3;
+  }
+
+  & .green {
+    color: green;
+  }
+
+  & .yellow {
+    color: yellow;
+  }
+
+  & .red {
+    color: red;
   }
 }
 </style>
