@@ -56,7 +56,7 @@ export default function getScenarios(host: string) {
     {
       label: 'Terms',
       url: `${host}/terms-and-conditions`,
-      delay: 5100,
+      delay: 3000,
       readySelector: '.promo-banner'
     },
     {
