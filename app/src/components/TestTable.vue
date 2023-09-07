@@ -6,6 +6,16 @@
     :items="fetchTable"
     @row-clicked="onRowClick"
   >
+    <template #cell(result)="{ item }">
+      <div v-if="!item.result.passed && !item.result.failed">
+        <span style="color: orange">В прогрессе</span>
+      </div>
+      <template v-else>
+        <span style="color: green">Passed: {{ item.result.passed }}</span>
+        <br>
+        <span style="color: red">Failed: {{ item.result.failed }}</span>
+      </template>
+    </template>
     <template #cell(actions)="{ item }">
       <b-button
         variant="danger"
@@ -59,6 +69,9 @@ export default {
           key: 'Id', label: 'Тесты', sortable: false,
         },
         {
+          key: 'result', label: 'Результаты', sortable: false,
+        },
+        {
           key: 'actions', label: 'Действия',
         },
       ]
@@ -74,12 +87,14 @@ export default {
 
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/test-list?project=${this.project}`).then(res => res.json()).then(res => {
-        callback(res.map(folder => {
+        callback(res.map(test => {
+          const folder = test.name
           const dateString = folder.startsWith('v') || folder.startsWith('master') || folder.startsWith('ALPA-')
             ? folder
             : `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
           return {
             Id: dateString,
+            result: test.result,
             origin: folder,
           }
         }))

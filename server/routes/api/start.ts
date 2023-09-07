@@ -5,6 +5,7 @@ import {getTestUrlByTask} from '../../helpers/hostHelper'
 import fs from 'fs'
 import path from 'path'
 import {MOCK_ADDR}from '@config'
+import { getTestResult } from '../../helpers/getTestResult'
 
 function getCurrentFormattedTime() {
     const now = new Date();
@@ -22,41 +23,6 @@ function copyReference(project: string, folder: string) {
     const srcPathName = path.join(__dirname, `../../backstop/reference/${project}`)
     const destPathName = path.join(__dirname, `../../backstop/test/${project}/${folder}/reference`)
     fs.cpSync(srcPathName, destPathName, {recursive: true});
-}
-
-interface ITestResult {
-    passed: number,
-    failed: number
-}
-function getResults(testPath: string): ITestResult {
-    try {
-        const file = fs.readFileSync([testPath, 'report.json'].join('/'), 'utf8')
-
-        const parsedFile = JSON.parse(file);
-
-        return parsedFile.tests.reduce((accumulator: ITestResult, currentValue: any) => {
-            switch (currentValue.status) {
-                case 'pass':
-                    accumulator.passed += 1;
-                    break;
-                case 'fail':
-                default:
-                    accumulator.failed += 1;
-                    break;
-            }
-
-            return accumulator;
-        }, {
-            passed: 0,
-            failed: 0,
-        })
-    } catch (e) {
-        console.log(e)
-        return {
-            passed: 0,
-            failed: 0,
-        }
-    }
 }
 
 export default function startRoute(req: Request, res: Response) {
@@ -84,10 +50,10 @@ export default function startRoute(req: Request, res: Response) {
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
-        SlackService.send(projectName, taskId, getResults(`backstop/test/${project}/${folder}`))
         console.log(err)
         console.log('error')
     }).finally(() => {
+        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`))
         res.setHeader('Access-Control-Allow-Origin', '*')
         res.send('ok')
     })
