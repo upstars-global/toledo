@@ -73,7 +73,6 @@ export default function getScenarios(host: string) {
             url: `${host}/rocket-wheel`,
             cookiePath,
             delay: 3000,
-            readySelector: ['.profile__content'],
         },
         {
             label: 'Profile',
