@@ -60,9 +60,22 @@ const router = new VueRouter({
         pageTitle: 'Project thor',
         breadcrumb: [
           {
-            text: 'Home',
-            to: '/',
+            text: 'Project Page',
+            active: true,
           },
+        ],
+      },
+    },
+    {
+      path: '/backoffice',
+      name: 'project-backoffice',
+      component: () => import('@/views/ProjectPage.vue'),
+      props: {
+        project: 'backoffice',
+      },
+      meta: {
+        pageTitle: 'Project backoffice',
+        breadcrumb: [
           {
             text: 'Project Page',
             active: true,
@@ -79,10 +92,6 @@ const router = new VueRouter({
         pageTitle: 'Report page',
         project: 'thor',
         breadcrumb: [
-          {
-            text: 'Home',
-            to: '/',
-          },
           {
             to: { name: 'project-thor' },
             text: 'Project page',
@@ -104,11 +113,27 @@ const router = new VueRouter({
         project: 'alpa',
         breadcrumb: [
           {
-            text: 'Home',
-            to: '/',
+            to: { name: 'project-alpa' },
+            text: 'Project page',
           },
           {
-            to: { name: 'project-alpa' },
+            text: 'Report page',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/report/backoffice/:test',
+      name: 'report-page-backoffice',
+      component: () => import('@/views/ReportPage.vue'),
+      props: true,
+      meta: {
+        pageTitle: 'Report page',
+        project: 'backoffice',
+        breadcrumb: [
+          {
+            to: { name: 'project-backoffice' },
             text: 'Project page',
           },
           {
