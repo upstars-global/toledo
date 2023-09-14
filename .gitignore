@@ -4,6 +4,7 @@ server/backstop/test
 server/backstop/data/ci_report
 server/backstop/data/html_report
 
+.idea
 .DS_Store
 app/dist
 
