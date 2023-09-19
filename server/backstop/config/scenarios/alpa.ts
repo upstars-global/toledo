@@ -33,6 +33,7 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             clickSelector: '.header__user-balance-arrow',
+            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow'],
             postInteractionWait: 3000,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
