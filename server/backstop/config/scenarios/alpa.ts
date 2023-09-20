@@ -134,6 +134,21 @@ export default function getScenarios(host: string) {
             delay: 3000,
         },
         {
+            label: 'Remind',
+            url: `${host}/remind`,
+            delay: 3000,
+        },
+        {
+            label: 'New-password',
+            url: `${host}/new-password`,
+            delay: 3000,
+        },
+        {
+            label: 'Oops',
+            url: `${host}/oops`,
+            delay: 3000,
+        },
+        {
             label: 'terms-and-conditions',
             url: `${host}/terms-and-conditions`,
             delay: 3000,
