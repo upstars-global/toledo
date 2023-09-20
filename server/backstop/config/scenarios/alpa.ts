@@ -138,6 +138,7 @@ export default function getScenarios(host: string) {
             label: 'terms-and-conditions',
             url: `${host}/terms-and-conditions`,
             delay: 3000,
+            readySelector: ".static-page"
             // scrollToSelector: '.footer__copyright',
         },
         {
