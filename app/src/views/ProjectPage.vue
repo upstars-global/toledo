@@ -6,7 +6,7 @@
     >
       <div>
         <b>Tests: </b>
-        <span :class="testDiskUsageClass">{{ Number(spaseUsage.testFolderSize).toFixed(2) }}</span> / 2000 mb
+        <span :class="testDiskUsageClass">{{ Number(spaseUsage.testFolderSize).toFixed(2) }}</span> / 20000 mb
       </div>
       <div><b>References: </b>{{ Number(spaseUsage.referenceFolderSize).toFixed(2) }} / 1000 mb</div>
     </b-card>
@@ -111,11 +111,11 @@ export default {
 
     testDiskUsageClass() {
       const usage = Number(this.spaseUsage.testFolderSize)
-      if (usage < 1500) {
+      if (usage < 17000) {
         return 'green'
       }
 
-      if (usage < 1800) {
+      if (usage < 19000) {
         return 'orange'
       }
 
