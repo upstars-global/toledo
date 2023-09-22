@@ -24,6 +24,7 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             clickSelector: '[data-test="header__deposit-btn"]',
+            clickSelectorsMobile: '[data-test="bottom-menu__deposit-button"]',
             postInteractionWait: 5000,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
@@ -153,6 +154,7 @@ export default function getScenarios(host: string) {
             label: 'terms-and-conditions',
             url: `${host}/terms-and-conditions`,
             delay: 3000,
+            readySelector: ".static-page"
             // scrollToSelector: '.footer__copyright',
         },
         {
