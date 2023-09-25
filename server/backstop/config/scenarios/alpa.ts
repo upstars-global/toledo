@@ -24,6 +24,7 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             clickSelector: '[data-test="header__deposit-btn"]',
+            clickSelectorsMobile: '[data-test="bottom-menu__deposit-button"]',
             postInteractionWait: 5000,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
@@ -135,9 +136,25 @@ export default function getScenarios(host: string) {
             delay: 3000,
         },
         {
+            label: 'Remind',
+            url: `${host}/remind`,
+            delay: 3000,
+        },
+        {
+            label: 'New-password',
+            url: `${host}/new-password`,
+            delay: 3000,
+        },
+        {
+            label: 'Oops',
+            url: `${host}/oops`,
+            delay: 3000,
+        },
+        {
             label: 'terms-and-conditions',
             url: `${host}/terms-and-conditions`,
             delay: 3000,
+            readySelector: ".static-page"
             // scrollToSelector: '.footer__copyright',
         },
         {
