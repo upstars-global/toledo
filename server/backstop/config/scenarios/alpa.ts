@@ -74,7 +74,9 @@ export default function getScenarios(host: string) {
             label: 'Lootbox auth',
             url: `${host}/rocket-wheel`,
             cookiePath,
+            postInteractionWait: 2000,
             delay: 3000,
+            readySelector: ".loot-box-spin-wheel-container"
         },
         {
             label: 'Profile',
