@@ -213,7 +213,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Vip Adventure',
-            url: `${host}/vip-adventure`,
+            url: `${host}/rocket-adventure`,
             delay: 3000,
         },
     ]
