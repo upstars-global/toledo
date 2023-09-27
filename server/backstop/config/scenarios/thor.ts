@@ -29,6 +29,12 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Vip club',
+      url: `${host}/vip-club`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
       label: 'Quests',
       url: `${host}/quests`,
       delay: 3000,
