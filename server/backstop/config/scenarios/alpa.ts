@@ -40,6 +40,34 @@ export default function getScenarios(host: string) {
             // scrollToSelector: '.footer__copyright',
         },
         {
+            label: 'SideBar',
+            url: `${host}/`,
+            viewports: [
+                {
+                    "label": "mobile",
+                    "width": 360,
+                    "height": 800
+                }
+            ],
+            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            delay: 3000,
+        },
+        {
+            label: 'SideBar auth user',
+            url: `${host}/`,
+            cookiePath,
+            viewports: [
+                {
+                    "label": "mobile",
+                    "width": 360,
+                    "height": 800
+                }
+            ],
+            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            delay: 3000,
+        },
+
+        {
             label: 'Search popup',
             url: `${host}/`,
             clickSelector: "[data-test='open-search-button']",
