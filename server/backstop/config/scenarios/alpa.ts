@@ -1,4 +1,5 @@
 import {processHost} from '../../../helpers/cookiesHelper';
+import mobileViewports from "../viewports/mobile";
 
 export default function getScenarios(host: string) {
     const cookiePath = processHost(host);
@@ -39,6 +40,22 @@ export default function getScenarios(host: string) {
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
+        {
+            label: 'SideBar',
+            url: `${host}/`,
+            viewports: mobileViewports,
+            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            delay: 3000,
+        },
+        {
+            label: 'SideBar auth user',
+            url: `${host}/`,
+            cookiePath,
+            viewports: mobileViewports,
+            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            delay: 3000,
+        },
+
         {
             label: 'Search popup',
             url: `${host}/`,
