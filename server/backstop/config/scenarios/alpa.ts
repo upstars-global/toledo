@@ -65,6 +65,33 @@ export default function getScenarios(host: string) {
             // scrollToSelector: '.footer__copyright',
         },
         {
+            label: 'Producers popup Homepage',
+            url: `${host}/`,
+            delay: 3000,
+            readySelector: '.games-list-toolbar__producers',
+            clickSelector: ".game-producers__activator",
+            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+
+        },
+        {
+            label: 'Producers popup pokies',
+            url: `${host}/pokies/all`,
+            delay: 3000,
+            readySelector: '.games-list-toolbar__producers',
+            clickSelector: ".game-producers__activator",
+            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+
+        },
+        {
+            label: 'Producers popup categories',
+            url: `${host}/categories/all`,
+            delay: 3000,
+            readySelector: '.games-list-toolbar__producers',
+            clickSelector: ".game-producers__activator",
+            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+        },
+
+        {
             label: 'Quest',
             url: `${host}/action/quick-snatch`,
             delay: 3000,
