@@ -31,6 +31,83 @@ export default function getScenarios(host: string) {
             // scrollToSelector: '.footer__copyright',
         },
         {
+            label: 'Deposit Step Payments list',
+            url: `${host}/`,
+            cookiePath,
+            clickSelector: ['[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]'],
+            clickSelectorsMobile: ['[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]'],
+            postInteractionWait: 5000,
+            delay: 1000,
+        },
+        {
+            label: 'Deposit Step render Card form',
+            url: `${host}/`,
+            cookiePath,
+            clickSelector: [
+                '[data-test="header__deposit-btn"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__devcode_devcode-creditcard-36_creditcard"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            clickSelectorsMobile: [
+                '[data-test="bottom-menu__deposit-button"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__devcode_devcode-creditcard-36_creditcard"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            delay: 1000,
+        },
+        {
+            label: 'Deposit Step render Card form saved method',
+            url: `${host}/`,
+            cookiePath,
+            clickSelector: [
+                '[data-test="header__deposit-btn"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__537541******4375"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            clickSelectorsMobile: [
+                '[data-test="bottom-menu__deposit-button"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__537541******4375"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            delay: 1000,
+        },
+        {
+            label: 'Deposit Step render Crypto method',
+            url: `${host}/`,
+            cookiePath,
+            clickSelector: [
+                '[data-test="header__deposit-btn"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__coinspaid_coinspaid-76_BTC_coinspaid"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            clickSelectorsMobile: [
+                '[data-test="bottom-menu__deposit-button"]',
+                '[data-test="cashbox-deposit__next-btn"]',
+                '[data-test="cashbox-item-item-brand__coinspaid_coinspaid-76_BTC_coinspaid"]',
+                '[data-test="cashbox-deposit__next-btn"]'
+            ],
+            delay: 1000,
+        },
+        {
+            label: 'Cashbox Dashboard',
+            url: `${host}/cashbox`,
+            cookiePath,
+            postInteractionWait: 5000,
+            delay: 1000,
+        },
+        {
+            label: 'Withdraw Step 1',
+            url: `${host}/withdraw`,
+            cookiePath,
+            postInteractionWait: 5000,
+            delay: 1000,
+        },
+        {
             label: 'Balance dropdown',
             url: `${host}/`,
             cookiePath,
