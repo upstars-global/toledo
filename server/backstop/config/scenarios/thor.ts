@@ -84,7 +84,7 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: "Casino Categories 'Top'",
+      label: 'Casino Categories Top',
       url: `${host}/casino/categories/top`,
       delay: 3000,
       readySelector: '.promo-banner'
@@ -96,44 +96,80 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: "Casino Provider 'endorphina'",
+      label: 'Casino Provider endorphina',
       url: `${host}/casino/providers/endorphina`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Casino Theme",
+      label: 'Casino Theme',
       url: `${host}/casino/theme`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Live Providers",
+      label: 'Live Providers',
       url: `${host}/live/providers`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Live Provider 'pragmatic play'",
+      label: 'Live Provider pragmatic play',
       url: `${host}/live/providers/pragmaticplay`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Live Categories",
+      label: 'Live Categories',
       url: `${host}/live/categories`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Live Categories 'Lobby'",
+      label: 'Live Categories Lobby',
       url: `${host}/live/categories/lobby`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: "Benefits of Crypto",
+      label: 'Benefits of Crypto',
       url: `${host}/benefits-of-crypto`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Privacy Policy ',
+      url: `${host}/privacy-policy`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Payment Policy',
+      url: `${host}/payment-policy`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Aml Policy',
+      url: `${host}/aml-policy`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'KYC Procedure',
+      url: `${host}/kyc`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Bonus terms and conditions',
+      url: `${host}/bonus-terms-and-conditions`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'FAQ',
+      url: `${host}/faq`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
