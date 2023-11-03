@@ -29,7 +29,7 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Vip club',
+      label: 'Vip club Guest',
       url: `${host}/vip-club`,
       delay: 3000,
       readySelector: '.promo-banner'
@@ -84,15 +84,70 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: "Producer 'Playn & go'",
-      url: `${host}/producers/playngo`,
+      label: "Casino Categories 'Top'",
+      url: `${host}/casino/categories/top`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
-      //
+    {
+      label: "Casino Providers",
+      url: `${host}/casino/providers`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Casino Provider 'endorphina'",
+      url: `${host}/casino/providers/endorphina`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Casino Theme",
+      url: `${host}/casino/theme`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Live Providers",
+      url: `${host}/live/providers`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Live Provider 'pragmatic play'",
+      url: `${host}/live/providers/pragmaticplay`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Live Categories",
+      url: `${host}/live/categories`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Live Categories 'Lobby'",
+      url: `${host}/live/categories/lobby`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: "Benefits of Crypto",
+      url: `${host}/benefits-of-crypto`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+      // Auth user
     {
       label: 'Homepage auth',
       url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      readySelector: '.header__wrapper'
+    },
+    {
+      label: 'Vip club Auth',
+      url: `${host}/vip-club`,
       cookiePath,
       delay: 3000,
       readySelector: '.header__wrapper'
