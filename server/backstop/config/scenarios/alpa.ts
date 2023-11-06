@@ -28,7 +28,6 @@ export default function getScenarios(host: string) {
             clickSelectorsMobile: '[data-test="bottom-menu__deposit-button"]',
             postInteractionWait: 5000,
             delay: 3000,
-            // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'Deposit Step Payments list',
@@ -37,7 +36,7 @@ export default function getScenarios(host: string) {
             clickSelector: ['[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]'],
             clickSelectorsMobile: ['[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]'],
             postInteractionWait: 5000,
-            delay: 1000,
+            delay: 3000,
         },
         {
             label: 'Deposit Step render Card form',
@@ -97,15 +96,14 @@ export default function getScenarios(host: string) {
             label: 'Cashbox Dashboard',
             url: `${host}/cashbox`,
             cookiePath,
-            postInteractionWait: 5000,
-            delay: 1000,
+            removeSelectors: [".ps__thumb-y"],
+            readySelector: [".cashbox-dashboard__user-balance"]
         },
         {
             label: 'Withdraw Step 1',
             url: `${host}/withdraw`,
             cookiePath,
-            postInteractionWait: 5000,
-            delay: 1000,
+            readySelector: [".CashboxStepWithdraw"]
         },
         {
             label: 'Balance dropdown',
@@ -115,7 +113,8 @@ export default function getScenarios(host: string) {
             clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow'],
             postInteractionWait: 3000,
             delay: 3000,
-            // scrollToSelector: '.footer__copyright',
+            "selectorExpansion": true,
+            "selectors": [".dropdown-balance"]
         },
         {
             label: 'SideBar',
@@ -204,28 +203,24 @@ export default function getScenarios(host: string) {
             url: `${host}/users/`,
             cookiePath,
             delay: 3000,
-            readySelector: ['.profile__content'],
         },
         {
             label: 'Profile level',
             url: `${host}/users/level`,
             cookiePath,
             delay: 3000,
-            readySelector: ['.profile__content'],
         },
         {
             label: 'Profile gifts',
             url: `${host}/users/gifts`,
             cookiePath,
             delay: 3000,
-            readySelector: ['.profile__content'],
         },
         {
             label: 'Profile verification',
             url: `${host}/users/verification`,
             cookiePath,
             delay: 3000,
-            readySelector: ['.profile__content'],
         },
         {
             label: 'Profile limits',
