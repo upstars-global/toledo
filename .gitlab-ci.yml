@@ -1,9 +1,14 @@
-default:
-  tags:
-    - whitelabel-staging
-    
+include:
+  - project: common/gitlab-ci-templates
+    file: "/build/common-variables-latest.yaml"
+    ref: master
+  - project: common/gitlab-ci-templates
+    file: "/publish/publish-to-argocd-1.0.1.yaml"
+    ref: master
+
 stages:
   - build
+  - publish
 
 variables:
   DO_REGISTRY: registry.digitalocean.com/bbq
@@ -19,7 +24,17 @@ build-package:
   script:
     - echo "Building BackstopJS"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
-    - /kaniko/executor --destination ${DO_IMAGE_TAG} --destination ${DO_IMAGE_TAG_ALTERNATIVE} --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot
+    - >
+      /kaniko/executor \
+        --destination ${DO_IMAGE_TAG} \
+        --destination ${DO_IMAGE_TAG_ALTERNATIVE} \
+        --context "${DOCKER_BUILD_CONTEXT}" \
+        --single-snapshot
+  rules:
+    - changes:
+        paths:
+          - charts/**/*
+      when: never
 
 build-source:
   stage: build
@@ -29,11 +44,46 @@ build-source:
   script:
     - echo "Building source container"
     - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
-    - /kaniko/executor --dockerfile "./modules/Dockerfile" --destination ${DO_IMAGE_TAG}-modules --context "${DOCKER_BUILD_CONTEXT}" --single-snapshot
-  only:
-    refs:
-      - merge_requests
-    changes:
-      - modules/Dockerfile
-      - "**/package.json"
-      - "**/yarn.lock"
+    - >
+      /kaniko/executor \
+        --dockerfile "./modules/Dockerfile" \
+        --destination ${DO_IMAGE_TAG}-modules \
+        --context "${DOCKER_BUILD_CONTEXT}" \
+        --single-snapshot
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      changes:
+        - modules/Dockerfile
+        - "**/package.json"
+        - "**/yarn.lock"
+
+publish to development:
+  extends: .publish-to-argocd
+  variables:
+    PUBLISH_TO_ENV: "development"
+    HELM_VALUES_PATH: "./values/development.yaml"
+    DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
+  stage: publish
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop"
+
+publish to staging:
+  extends: .publish-to-argocd
+  variables:
+    PUBLISH_TO_ENV: "staging"
+    HELM_VALUES_PATH: "./values/staging.yaml"
+    DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
+  stage: publish
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+
+publish to production:
+  extends: .publish-to-argocd
+  variables:
+    PUBLISH_TO_ENV: "production"
+    HELM_VALUES_PATH: "./values/production.yaml"
+    DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
+  stage: publish
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+      when: manual

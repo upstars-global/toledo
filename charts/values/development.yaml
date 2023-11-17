@@ -1,0 +1,8 @@
+ingress:
+  hostname: toledo-develop-aws.upstr.to
+
+env_value: develop
+
+env:
+  alpa_addr: frontera-alpa-develop-mock.alpa.svc.cluster.local:2004
+  thor_addr: http://frontera-thor-develop-mock.thor.svc.cluster.local:2004

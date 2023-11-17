@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/application: {{ .Release.Namespace }}
+    app.kubernetes.io/name: {{ .Values.componentId }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  name: {{ .Release.Name }}-pvc-tests
+spec:
+  storageClassName: gp3
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage:  {{ .Values.volume.testSize }}
