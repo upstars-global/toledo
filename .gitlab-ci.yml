@@ -23,11 +23,13 @@ build-package:
     DOCKER_BUILD_CONTEXT: "."
   script:
     - echo "Building BackstopJS"
-    - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
+    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
         --destination ${DO_IMAGE_TAG} \
         --destination ${DO_IMAGE_TAG_ALTERNATIVE} \
+        --destination ${IMAGE} \
+        --destination ${IMAGE_HASH} \
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
   rules:
@@ -35,6 +37,9 @@ build-package:
         paths:
           - charts/**/*
       when: never
+    - changes:
+        paths:
+          - ./**/*
 
 build-source:
   stage: build
@@ -43,11 +48,12 @@ build-source:
     DOCKER_BUILD_CONTEXT: "."
   script:
     - echo "Building source container"
-    - echo ${DOCKER_AUTH_CONFIG} > /kaniko/.docker/config.json
+    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
         --dockerfile "./modules/Dockerfile" \
-        --destination ${DO_IMAGE_TAG}-modules \
+        --destination "${DO_IMAGE_TAG}-modules" \
+        --destination "${IMAGE}-modules" \
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
   rules:
