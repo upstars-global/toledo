@@ -94,18 +94,3 @@ publish to staging:
           - charts/**/*
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-
-publish to production:
-  extends: .publish-to-argocd
-  variables:
-    PUBLISH_TO_ENV: "production"
-    HELM_VALUES_PATH: "./values/production.yaml"
-    DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
-  stage: publish
-  rules:
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-      when: manual

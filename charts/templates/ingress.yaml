@@ -5,14 +5,12 @@ metadata:
     app.kubernetes.io/application: {{ .Release.Namespace }}
     app.kubernetes.io/name: {{ .Values.componentId }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-  name: {{ .Release.Name }}-new
+  name: {{ .Release.Name }}
   annotations:
     {{- with .Values.ingress.annotations }}
       {{- toYaml . | indent 4 }}
     {{- end }}
-    cert-manager.io/cluster-issuer: "letsencrypt-certs"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: 512m
+    nginx.org/client-max-body-size: 512m
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   ingressClassName: nginx
