@@ -1,5 +1,5 @@
 ingress:
-  hostname: toledo-staging-aws.upstr.to
+  hostname: toledo-staging.whitelabel.to
 
 env_value: staging  
 

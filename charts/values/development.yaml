@@ -1,5 +1,5 @@
 ingress:
-  hostname: toledo-develop-aws.upstr.to
+  hostname: toledo-develop.whitelabel.to
 
 env_value: develop
 
