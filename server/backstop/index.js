@@ -31,14 +31,23 @@ function getScenarios(project, hostName) {
   return scenarios
 }
 
-import {NODE_ENV}from '@config'
-export default function commandFn(command, { hostName, project, testId }) {
+import { NODE_ENV } from '@config'
+
+export default function commandFn(command, { hostName, project, testId, selectedScenariosLabels = [] }) {
   const file = JSON.parse(
       fs.readFileSync(`./backstop/config/${NODE_ENV ? 'defaultConfigDev' : 'defaultConfig'}.json`)
   )
 
   file.paths = getPaths(command, project, testId)
-  file.scenarios = getScenarios(project, hostName)
+  const allScenarios = getScenarios(project, hostName)
+
+  if (selectedScenariosLabels.length) {
+    file.scenarios = allScenarios.filter(({ label }) => {
+      return selectedScenariosLabels.includes(label)
+    })
+  } else {
+    file.scenarios = allScenarios
+  }
 
   if (testId) {
     file.dynamicTestId = testId
