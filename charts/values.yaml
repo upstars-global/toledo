@@ -1,0 +1,24 @@
+componentId: 'toledo'
+env_value: production
+replicas: 1
+port: 3000
+
+resources:
+  requests:
+    cpu: 400m
+    memory: 3000Mi
+  limits:
+     memory: 3000Mi
+
+image:
+  name: 'localhost'
+  tag: 'master'
+
+ingress:
+  hostname: ''
+#  cfIpList: ''
+  annotations: []
+
+volume:
+  size: 1Gi
+  testSize: 20Gi
