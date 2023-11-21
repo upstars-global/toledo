@@ -75,6 +75,10 @@ publish to development:
     DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
   stage: publish
   rules:
+    - changes:
+        paths:
+          - charts/**/*
+      when: never
     - if: $CI_COMMIT_REF_NAME == "develop"
 
 publish to staging:
@@ -85,6 +89,10 @@ publish to staging:
     DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
   stage: publish
   rules:
+    - changes:
+        paths:
+          - charts/**/*
+      when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
 publish to production:
@@ -95,5 +103,9 @@ publish to production:
     DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
   stage: publish
   rules:
+    - changes:
+        paths:
+          - charts/**/*
+      when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       when: manual
