@@ -6,9 +6,16 @@
     >
       <div>
         <b>Tests: </b>
-        <span :class="testDiskUsageClass">{{ Number(spaseUsage.testFolderSize).toFixed(2) }}</span> / 20000 mb
+        <span :class="testDiskUsageClass">{{
+          Number(spaseUsage.testFolderSize)
+            .toFixed(2)
+        }}</span> / 20000 mb
       </div>
-      <div><b>References: </b>{{ Number(spaseUsage.referenceFolderSize).toFixed(2) }} / 1000 mb</div>
+      <div><b>References: </b>{{
+        Number(spaseUsage.referenceFolderSize)
+          .toFixed(2)
+      }} / 1000 mb
+      </div>
     </b-card>
     <b-card title="Запуск нового теста">
       <b-button @click="startNewTest">
@@ -20,6 +27,23 @@
         Старт
       </b-button>
     </b-card>
+    <b-card title="Запуск тестов выбранных сценариев">
+      <b-form-select
+        v-model="selectTests.selected"
+        :options="selectTestOptions"
+        multiple
+        label-field="title"
+        :select-size="4"
+      />
+      <div class="mt-1">
+        Selected: <strong>{{ selectTests.selected }}</strong>
+      </div>
+
+      <b-button @click="startNewTest">
+        Старт выбранных сценариев
+      </b-button>
+    </b-card>
+
     <b-card
       class="project-page__one-column"
       no-body
@@ -67,8 +91,9 @@ import {
   BCard,
   BButton,
   BModal,
+  BFormSelect,
 } from 'bootstrap-vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import TestTable from '@/components/TestTable.vue'
 import DynamicTable from '@/components/DynamicTable.vue'
 
@@ -84,6 +109,7 @@ export default {
     Preloader,
     TestTable,
     DynamicTable,
+    BFormSelect,
   },
 
   props: {
@@ -101,12 +127,18 @@ export default {
         referenceFolderSize: 0,
       },
       item: {},
+      selectTests: {
+        dir: 'ltr',
+        selected: [],
+      },
+
     }
   },
 
   computed: {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
+      getTestScenarios: 'getTestScenarios',
     }),
 
     testDiskUsageClass() {
@@ -121,32 +153,50 @@ export default {
 
       return 'red'
     },
+
+    selectTestOptions() {
+      return this.getTestScenarios.map(({ label }) => ({
+        value: label,
+        text: label,
+      }))
+    },
   },
 
   created() {
     this.loadSpaseUsage()
   },
 
+  mounted() {
+    this.getAllScenarios(this.project)
+  },
+
   methods: {
+    ...mapActions('app', {
+      getAllScenarios: 'getAllScenarios',
+    }),
     loadSpaseUsage() {
-      fetch(`${this.apiAddr}api/spase-usage`).then(res => res.json()).then(res => {
-        this.spaseUsage = res
-      })
+      fetch(`${this.apiAddr}api/spase-usage`)
+        .then(res => res.json())
+        .then(res => {
+          this.spaseUsage = res
+        })
     },
 
     startNewTest() {
       this.loading = true
-      fetch(`${this.apiAddr}api/start?project=${this.project}`).then(() => {
-        this.loading = false
-        this.$refs.table.refresh()
-      })
+      fetch(`${this.apiAddr}api/start?project=${this.project}`)
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
     },
 
     createReference() {
       this.loading = true
-      fetch(`${this.apiAddr}api/reference?project=${this.project}`).then(() => {
-        this.loading = false
-      })
+      fetch(`${this.apiAddr}api/reference?project=${this.project}`)
+        .then(() => {
+          this.loading = false
+        })
     },
 
     showModal(item) {
@@ -160,11 +210,12 @@ export default {
 
     deleteTest() {
       this.loading = true
-      fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`).then(() => {
-        this.loading = false
-        this.loadSpaseUsage()
-        this.$refs.table.refresh()
-      })
+      fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`)
+        .then(() => {
+          this.loading = false
+          this.loadSpaseUsage()
+          this.$refs.table.refresh()
+        })
       this.hideModal()
     },
   },
