@@ -80,10 +80,6 @@ publish to development:
           - charts/**/*
       when: never
     - if: $CI_COMMIT_REF_NAME == "develop"
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
 
 publish to staging:
   extends: .publish-to-argocd
@@ -98,10 +94,6 @@ publish to staging:
           - charts/**/*
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
 
 publish to production:
   extends: .publish-to-argocd
@@ -117,7 +109,3 @@ publish to production:
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
       when: manual
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
