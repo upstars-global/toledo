@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/application: {{ .Release.Namespace }}
+    app.kubernetes.io/name: {{ .Values.componentId }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  strategy: 
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/application: {{ .Release.Namespace }}
+      app.kubernetes.io/name: {{ .Values.componentId }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/application: {{ .Release.Namespace }}
+        app.kubernetes.io/name: {{ .Values.componentId }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: toledo
+          env:
+            - name: ALPA_ADDR
+              value: {{ .Values.env.alpa_addr }}
+            - name: THOR_ADDR
+              value: {{ .Values.env.thor_addr }}
+            - name: ENVIRONMENT
+              value: {{ .Values.env_value }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{ .Values.port }}
+              name: http
+            - containerPort: 9229
+              name: debug
+          resources: {{- toYaml .Values.resources | nindent 12}}
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            timeoutSeconds: 2
+            periodSeconds: 2
+            successThreshold: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /data/server/backstop/reference/
+            - name: tests
+              mountPath: /data/server/backstop/test/
+      restartPolicy: Always
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc
+        - name: tests
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-pvc-tests
+      serviceAccountName: {{ .Values.componentId }}
