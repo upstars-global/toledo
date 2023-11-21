@@ -6,9 +6,16 @@
     >
       <div>
         <b>Tests: </b>
-        <span :class="testDiskUsageClass">{{ Number(spaseUsage.testFolderSize).toFixed(2) }}</span> / 20000 mb
+        <span :class="testDiskUsageClass">{{
+          Number(spaseUsage.testFolderSize)
+            .toFixed(2)
+        }}</span> / 20000 mb
       </div>
-      <div><b>References: </b>{{ Number(spaseUsage.referenceFolderSize).toFixed(2) }} / 1000 mb</div>
+      <div><b>References: </b>{{
+        Number(spaseUsage.referenceFolderSize)
+          .toFixed(2)
+      }} / 1000 mb
+      </div>
     </b-card>
     <b-card title="Запуск нового теста">
       <b-button @click="startNewTest">
@@ -20,6 +27,57 @@
         Старт
       </b-button>
     </b-card>
+    <b-card
+      class="project-page__one-column"
+      title="Запуск выбранных сценариев"
+    >
+      <validation-observer ref="scenarioSelect">
+        <b-form>
+          <b-row>
+            <b-col cols="12">
+              <b-form-group
+                label="Выбор сценариев для"
+                label-for="select-tests-scenario"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="select-tests-scenario"
+                  rules="required"
+                >
+                  <v-select
+                    id="select-tests-scenario"
+                    v-model="selectTests.selected"
+                    multiple
+                    label="title"
+                    :options="selectTestOptions"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-button
+                type="submit"
+                @click.prevent="startTestSelectedScenarios"
+              >
+                Старт тестов выбранных сценариев
+              </b-button>
+            </b-col>
+            <b-col>
+              <b-button
+                type="submit"
+                @click.prevent="createReferenceSelectedScenarios"
+              >
+                Старт принятия эталонов выбранных сценариев
+              </b-button>
+            </b-col>
+          </b-row>
+        </b-form>
+      </validation-observer>
+    </b-card>
+
     <b-card
       class="project-page__one-column"
       no-body
@@ -67,8 +125,16 @@ import {
   BCard,
   BButton,
   BModal,
+  BForm,
+  BRow,
+  BCol,
+  BFormGroup,
 } from 'bootstrap-vue'
-import { mapGetters } from 'vuex'
+import vSelect from 'vue-select'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { required } from '@validations'
+
+import { mapActions, mapGetters } from 'vuex'
 import TestTable from '@/components/TestTable.vue'
 import DynamicTable from '@/components/DynamicTable.vue'
 
@@ -81,9 +147,16 @@ export default {
     BCard,
     BButton,
     BModal,
+    BForm,
+    BRow,
+    BCol,
+    BFormGroup,
     Preloader,
     TestTable,
     DynamicTable,
+    vSelect,
+    ValidationProvider,
+    ValidationObserver,
   },
 
   props: {
@@ -95,18 +168,25 @@ export default {
 
   data() {
     return {
+      required,
       loading: false,
       spaseUsage: {
         testFolderSize: 0,
         referenceFolderSize: 0,
       },
       item: {},
+      selectTests: {
+        dir: 'ltr',
+        selected: [],
+      },
+
     }
   },
 
   computed: {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
+      getTestScenarios: 'getTestScenarios',
     }),
 
     testDiskUsageClass() {
@@ -121,32 +201,88 @@ export default {
 
       return 'red'
     },
+
+    selectTestOptions() {
+      return this.getTestScenarios.map(({ label }) => label)
+    },
   },
 
   created() {
     this.loadSpaseUsage()
   },
 
+  mounted() {
+    this.getAllScenarios(this.project)
+  },
+
   methods: {
+    ...mapActions('app', {
+      getAllScenarios: 'getAllScenarios',
+    }),
     loadSpaseUsage() {
-      fetch(`${this.apiAddr}api/spase-usage`).then(res => res.json()).then(res => {
-        this.spaseUsage = res
-      })
+      fetch(`${this.apiAddr}api/spase-usage`)
+        .then(res => res.json())
+        .then(res => {
+          this.spaseUsage = res
+        })
     },
 
     startNewTest() {
       this.loading = true
-      fetch(`${this.apiAddr}api/start?project=${this.project}`).then(() => {
-        this.loading = false
-        this.$refs.table.refresh()
+      fetch(`${this.apiAddr}api/start?project=${this.project}`)
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
+    },
+    async startTestSelectedScenarios() {
+      const result = await this.$refs.scenarioSelect.validate()
+      if (!result) {
+        return
+      }
+
+      this.loading = true
+      fetch(`${this.apiAddr}api/start-test-select-scenarios?project=${this.project}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(this.selectTests.selected),
       })
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
+    },
+
+    async createReferenceSelectedScenarios() {
+      const result = await this.$refs.scenarioSelect.validate()
+      if (!result) {
+        return
+      }
+
+      this.loading = true
+      fetch(`${this.apiAddr}api/reference-select-scenarios?project=${this.project}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(this.selectTests.selected),
+      })
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
     },
 
     createReference() {
       this.loading = true
-      fetch(`${this.apiAddr}api/reference?project=${this.project}`).then(() => {
-        this.loading = false
-      })
+      fetch(`${this.apiAddr}api/reference?project=${this.project}`)
+        .then(() => {
+          this.loading = false
+        })
     },
 
     showModal(item) {
@@ -160,11 +296,12 @@ export default {
 
     deleteTest() {
       this.loading = true
-      fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`).then(() => {
-        this.loading = false
-        this.loadSpaseUsage()
-        this.$refs.table.refresh()
-      })
+      fetch(`${this.apiAddr}api/delete?project=${this.project}&folder=${this.item.origin}`)
+        .then(() => {
+          this.loading = false
+          this.loadSpaseUsage()
+          this.$refs.table.refresh()
+        })
       this.hideModal()
     },
   },

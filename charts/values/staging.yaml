@@ -1,5 +1,5 @@
 ingress:
-  hostname: toledo-staging.whitelabel.to
+  hostname: toledo-staging.wlabel.site
 
 env_value: staging  
 

@@ -5,6 +5,7 @@ export default {
   state: {
     windowWidth: 0,
     shallShowOverlay: false,
+    testScenarios: [],
   },
   getters: {
     currentBreakPoint: state => {
@@ -16,6 +17,8 @@ export default {
       return 'xs'
     },
     apiAddr: () => '/',
+    // apiAddr: () => 'http://localhost:3000/', // todo: вернуть / как и было
+    getTestScenarios: state => state.testScenarios,
   },
   mutations: {
     UPDATE_WINDOW_WIDTH(state, val) {
@@ -24,6 +27,20 @@ export default {
     TOGGLE_OVERLAY(state, val) {
       state.shallShowOverlay = val !== undefined ? val : !state.shallShowOverlay
     },
+    SET_TEST_SCENARIOS(state, val) {
+      state.testScenarios = val
+    },
   },
-  actions: {},
+  actions: {
+    async getAllScenarios({
+      commit,
+      getters,
+    }, project) {
+      const response = await fetch(`${getters.apiAddr}api/test-scenarios?project=${project}`)
+      if (response.ok) {
+        const testScenarios = await response.json()
+        commit('SET_TEST_SCENARIOS', testScenarios)
+      }
+    },
+  },
 }

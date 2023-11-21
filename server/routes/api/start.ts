@@ -47,6 +47,7 @@ export default function startRoute(req: Request, res: Response) {
         hostName: MOCK_ADDR || host,
         project: projectName,
         testId: folder,
+        selectedScenariosLabels: req.body
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {

@@ -14,6 +14,7 @@ export default function reference(req: Request, res: Response) {
         }),
         project,
         testId: '',
+        selectedScenariosLabels: req.body
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {
