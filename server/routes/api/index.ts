@@ -12,6 +12,7 @@ export default function apiRouter(): Router {
     const apiRouter = express.Router();
 
     apiRouter.get('/start', startRoute)
+    apiRouter.post('/start-select-scenarios', startRoute)
     apiRouter.get('/test-list', testList)
     apiRouter.get('/app-list', appList)
     apiRouter.get('/reference', reference)

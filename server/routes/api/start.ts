@@ -42,11 +42,14 @@ export default function startRoute(req: Request, res: Response) {
     const folder = taskId || getCurrentFormattedTime()
     copyReference(projectName, folder)
 
+    const selectedScenariosLabels = req.body
+
     console.log('Host: ', host)
     command('test', {
         hostName: MOCK_ADDR || host,
         project: projectName,
         testId: folder,
+        selectedScenariosLabels
     }).then(() => {
         console.log('complete')
     }).catch((err: Error) => {

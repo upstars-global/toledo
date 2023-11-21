@@ -27,21 +27,55 @@
         Старт
       </b-button>
     </b-card>
-    <b-card title="Запуск тестов выбранных сценариев">
-      <b-form-select
-        v-model="selectTests.selected"
-        :options="selectTestOptions"
-        multiple
-        label-field="title"
-        :select-size="4"
-      />
-      <div class="mt-1">
-        Selected: <strong>{{ selectTests.selected }}</strong>
-      </div>
-
-      <b-button @click="startNewTest">
-        Старт выбранных сценариев
-      </b-button>
+    <b-card
+      class="project-page__one-column"
+      title="Запуск тестов выбранных сценариев"
+    >
+      <validation-observer ref="scenarioSelect">
+        <b-form>
+          <b-row>
+            <b-col cols="12">
+              <b-form-group
+                label="Выбор сценариев для"
+                label-for="select-tests-scenario"
+              >
+                <validation-provider
+                  #default="{ errors }"
+                  name="select-tests-scenario"
+                  rules="required"
+                >
+                  <v-select
+                    id="select-tests-scenario"
+                    v-model="selectTests.selected"
+                    multiple
+                    label="title"
+                    :options="selectTestOptions"
+                  />
+                  <small class="text-danger">{{ errors[0] }}</small>
+                </validation-provider>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-button
+                type="submit"
+                @click.prevent="startTestSelectedScenarios"
+              >
+                Старт тестов выбранных сценариев
+              </b-button>
+            </b-col>
+            <b-col>
+              <b-button
+                type="submit"
+                @click.prevent
+              >
+                Старт принятия эталонов выбранных сценариев
+              </b-button>
+            </b-col>
+          </b-row>
+        </b-form>
+      </validation-observer>
     </b-card>
 
     <b-card
@@ -91,8 +125,15 @@ import {
   BCard,
   BButton,
   BModal,
-  BFormSelect,
+  BForm,
+  BRow,
+  BCol,
+  BFormGroup,
 } from 'bootstrap-vue'
+import vSelect from 'vue-select'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { required } from '@validations'
+
 import { mapActions, mapGetters } from 'vuex'
 import TestTable from '@/components/TestTable.vue'
 import DynamicTable from '@/components/DynamicTable.vue'
@@ -106,10 +147,16 @@ export default {
     BCard,
     BButton,
     BModal,
+    BForm,
+    BRow,
+    BCol,
+    BFormGroup,
     Preloader,
     TestTable,
     DynamicTable,
-    BFormSelect,
+    vSelect,
+    ValidationProvider,
+    ValidationObserver,
   },
 
   props: {
@@ -121,6 +168,7 @@ export default {
 
   data() {
     return {
+      required,
       loading: false,
       spaseUsage: {
         testFolderSize: 0,
@@ -156,8 +204,7 @@ export default {
 
     selectTestOptions() {
       return this.getTestScenarios.map(({ label }) => ({
-        value: label,
-        text: label,
+        title: label,
       }))
     },
   },
@@ -185,6 +232,26 @@ export default {
     startNewTest() {
       this.loading = true
       fetch(`${this.apiAddr}api/start?project=${this.project}`)
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
+    },
+    async startTestSelectedScenarios() {
+      const result = await this.$refs.scenarioSelect.validate()
+      if (!result) {
+        return
+      }
+
+      this.loading = true
+      fetch(`${this.apiAddr}api/start-select-scenarios?project=${this.project}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(this.selectTests.selected),
+      })
         .then(() => {
           this.loading = false
           this.$refs.table.refresh()
