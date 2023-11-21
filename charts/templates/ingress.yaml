@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/application: {{ .Release.Namespace }}
     app.kubernetes.io/name: {{ .Values.componentId }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-  name: {{ .Release.Name }}-new
+  name: {{ .Release.Name }}
   annotations:
     {{- with .Values.ingress.annotations }}
       {{- toYaml . | indent 4 }}
