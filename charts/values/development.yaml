@@ -1,5 +1,5 @@
 ingress:
-  hostname: toledo-develop.whitelabel.to
+  hostname: toledo-develop.wlabel.site
 
 env_value: develop
 
