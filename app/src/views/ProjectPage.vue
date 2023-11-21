@@ -29,7 +29,7 @@
     </b-card>
     <b-card
       class="project-page__one-column"
-      title="Запуск тестов выбранных сценариев"
+      title="Запуск выбранных сценариев"
     >
       <validation-observer ref="scenarioSelect">
         <b-form>
@@ -68,7 +68,7 @@
             <b-col>
               <b-button
                 type="submit"
-                @click.prevent
+                @click.prevent="createReferenceSelectedScenarios"
               >
                 Старт принятия эталонов выбранных сценариев
               </b-button>
@@ -203,9 +203,7 @@ export default {
     },
 
     selectTestOptions() {
-      return this.getTestScenarios.map(({ label }) => ({
-        title: label,
-      }))
+      return this.getTestScenarios.map(({ label }) => label)
     },
   },
 
@@ -244,7 +242,28 @@ export default {
       }
 
       this.loading = true
-      fetch(`${this.apiAddr}api/start-select-scenarios?project=${this.project}`, {
+      fetch(`${this.apiAddr}api/start-test-select-scenarios?project=${this.project}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify(this.selectTests.selected),
+      })
+        .then(() => {
+          this.loading = false
+          this.$refs.table.refresh()
+        })
+    },
+
+    async createReferenceSelectedScenarios() {
+      const result = await this.$refs.scenarioSelect.validate()
+      if (!result) {
+        return
+      }
+
+      this.loading = true
+      fetch(`${this.apiAddr}api/reference-select-scenarios?project=${this.project}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
