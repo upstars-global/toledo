@@ -66,6 +66,8 @@
                 Старт тестов выбранных сценариев
               </b-button>
             </b-col>
+            <!--
+            TODO: убрать удаление всех єталонов при запуски задачи `принятия эталонов выбранных сценариев`
             <b-col>
               <b-button
                 type="submit"
@@ -73,7 +75,7 @@
               >
                 Старт принятия эталонов выбранных сценариев
               </b-button>
-            </b-col>
+            </b-col>-->
           </b-row>
         </b-form>
       </validation-observer>
@@ -264,7 +266,7 @@ export default {
       }
 
       this.loading = true
-      fetch(`${this.apiAddr}api/reference-select-scenarios?project=${this.project}`, {
+      fetch(`${this.apiAddr}api/reference/select-scenarios?project=${this.project}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
+import {Request, Response, Router} from 'express'
 import command from '../../backstop'
 import { getTestUrlByTask } from '../../helpers/hostHelper'
 import {MOCK_ADDR}from '@config'
 
-export default function reference(req: Request, res: Response) {
+function reference(req: Request, res: Response) {
     const {
         project,
     } = req.query
@@ -25,3 +25,11 @@ export default function reference(req: Request, res: Response) {
         res.send('ok')
     })
 }
+
+export default function (): Router {
+    const referenceRouter = Router()
+
+    referenceRouter.get('/', reference)
+    referenceRouter.post('/select-scenarios', reference)
+    return referenceRouter
+};
