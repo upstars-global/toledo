@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import { Router } from "express";
 import startRoute from './start'
 import testList from './test-list'
 import reference from './reference'
@@ -9,10 +9,9 @@ import {getScenariosProject} from "./test-scenarios";
 
 
 export default function apiRouter(): Router {
-    const apiRouter = express.Router();
+    const apiRouter = Router();
 
-    apiRouter.get('/start', startRoute)
-    apiRouter.post('/start-test-select-scenarios', startRoute)
+    apiRouter.use('/start', startRoute())
     apiRouter.get('/test-list', testList)
     apiRouter.get('/app-list', appList)
     apiRouter.get('/reference', reference)

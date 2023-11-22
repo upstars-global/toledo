@@ -1,10 +1,10 @@
-import {Request, Response} from 'express'
+import { Request, Response, Router } from 'express'
 import command from '../../backstop'
 import SlackService from '../../services/SlackService'
 import {getTestUrlByTask} from '../../helpers/hostHelper'
 import fs from 'fs'
 import path from 'path'
-import {MOCK_ADDR}from '@config'
+import { MOCK_ADDR } from '@config'
 import { getTestResult } from '../../helpers/getTestResult'
 
 function getCurrentFormattedTime() {
@@ -25,7 +25,7 @@ function copyReference(project: string, folder: string) {
     fs.cpSync(srcPathName, destPathName, {recursive: true});
 }
 
-export default function startRoute(req: Request, res: Response) {
+function startRoute(req: Request, res: Response) {
     const {
         project,
         testId,
@@ -59,3 +59,13 @@ export default function startRoute(req: Request, res: Response) {
         res.send('ok')
     })
 }
+
+export default function (): Router {
+    const startRouter = Router()
+
+    startRouter.post('/test-select-scenarios', startRoute)
+    startRouter.get('/', startRoute)
+    return startRouter
+};
+
+

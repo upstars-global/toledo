@@ -242,7 +242,7 @@ export default {
       }
 
       this.loading = true
-      fetch(`${this.apiAddr}api/start-test-select-scenarios?project=${this.project}`, {
+      fetch(`${this.apiAddr}api/start/test-select-scenarios?project=${this.project}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
