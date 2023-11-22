@@ -63,8 +63,8 @@ function startRoute(req: Request, res: Response) {
 export default function (): Router {
     const startRouter = Router()
 
-    startRouter.post('/test-select-scenarios', startRoute)
     startRouter.get('/', startRoute)
+    startRouter.post('/test-select-scenarios', startRoute)
     return startRouter
 };
 

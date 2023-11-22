@@ -49,6 +49,7 @@
                     v-model="selectTests.selected"
                     multiple
                     label="title"
+                    :close-on-select="false"
                     :options="selectTestOptions"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
