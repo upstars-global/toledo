@@ -14,7 +14,7 @@ export default function apiRouter(): Router {
     apiRouter.use('/start', startRoute())
     apiRouter.get('/test-list', testList)
     apiRouter.get('/app-list', appList)
-    apiRouter.use('/reference', reference)
+    apiRouter.use('/reference', reference())
     apiRouter.get('/delete', deleteRoute)
     apiRouter.get('/spase-usage', spaseUsage)
     apiRouter.get('/test-scenarios', getScenariosProject)
