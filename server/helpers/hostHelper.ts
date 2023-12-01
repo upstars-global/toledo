@@ -1,4 +1,4 @@
-import { ENVIRONMENT }from '@config'
+import { ENVIRONMENT, IS_AWS }from '@config'
 
 interface IHost {
     task?: string,
@@ -12,6 +12,10 @@ function getCookieUrlByTask(config: IHost): string {
     if (config.task) {
         task = `-${ config.task.toLowerCase() }-ss`
         env = 'develop'
+    }
+
+    if (IS_AWS) {
+        return `frontera${ task }-${ env }-${ config.project }-mock.${ config.project }.svc.cluster.local`;
     }
 
     return `frontera${ task }-${ config.project }-${ env }-mock.${ config.project }.svc.cluster.local`;
