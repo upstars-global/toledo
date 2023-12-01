@@ -79,6 +79,12 @@ publish to development:
         paths:
           - charts/**/*
       when: never
+    - changes:
+        paths:
+          - modules/Dockerfile
+          - "**/package.json"
+          - "**/yarn.lock"
+      when: never
     - if: $CI_COMMIT_REF_NAME == "develop"
 
 publish to staging:
@@ -92,5 +98,11 @@ publish to staging:
     - changes:
         paths:
           - charts/**/*
+      when: never
+    - changes:
+        paths:
+          - modules/Dockerfile
+          - "**/package.json"
+          - "**/yarn.lock"
       when: never
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
