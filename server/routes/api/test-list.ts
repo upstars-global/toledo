@@ -12,7 +12,10 @@ export default function testList(req: Request, res: Response) {
     }
 
     const index = files.indexOf('.gitkeep')
-    files.splice(index, 1)
+    if (index > -1) {
+      files.splice(index, 1)
+    }
+
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Content-Type', 'application/json')
     res.send(files.map((test) => {
