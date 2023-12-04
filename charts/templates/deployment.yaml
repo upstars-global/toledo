@@ -31,8 +31,6 @@ spec:
               value: {{ .Values.env.thor_addr }}
             - name: ENVIRONMENT
               value: {{ .Values.env_value }}
-            - name: IS_AWS
-              value: "true"
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
