@@ -9,6 +9,7 @@ module.exports = async (page, scenario, vp) => {
   if (keyPressSelector) {
     for (const keyPressSelectorItem of [].concat(keyPressSelector)) {
       await page.waitForSelector(keyPressSelectorItem.selector);
+      
       if(keyPressSelectorItem?.clickSelector) {
         await page.click(keyPressSelectorItem.clickSelector);
       } else {
