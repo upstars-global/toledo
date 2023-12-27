@@ -112,8 +112,8 @@ export default {
       fetch(`${this.apiAddr}api/app-list?project=${this.project}`).then(res => res.json()).then(res => {
         callback(
           res
-            .filter(folder => !folder.startsWith("s3"))
-            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|revert-[0-9a-f]+|s3)/)[0], origin: folder }))
+            .filter(folder => !folder.startsWith('s3'))
+            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|revert-[0-9a-f]+)/)[0], origin: folder })),
         )
       })
     },
