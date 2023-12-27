@@ -119,14 +119,14 @@ export default function getScenarios(host: string) {
       postInteractionWait: 3000,
     },
     {
-      label: 'Personal limits - Deposit limits',
+      label: 'PersonalLimits DepositLimits',
       url: `${host}/users/limits`,
       cookiePath,
       delay: 3000,
       readySelector: '.header__wrapper'
     },
     {
-      label: 'Personal limits - Add deposit limit',
+      label: 'PersonalLimits AddDepositLimit',
       url: `${host}/users/limits`,
       cookiePath,
       delay: 3000,
@@ -134,7 +134,7 @@ export default function getScenarios(host: string) {
       postInteractionWait: 3000,
     },
     {
-      label: 'Personal limits - Manage deposit limit',
+      label: 'PersonalLimits ManageDepositLimit',
       url: `${host}/users/limits`,
       cookiePath,
       delay: 3000,
