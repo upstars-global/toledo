@@ -89,9 +89,14 @@ export default {
       fetch(`${this.apiAddr}api/test-list?project=${this.project}`).then(res => res.json()).then(res => {
         callback(res.map(test => {
           const folder = test.name
-          const dateString = folder.startsWith('v') || folder.startsWith('master') || folder.startsWith('ALPA-')
-            ? folder
-            : `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
+
+          let dateString = folder
+          if (folder.startsWith('frontera_')) {
+            dateString = folder.split('_')[1]
+          } else if (!folder.startsWith('v') && !folder.startsWith('master') && !folder.startsWith('ALPA-')) {
+            dateString = `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
+          }
+
           return {
             Id: dateString,
             result: test.result,

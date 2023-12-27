@@ -6,7 +6,15 @@ function getChanelHook(project: string): string {
     }
 
     return "https://hooks.slack.com/services/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"
-};
+}
+
+function getReportLink(project: string, testId: string): string {
+    if (project === 'alpa') {
+        return `https://toledo-staging.wlabel.site/report/${ project }/${ testId }`
+    }
+
+    return `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+}
 
 function getText(project: string, testId: string): string {
     if (project === 'alpa') {
@@ -83,7 +91,7 @@ export default {
                                 "text": "Result"
                             },
                             "style": "primary",
-                            "url": `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+                            "url": getReportLink(project, testId)
                         }
                     ]
                 }
