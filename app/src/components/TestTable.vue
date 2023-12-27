@@ -92,7 +92,7 @@ export default {
 
           let dateString = folder
           if (folder.startsWith('frontera_')) {
-            dateString = folder.split('_')[1]
+            [, dateString] = folder.split('_')
           } else if (!folder.startsWith('v') && !folder.startsWith('master') && !folder.startsWith('ALPA-')) {
             dateString = `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
           }
