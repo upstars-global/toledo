@@ -66,12 +66,12 @@
               </b-button>
             </b-col>
             <b-col>
-              <b-button
+              <!--              <b-button
                 type="submit"
                 @click.prevent="createReferenceSelectedScenarios"
               >
                 Старт принятия эталонов выбранных сценариев
-              </b-button>
+              </b-button>-->
             </b-col>
           </b-row>
         </b-form>
