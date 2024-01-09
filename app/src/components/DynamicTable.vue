@@ -110,7 +110,11 @@ export default {
 
     fetchTable(_, callback) {
       fetch(`${this.apiAddr}api/app-list?project=${this.project}`).then(res => res.json()).then(res => {
-        callback(res.map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|revert-[0-9a-f]+)/)[0], origin: folder })))
+        callback(
+          res
+            .filter(folder => !folder.startsWith('s3'))
+            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|revert-[0-9a-f]+)/)[0], origin: folder })),
+        )
       })
     },
 

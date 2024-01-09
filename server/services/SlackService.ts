@@ -6,14 +6,23 @@ function getChanelHook(project: string): string {
     }
 
     return "https://hooks.slack.com/services/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"
-};
+}
+
+function getReportLink(project: string, testId: string): string {
+    if (project === 'alpa') {
+        return `https://toledo-staging.wlabel.site/report/${ project }/${ testId }`
+    }
+
+    return `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+}
 
 function getText(project: string, testId: string): string {
     if (project === 'alpa') {
         return `Test new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended with errors`
     }
 
-    return `Test new release "${ testId }" ended with errors`
+    const [, pipelineId] = testId.split('_')
+    return `Test new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ testId }> ended with errors`
 }
 
 export default {
@@ -83,7 +92,7 @@ export default {
                                 "text": "Result"
                             },
                             "style": "primary",
-                            "url": `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+                            "url": getReportLink(project, testId)
                         }
                     ]
                 }

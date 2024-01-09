@@ -132,6 +132,22 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Search popup',
+      url: `${host}/casino`,
+      postInteractionWait: 3000,
+      keyPressSelectors: [
+        {
+          selector: '.games-list-toolbar-search',
+          clickSelector: '.games-list-toolbar-search',
+        },
+        {
+          selector: '.game-search__input',
+          keyPress: "book"
+        },
+      ],
+      delay: 3000,
+    },
+    {
       label: 'Benefits of Crypto',
       url: `${host}/benefits-of-crypto`,
       delay: 3000,
