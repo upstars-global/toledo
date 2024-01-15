@@ -226,6 +226,29 @@ export default function getScenarios(host: string) {
       postInteractionWait: 3000,
     },
     {
+      label: 'PersonalLimits DepositLimits',
+      url: `${host}/users/limits`,
+      cookiePath,
+      delay: 3000,
+      readySelector: '.header__wrapper'
+    },
+    {
+      label: 'PersonalLimits AddDepositLimit',
+      url: `${host}/users/limits`,
+      cookiePath,
+      delay: 3000,
+      clickSelector: "[data-test='add-deposit-limit-button']",
+      postInteractionWait: 3000,
+    },
+    {
+      label: 'PersonalLimits ManageDepositLimit',
+      url: `${host}/users/limits`,
+      cookiePath,
+      delay: 3000,
+      clickSelector: "[data-test='manage-limit-daily-button']",
+      postInteractionWait: 3000,
+    },
+    {
       label: 'CashboxDashboard',
       url: `${host}`,
       cookiePath,
