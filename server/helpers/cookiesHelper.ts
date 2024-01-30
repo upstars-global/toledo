@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from "path";
 
+function cleanFileName(fileName: string) {
+    return fileName.replace(/[:/]/g, '-');
+}
+
 export function processHost(host: string): string {
     const domain = host.replace(':2004', '');
     const pasePath = '../backstop/config/cookies'
@@ -8,8 +12,7 @@ export function processHost(host: string): string {
     const parsedFile = JSON.parse(file)
     parsedFile[0].domain = domain
     parsedFile[0].name = /rocketplay|alpa/.test(domain) ? '_casino_session' : 'default_token'
-    const fileName = `cookies-${domain.replace('http://', '').replace(/\./g, '-')}.json`
+    const fileName = cleanFileName(`cookies-${domain.replace('http://', '').replace(/\./g, '-')}.json`)
     fs.writeFileSync(path.resolve(__dirname, pasePath, fileName), JSON.stringify(parsedFile));
-
     return `backstop/config/cookies/${fileName}`
 }
