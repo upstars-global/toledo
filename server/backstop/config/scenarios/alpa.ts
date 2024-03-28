@@ -103,7 +103,7 @@ export default function getScenarios(host: string) {
             label: 'Withdraw Step 1',
             url: `${host}/withdraw`,
             cookiePath,
-            readySelector: [".CashboxStepWithdraw"]
+            readySelector: [".modal-cashbox-step-withdraw"]
         },
         {
             label: 'Balance dropdown',
