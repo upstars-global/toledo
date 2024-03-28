@@ -84,6 +84,46 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/alpa/reference',
+      name: 'reference-page-alpa',
+      component: () => import('@/views/ReferencePage.vue'),
+      props: true,
+      meta: {
+        pageTitle: 'Report page',
+        project: 'alpa',
+        breadcrumb: [
+          {
+            to: { name: 'project-alpa' },
+            text: 'Project page',
+          },
+          {
+            text: 'Reference page',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/thor/reference',
+      name: 'reference-page-thor',
+      component: () => import('@/views/ReferencePage.vue'),
+      props: true,
+      meta: {
+        pageTitle: 'Report page',
+        project: 'thor',
+        breadcrumb: [
+          {
+            to: { name: 'project-thor' },
+            text: 'Project page',
+          },
+          {
+            text: 'Reference page',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
       path: '/report/thor/:test',
       name: 'report-page-thor',
       component: () => import('@/views/ReportPage.vue'),
