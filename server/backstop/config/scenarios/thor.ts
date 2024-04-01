@@ -172,6 +172,24 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Return Policy',
+      url: `${host}/refund`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Responsible Gaming',
+      url: `${host}/responsible-gaming`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Sports Betting Rules',
+      url: `${host}/sports-betting-rules`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
       label: 'KYC Procedure',
       url: `${host}/kyc`,
       delay: 3000,
