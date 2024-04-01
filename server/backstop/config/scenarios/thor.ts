@@ -1,7 +1,8 @@
 import { processHost } from '../../../helpers/cookiesHelper'
 import {MOCK_ADDR}from '@config'
 export default function getScenarios(host: string) {
-  const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
+  // const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
+  const cookiePath =  processHost(host);
 
   return [
     {
@@ -25,6 +26,18 @@ export default function getScenarios(host: string) {
     {
       label: 'Arena',
       url: `${host}/arena`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Promotions',
+      url: `${host}/promo`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Tournaments',
+      url: `${host}/tournaments`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -244,6 +257,24 @@ export default function getScenarios(host: string) {
       postInteractionWait: 3000,
     },
     {
+      label: 'Profile Promocode',
+      url: `${host}/users/promocode`,
+      cookiePath,
+      readySelector: ".profile-promocode__body [data-test='profile__input--promocode']",
+    },
+    {
+      label: 'Profile Verification',
+      url: `${host}/users/verification`,
+      cookiePath,
+      readySelector: ".verification .verification-state-card",
+    },
+    {
+      label: 'Profile Level',
+      url: `${host}/users/level`,
+      cookiePath,
+      readySelector: ".profile .level-system-carousel__element",
+    },
+    {
       label: 'PersonalLimits DepositLimits',
       url: `${host}/users/limits`,
       cookiePath,
@@ -326,13 +357,23 @@ export default function getScenarios(host: string) {
       postInteractionWait: 1000,
     },
     {
-      label: 'Support dropdown',
+      label: 'Support List',
       url: `${host}`,
       cookiePath,
       delay: 3000,
       clickSelectors: ['[data-test=\'chat-button\']'],
       clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']'],
       postInteractionWait: 3000,
+    },
+    {
+      label: 'Notifications List',
+      url: `${host}`,
+      cookiePath,
+      delay: 1000,
+      clickSelectors: ['[data-test=\'notifications-button\']'],
+      clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']'],
+      readySelector: ".fe-notice",
+      postInteractionWait: 2000,
     },
     {
       label: 'Login',
