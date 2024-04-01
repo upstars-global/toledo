@@ -271,7 +271,7 @@ export default function getScenarios(host: string) {
       url: `${host}`,
       cookiePath,
       delay: 3000,
-      clickSelectors: ['.header__user-balance', '.user-balance__common .fe-button'],
+      clickSelectors: ['.header__user-balance', '[data-test=\'cashbox-button--header\']'],
       postInteractionWait: 1000,
     },
     {
@@ -279,7 +279,7 @@ export default function getScenarios(host: string) {
       url: `${host}`,
       cookiePath,
       delay: 3000,
-      clickSelectors: ['.header__user-balance', '.user-balance__common .fe-button', '.cashbox-dashboard__buttons .fe-button'],
+      clickSelectors: ['.header__user-balance', '[data-test=\'cashbox-button--header\']', '.cashbox-dashboard__buttons .fe-button'],
       postInteractionWait: 1000,
     },
     {
@@ -287,7 +287,7 @@ export default function getScenarios(host: string) {
       url: `${host}`,
       cookiePath,
       delay: 3000,
-      clickSelectors: ['.header__user-balance', '.user-balance__common .fe-button', '.cashbox-dashboard__buttons .fe-button', '.payments-item'],
+      clickSelectors: ['.header__user-balance', '[data-test=\'cashbox-button--header\']', '.cashbox-dashboard__buttons .fe-button', '.payments-item'],
       postInteractionWait: 1000,
     },
     {
@@ -324,6 +324,15 @@ export default function getScenarios(host: string) {
       delay: 3000,
       clickSelector: '.header__user-balance',
       postInteractionWait: 1000,
+    },
+    {
+      label: 'Support dropdown',
+      url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      clickSelectors: ['[data-test=\'chat-button\']'],
+      clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']'],
+      postInteractionWait: 3000,
     },
     {
       label: 'Login',
