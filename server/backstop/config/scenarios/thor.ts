@@ -1,8 +1,7 @@
 import { processHost } from '../../../helpers/cookiesHelper'
 import {MOCK_ADDR}from '@config'
 export default function getScenarios(host: string) {
-  // const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
-  const cookiePath =  processHost(host);
+  const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
 
   return [
     {
@@ -109,14 +108,20 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Casino Provider endorphina',
-      url: `${host}/casino/providers/endorphina`,
+      label: 'Casino Provider netent',
+      url: `${host}/casino/providers/netent`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
       label: 'Casino Theme',
       url: `${host}/casino/theme`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Casino Theme fruits',
+      url: `${host}/casino/theme/fruits`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -128,7 +133,7 @@ export default function getScenarios(host: string) {
     },
     {
       label: 'Live Provider pragmatic play',
-      url: `${host}/live/providers/pragmaticplay`,
+      url: `${host}/live/providers/pragmaticplaylive`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -140,7 +145,7 @@ export default function getScenarios(host: string) {
     },
     {
       label: 'Live Categories Lobby',
-      url: `${host}/live/categories/lobby`,
+      url: `${host}/live/categories/toplive`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -361,8 +366,17 @@ export default function getScenarios(host: string) {
       url: `${host}`,
       cookiePath,
       delay: 3000,
-      clickSelectors: ['[data-test=\'chat-button\']'],
+      clickSelectors: ['.header [data-test=\'chat-button\']'],
       clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']'],
+      postInteractionWait: 3000,
+    },
+    {
+      label: 'Callback',
+      url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      clickSelectors: ['.header [data-test=\'chat-button\']', '.header [data-test=\'chat-list--callback\']'],
+      clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']',  '.sidebar [data-test=\'chat-list--callback\']'],
       postInteractionWait: 3000,
     },
     {
