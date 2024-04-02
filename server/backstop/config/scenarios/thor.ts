@@ -368,6 +368,7 @@ export default function getScenarios(host: string) {
       delay: 3000,
       clickSelectors: ['.header [data-test=\'chat-button\']'],
       clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']'],
+      scrollToSelector: ".sidebar .vip-manager",
       postInteractionWait: 3000,
     },
     {
