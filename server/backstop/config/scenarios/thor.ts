@@ -29,6 +29,18 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
+      label: 'Promotions',
+      url: `${host}/promo`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Tournaments',
+      url: `${host}/tournaments`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
       label: 'Vip club Guest',
       url: `${host}/vip-club`,
       delay: 3000,
@@ -96,14 +108,20 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Casino Provider endorphina',
-      url: `${host}/casino/providers/endorphina`,
+      label: 'Casino Provider netent',
+      url: `${host}/casino/providers/netent`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
       label: 'Casino Theme',
       url: `${host}/casino/theme`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Casino Theme fruits',
+      url: `${host}/casino/theme/fruits`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -115,7 +133,7 @@ export default function getScenarios(host: string) {
     },
     {
       label: 'Live Provider pragmatic play',
-      url: `${host}/live/providers/pragmaticplay`,
+      url: `${host}/live/providers/pragmaticplaylive`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -127,7 +145,7 @@ export default function getScenarios(host: string) {
     },
     {
       label: 'Live Categories Lobby',
-      url: `${host}/live/categories/lobby`,
+      url: `${host}/live/categories/toplive`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -244,6 +262,24 @@ export default function getScenarios(host: string) {
       postInteractionWait: 3000,
     },
     {
+      label: 'Profile Promocode',
+      url: `${host}/users/promocode`,
+      cookiePath,
+      readySelector: ".profile-promocode__body [data-test='profile__input--promocode']",
+    },
+    {
+      label: 'Profile Verification',
+      url: `${host}/users/verification`,
+      cookiePath,
+      readySelector: ".verification .verification-state-card",
+    },
+    {
+      label: 'Profile Level',
+      url: `${host}/users/level`,
+      cookiePath,
+      readySelector: ".profile .level-system-carousel__element",
+    },
+    {
       label: 'PersonalLimits DepositLimits',
       url: `${host}/users/limits`,
       cookiePath,
@@ -326,13 +362,33 @@ export default function getScenarios(host: string) {
       postInteractionWait: 1000,
     },
     {
-      label: 'Support dropdown',
+      label: 'Support List',
       url: `${host}`,
       cookiePath,
       delay: 3000,
-      clickSelectors: ['[data-test=\'chat-button\']'],
+      clickSelectors: ['.header [data-test=\'chat-button\']'],
       clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']'],
+      scrollToSelector: ".sidebar .vip-manager",
       postInteractionWait: 3000,
+    },
+    {
+      label: 'Callback',
+      url: `${host}`,
+      cookiePath,
+      delay: 3000,
+      clickSelectors: ['.header [data-test=\'chat-button\']', '.header [data-test=\'chat-list--callback\']'],
+      clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']',  '.sidebar [data-test=\'chat-list--callback\']'],
+      postInteractionWait: 3000,
+    },
+    {
+      label: 'Notifications List',
+      url: `${host}`,
+      cookiePath,
+      delay: 1000,
+      clickSelectors: ['[data-test=\'notifications-button\']'],
+      clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']'],
+      readySelector: ".fe-notice",
+      postInteractionWait: 2000,
     },
     {
       label: 'Login',
