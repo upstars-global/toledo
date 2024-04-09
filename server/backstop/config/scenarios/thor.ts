@@ -378,7 +378,7 @@ export default function getScenarios(host: string) {
       delay: 3000,
       clickSelectors: ['.header [data-test=\'chat-button\']', '.header [data-test=\'chat-list--callback\']'],
       clickSelectorsMobile: ['[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']',  '.sidebar [data-test=\'chat-list--callback\']'],
-      postInteractionWait: 3000,
+      postInteractionWait: 5000,
     },
     {
       label: 'Notifications List',
