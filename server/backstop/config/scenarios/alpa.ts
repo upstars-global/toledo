@@ -9,7 +9,7 @@ export default function getScenarios(host: string) {
             label: 'Homepage',
             url: `${host}/`,
             delay: 3000,
-            readySelector: '.jackpot-item',
+            readySelector: '.trust-block',
             // scrollToSelector: '.footer__copyright',
         },
         {
@@ -17,7 +17,7 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             delay: 3000,
-            readySelector: '.jackpot-item',
+            readySelector: '.trust-block',
             // scrollToSelector: '.footer__copyright',
         },
         {
@@ -103,7 +103,7 @@ export default function getScenarios(host: string) {
             label: 'Withdraw Step 1',
             url: `${host}/withdraw`,
             cookiePath,
-            readySelector: [".modal-cashbox-step-withdraw"]
+            readySelector: [".modal-cashbox-step-withdraw .user-balance"]
         },
         {
             label: 'Balance dropdown',
@@ -144,7 +144,7 @@ export default function getScenarios(host: string) {
             label: 'Producers popup Homepage',
             url: `${host}/`,
             delay: 3000,
-            readySelector: '.games-list-toolbar__producers',
+            readySelector: '.producers-block',
             clickSelector: ".game-producers__activator",
             clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
 
@@ -301,7 +301,7 @@ export default function getScenarios(host: string) {
         {
             label: 'benefits-of-crypto',
             url: `${host}/benefits-of-crypto`,
-            delay: 3000,
+            delay: 5000,
             // scrollToSelector: '.footer__copyright',
         },
         {
