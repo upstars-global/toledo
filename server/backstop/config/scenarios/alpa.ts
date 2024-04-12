@@ -9,7 +9,7 @@ export default function getScenarios(host: string) {
             label: 'Homepage',
             url: `${host}/`,
             delay: 3000,
-            readySelector: '.jackpot-item',
+            readySelector: '.trust-block',
             // scrollToSelector: '.footer__copyright',
         },
         {
@@ -17,7 +17,7 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             delay: 3000,
-            readySelector: '.jackpot-item',
+            readySelector: '.trust-block',
             // scrollToSelector: '.footer__copyright',
         },
         {
