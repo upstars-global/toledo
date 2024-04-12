@@ -144,7 +144,7 @@ export default function getScenarios(host: string) {
             label: 'Producers popup Homepage',
             url: `${host}/`,
             delay: 3000,
-            readySelector: '.games-list-toolbar__producers',
+            readySelector: '.producers-block',
             clickSelector: ".game-producers__activator",
             clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
 
