@@ -301,7 +301,7 @@ export default function getScenarios(host: string) {
         {
             label: 'benefits-of-crypto',
             url: `${host}/benefits-of-crypto`,
-            delay: 3000,
+            delay: 5000,
             // scrollToSelector: '.footer__copyright',
         },
         {
