@@ -403,6 +403,13 @@ export default function getScenarios(host: string) {
       readySelector: '.popup'
     },
     {
+      label: 'Popup Leave now open',
+      url: `${host}/registration`,
+      clickSelectors: ['.logo'],
+      postInteractionWait: 3000,
+      readySelector: '.popup'
+    },
+    {
       label: 'Remind',
       url: `${host}/remind`,
       delay: 3000,
