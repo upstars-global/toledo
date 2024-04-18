@@ -26,6 +26,9 @@
       <b-button @click="createReference">
         Старт
       </b-button>
+      <b-button @click="openReference">
+        Показать эталоны
+      </b-button>
     </b-card>
     <b-card
       class="project-page__one-column"
@@ -285,6 +288,10 @@ export default {
         })
     },
 
+    openReference() {
+      this.$router.push({ name: `reference-page-${this.project}` })
+    },
+
     showModal(item) {
       this.item = item
       this.$refs['my-modal'].show()
@@ -329,5 +336,9 @@ export default {
   & .red {
     color: red;
   }
+}
+
+button {
+  margin-right: 1rem;
 }
 </style>
