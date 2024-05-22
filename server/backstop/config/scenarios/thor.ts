@@ -23,20 +23,26 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Arena',
-      url: `${host}/arena`,
+      label: 'Promotions Casino Current',
+      url: `${host}/promotions/casino`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: 'Promotions',
-      url: `${host}/promo`,
+      label: 'Promotions Casino Actions',
+      url: `${host}/promotions/casino/actions`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
     {
-      label: 'Tournaments',
-      url: `${host}/tournaments`,
+      label: 'Promotions Casino Tournaments',
+      url: `${host}/promotions/casino/tournaments`,
+      delay: 3000,
+      readySelector: '.promo-banner'
+    },
+    {
+      label: 'Promotions Casino Quests for guest',
+      url: `${host}/promotions/casino/quests`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -47,8 +53,8 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Quests',
-      url: `${host}/quests`,
+      label: 'Promotions Casino Quests for user',
+      url: `${host}/promotions/casino/quests`,
       delay: 3000,
       cookiePath,
       readySelector: '.header__wrapper'
@@ -66,23 +72,12 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Vip',
+      label: 'Loyalty Program Page',
       url: `${host}/vip`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
-    {
-      label: 'Terms',
-      url: `${host}/terms-and-conditions`,
-      delay: 3000,
-      readySelector: '.promo-banner'
-    },
-    {
-      label: 'Promotion fs-review',
-      url: `${host}/fs-review`,
-      delay: 3000,
-      readySelector: '.promo-banner'
-    },
+
     {
       label: 'Tournament page',
       url: `${host}/tournaments/1690879800Newbies-Cup`,
@@ -91,7 +86,7 @@ export default function getScenarios(host: string) {
     },
     {
       label: 'Promo page',
-      url: `${host}/promo/marvel-stars`,
+      url: `${host}/actions/marvel-stars`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
@@ -171,18 +166,7 @@ export default function getScenarios(host: string) {
       delay: 3000,
       readySelector: '.promo-banner'
     },
-    {
-      label: 'Privacy Policy ',
-      url: `${host}/privacy-policy`,
-      delay: 3000,
-      readySelector: '.promo-banner'
-    },
-    {
-      label: 'Payment Policy',
-      url: `${host}/payment-policy`,
-      delay: 3000,
-      readySelector: '.promo-banner'
-    },
+
     {
       label: 'Aml Policy',
       url: `${host}/aml-policy`,
@@ -208,14 +192,8 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'KYC Procedure',
+      label: 'Static Page',
       url: `${host}/kyc`,
-      delay: 3000,
-      readySelector: '.promo-banner'
-    },
-    {
-      label: 'Bonus terms and conditions',
-      url: `${host}/bonus-terms-and-conditions`,
       delay: 3000,
       readySelector: '.promo-banner'
     },
