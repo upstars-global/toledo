@@ -24,7 +24,7 @@ variables:
 
 build-package:
   stage: build
-  image: gcr.io/kaniko-project/executor:debug-v1
+  image: gcr.io/kaniko-project/executor:v1.23.0-debug
   variables:
     DOCKER_BUILD_CONTEXT: "."
   script:
