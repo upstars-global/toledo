@@ -9,9 +9,9 @@ function getCookieUrlByTask(config: IHost): string {
     let task = ''
     let env = String(ENVIRONMENT)
 
-    if (config.task) {
+    if (config.task && config.project === 'alpa') {
         task = `-${ config.task.toLowerCase() }-ss`
-        env = 'develop'
+        return `frontera${ task }-mock.${ config.project }.svc.cluster.local`;
     }
 
     return `frontera${ task }-${ config.project }-${ env }-mock.${ config.project }.svc.cluster.local`;

@@ -1,3 +1,5 @@
+import { ENVIRONMENT }from '@config'
+
 import axios from "axios";
 
 function getChanelHook(project: string): string {
@@ -9,11 +11,12 @@ function getChanelHook(project: string): string {
 }
 
 function getReportLink(project: string, testId: string): string {
+    let env = String(ENVIRONMENT)
     if (project === 'alpa') {
-        return `https://toledo-staging.wlabel.site/report/${ project }/${ testId }`
+        return `https://toledo-${ env }.wlabel.site/report/${ project }/${ testId }`
     }
 
-    return `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+    return `https://toledo-${ env }.upstr.to/report/${ project }/${ testId }`
 }
 
 function getText(project: string, testId: string): string {
