@@ -56,7 +56,7 @@ export default function startRoute(req: Request, res: Response) {
         console.log(err)
         console.log('error')
     }).finally(() => {
-        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`))
+        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`), Boolean(isAws === 'true'))
         res.setHeader('Access-Control-Allow-Origin', '*')
         res.send('ok')
     })
