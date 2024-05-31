@@ -6,10 +6,12 @@ export function getScenariosProject(req: Request, res: Response) {
     const {
         project,
         dyn,
+        isAws
     } = req.query;
     const host = getTestUrlByTask({
         task: String(dyn || ''),
         project: String(project),
+        isAws: Boolean(isAws === 'true')
     })
     const scenarios = getPages(project as "alpa" | "thor", host)
     res.setHeader('Access-Control-Allow-Origin', '*')

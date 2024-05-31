@@ -30,6 +30,7 @@ export default function startRoute(req: Request, res: Response) {
         project,
         testId,
         dyn,
+        isAws
     } = req.query;
 
     let taskId = String(dyn || '') || String(testId || '');
@@ -37,6 +38,7 @@ export default function startRoute(req: Request, res: Response) {
     const host = getTestUrlByTask({
         task: String(dyn || ''),
         project: projectName,
+        isAws: Boolean(isAws === 'true')
     })
 
     const folder = taskId || getCurrentFormattedTime()
