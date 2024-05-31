@@ -15,10 +15,6 @@ function getCookieUrlByTask(config: IHost): string {
         return `frontera${ task }-mock.${ config.project }.svc.cluster.local`;
     }
 
-    if (config.project === 'thor') {
-        console.log(config)
-    }
-
     if (config.project === 'thor' && config.isAws) {
         return `frontera${ task }-${ config.project }-${ env }-mock.thor-frontera.svc.cluster.local`;
     }
