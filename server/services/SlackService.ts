@@ -25,7 +25,7 @@ function getText(project: string, testId: string): string {
     }
 
     const [_, tagName, pipelineId] = testId.split('_')
-    if (pipelineId) {
+    if (tagName && pipelineId) {
         return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended`
     }
 
