@@ -25,7 +25,11 @@ function getText(project: string, testId: string): string {
     }
 
     const [, tagName] = testId.split('_')
-    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ tagName }|${ tagName }> ended`
+    if (tagName) {
+        return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ tagName }|${ tagName }> ended`
+    }
+
+    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended`
 }
 
 export default {
