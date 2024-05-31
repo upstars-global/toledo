@@ -14,9 +14,9 @@ function getCookieUrlByTask(config: IHost): string {
         return `frontera${ task }-mock.${ config.project }.svc.cluster.local`;
     }
 
-    if (config.project === 'thor') {
-        return `frontera${ task }-${ config.project }-${ env }-mock.thor-frontera.svc.cluster.local`;
-    }
+    // if (config.project === 'thor') {
+    //     return `frontera${ task }-${ config.project }-${ env }-mock.thor-frontera.svc.cluster.local`;
+    // }
 
     return `frontera${ task }-${ config.project }-${ env }-mock.${ config.project }.svc.cluster.local`;
 }
