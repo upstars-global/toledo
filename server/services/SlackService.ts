@@ -24,9 +24,9 @@ function getText(project: string, testId: string): string {
         return `Test new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended with errors`
     }
 
-    const [_, _tagName, pipelineId] = testId.split('_')
-    if (pipelineId) {
-        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines${ pipelineId }|${ testId }> ended`
+    const [_, tagName, pipelineId] = testId.split('_')
+    if (tagName && pipelineId) {
+        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended`
     }
 
     return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended`
