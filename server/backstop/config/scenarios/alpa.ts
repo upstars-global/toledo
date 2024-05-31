@@ -331,5 +331,10 @@ export default function getScenarios(host: string) {
             url: `${host}/rocket-adventure`,
             delay: 3000,
         },
+        {
+            label: 'Cookie policy',
+            url: `${host}/cookie-policy`,
+            delay: 3000,
+        },
     ]
 }
