@@ -1,3 +1,5 @@
+import { ENVIRONMENT }from '@config'
+
 import axios from "axios";
 
 function getChanelHook(project: string): string {
@@ -8,12 +10,13 @@ function getChanelHook(project: string): string {
     return "https://hooks.slack.com/services/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"
 }
 
-function getReportLink(project: string, testId: string): string {
-    if (project === 'alpa') {
-        return `https://toledo-staging.wlabel.site/report/${ project }/${ testId }`
+function getReportLink(project: string, testId: string, isAws?: boolean): string {
+    let env = String(ENVIRONMENT)
+    if (project === 'alpa' || isAws) {
+        return `https://toledo-${ env }.wlabel.site/report/${ project }/${ testId }`
     }
 
-    return `https://toledo-staging.upstr.to/report/${ project }/${ testId }`
+    return `https://toledo-${ env }.upstr.to/report/${ project }/${ testId }`
 }
 
 function getText(project: string, testId: string): string {
@@ -21,15 +24,19 @@ function getText(project: string, testId: string): string {
         return `Test new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended with errors`
     }
 
-    const [, pipelineId] = testId.split('_')
-    return `Test new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ testId }> ended with errors`
+    const [_, tagName, pipelineId] = testId.split('_')
+    if (tagName && pipelineId) {
+        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended`
+    }
+
+    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended`
 }
 
 export default {
     send: function send(project: string, testId: string, result: {
         passed: number,
         failed: number
-    }) {
+    }, isAws?: boolean) {
         if (!testId) {
             return;
         }
@@ -92,7 +99,7 @@ export default {
                                 "text": "Result"
                             },
                             "style": "primary",
-                            "url": getReportLink(project, testId)
+                            "url": getReportLink(project, testId, isAws)
                         }
                     ]
                 }
