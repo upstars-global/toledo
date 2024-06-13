@@ -22,7 +22,7 @@ ingress:
 env:
   alpa_addr: localhost:2004
   thor_addr: localhost:2004
-  is_aws: true
+  is_aws: "false"
 
 volume:
   size: 1Gi
