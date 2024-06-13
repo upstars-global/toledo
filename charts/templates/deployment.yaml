@@ -8,7 +8,7 @@ metadata:
   name: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicas }}
-  strategy: 
+  strategy:
     type: Recreate
   selector:
     matchLabels:
@@ -31,6 +31,8 @@ spec:
               value: {{ .Values.env.thor_addr }}
             - name: ENVIRONMENT
               value: {{ .Values.env_value }}
+            - name: IS_AWS
+              value: {{ .Values.env.is_aws }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
