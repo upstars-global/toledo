@@ -102,7 +102,7 @@ export default {
 
     startNewDynTest(item) {
       this.loading = true
-      fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${item.id.toUpperCase()}`).then(() => {
+      fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${item.id.toUpperCase()}-ss`).then(() => {
         this.loading = false
         this.$refs.table.refresh()
       })
