@@ -11,6 +11,7 @@ metadata:
       {{- toYaml . | indent 4 }}
     {{- end }}
     nginx.org/client-max-body-size: 512m
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 spec:
   ingressClassName: nginx
   tls:
