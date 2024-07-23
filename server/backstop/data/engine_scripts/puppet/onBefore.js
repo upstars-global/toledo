@@ -1,5 +1,6 @@
 module.exports = async (page, scenario, vp) => {
   await require('./loadCookies')(page, scenario)
+  await require('./setLocalStorage')(page, scenario)
 
   if (vp.label === 'mobile') {
     if (/rocketplay|alpa/.test(scenario.url)) {
