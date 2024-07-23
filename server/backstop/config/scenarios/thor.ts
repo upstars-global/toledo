@@ -369,6 +369,22 @@ export default function getScenarios(host: string) {
       postInteractionWait: 2000,
     },
     {
+      label: 'Daily Deposit Insurance',
+      url: `${host}/users/bonuses/insurance`,
+      cookiePath: cookiePath,
+      delay: 3000,
+      readySelector: "[data-test='bonus-item']"
+    },
+    {
+      label: 'Daily Deposit Insurance Details Popup',
+      url: `${host}/users/bonuses/insurance`,
+      cookiePath: cookiePath,
+      delay: 3000,
+      clickSelectors: ['.bonus-item [data-test=\'bonus-details-button\']'],
+      clickSelectorsMobile: ['.bonus-item [data-test=\'bonus-details-button\']'],
+      postInteractionWait: 3000,
+    },
+    {
       label: 'Login',
       url: `${host}/login`,
       delay: 3000,
