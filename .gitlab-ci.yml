@@ -13,12 +13,14 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == "develop"'
 
 stages:
+  - build-source
   - build
   - publish
 
 variables:
   DO_REGISTRY: registry.digitalocean.com/bbq
   DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
+  DO_SOURCE_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:develop
   DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
   GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
 
@@ -46,7 +48,7 @@ build-package:
     - if: $CI_COMMIT_REF_NAME
 
 build-source:
-  stage: build
+  stage: build-source
   image: gcr.io/kaniko-project/executor:debug
   variables:
     DOCKER_BUILD_CONTEXT: "."
@@ -56,7 +58,7 @@ build-source:
     - >
       /kaniko/executor \
         --dockerfile "./modules/Dockerfile" \
-        --destination "${DO_IMAGE_TAG}-modules" \
+        --destination "${DO_SOURCE_IMAGE_TAG}-modules" \
         --destination "${IMAGE}-modules" \
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
