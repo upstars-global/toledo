@@ -113,7 +113,8 @@ export default {
         callback(
           res
             .filter(folder => !folder.startsWith('s3'))
-            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|revert-[0-9a-f]+)/)[0], origin: folder })),
+            .filter(folder => Boolean(folder.match(/(alpa-\d+|fp-\d+|sre-\d+|revert-[0-9a-f]+)/)))
+            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|sre-\d+|revert-[0-9a-f]+)/)[0], origin: folder })),
         )
       })
     },

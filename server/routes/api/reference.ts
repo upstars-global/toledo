@@ -4,7 +4,7 @@ import { getTestUrlByTask } from '../../helpers/hostHelper'
 import { MOCK_ADDR, IS_AWS }from '@config'
 
 export default function reference(req: Request, res: Response) {
-    const { project} = req.query
+    const { project } = req.query
 
     command('reference', {
         hostName: MOCK_ADDR || getTestUrlByTask({
