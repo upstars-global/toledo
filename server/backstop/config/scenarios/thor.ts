@@ -243,7 +243,7 @@ export default function getScenarios(host: string) {
       label: 'Profile Promocode',
       url: `${host}/users/promocode`,
       cookiePath,
-      readySelector: ".profile-promocode__body [data-test='profile__input--promocode']",
+      readySelector: ".profile [data-test='profile__input--promocode']",
     },
     {
       label: 'Profile Verification',
