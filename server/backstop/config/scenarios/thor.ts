@@ -139,7 +139,7 @@ export default function getScenarios(host: string) {
       readySelector: '.promo-banner'
     },
     {
-      label: 'Live Categories Lobby',
+      label: 'Live Categories Top Live',
       url: `${host}/live/categories/toplive`,
       delay: 3000,
       readySelector: '.promo-banner'
