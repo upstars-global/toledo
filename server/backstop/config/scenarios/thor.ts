@@ -1,7 +1,7 @@
 import { processHost } from '../../../helpers/cookiesHelper'
 import {MOCK_ADDR}from '@config'
 export default function getScenarios(host: string) {
-  const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
+const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host)
 
   return [
     {
@@ -369,19 +369,74 @@ export default function getScenarios(host: string) {
       postInteractionWait: 2000,
     },
     {
+      label: 'Casino bonus in profile',
+      url: `${host}/users/bonuses/casino`,
+      cookiePath: cookiePath,
+      delay: 3000,
+      readySelector: "[data-test='bonus-item']"
+    },
+    {
+        label: 'Sport bonus in profile',
+        url: `${host}/users/bonuses/sport`,
+        cookiePath: cookiePath,
+        delay: 3000,
+        readySelector: "[data-test='bonus-item']"
+     },
+    {
+        label: 'Pop-up details casino bonus in profile',
+        url: `${host}/users/bonuses/casino`,
+        cookiePath: cookiePath,
+        delay: 3000,
+        clickSelectors: ["[data-test='bonus-item'] [data-test=\'bonus-details-button\']"],
+        postInteractionWait: 3000
+    },
+    {
+        label: 'Cancel Pop-up casino bonus in profile',
+        url: `${host}/users/bonuses/casino`,
+        cookiePath: cookiePath,
+        delay: 3000,
+        keyPressSelectors: [
+            {
+              selector: "[data-test='bonus-item'] [data-test=\'bonus-details-button\']",
+              clickSelector: "[data-test='bonus-item'] [data-test=\'bonus-details-button\']",
+            },
+            {
+              selector: '.bonus-details__actions',
+              clickSelector: '.bonus-details__actions .fe-button',
+            },
+          ],
+        postInteractionWait: 3000
+    },
+    {
+        label: 'Pop-up details sport bonus in profile',
+        url: `${host}/users/bonuses/sport`,
+        cookiePath: cookiePath,
+        delay: 3000,
+        clickSelectors: "[data-test='bonus-item'] [data-test=\'bonus-details-button\']",
+        postInteractionWait: 3000
+    },
+    {
+        label: 'History casino bonus in profile',
+        url: `${host}/users/bonuses/casino`,
+        cookiePath: cookiePath,
+        delay: 3000,
+        clickSelectors: [' [data-test=\'profile-bonuses-history\'] .accordion-menu__activator'],
+        scrollToSelector: ".profile-bonuses__history [data-test='bonus-item']",
+        postInteractionWait: 3000
+     },
+    {
       label: 'Daily Deposit Insurance',
       url: `${host}/users/bonuses/insurance`,
       cookiePath: cookiePath,
       delay: 3000,
       readySelector: "[data-test='bonus-item']"
     },
-    {
+     {
       label: 'Daily Deposit Insurance Details Popup',
       url: `${host}/users/bonuses/insurance`,
       cookiePath: cookiePath,
       delay: 3000,
-      clickSelectors: ['.bonus-item [data-test=\'bonus-details-button\']'],
-      clickSelectorsMobile: ['.bonus-item [data-test=\'bonus-details-button\']'],
+      clickSelectors: "[data-test='bonus-item'] [data-test=\'bonus-details-button\']",
       postInteractionWait: 3000,
     },
     {
