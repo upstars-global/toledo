@@ -465,6 +465,41 @@ const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : pro
       readySelector: '.popup'
     },
     {
+      label: 'Personal data auth Popup Leave now',
+      url: `${host}#confirm-exit`,
+      cookiePath,
+      delay: 3000,
+      readySelector: "[data-test=\"confirm-exit\"]"
+    },
+    {
+      label: 'Limits Suspended popup',
+      url: `${host}#modal-game-suspended`,
+      cookiePath,
+      delay: 3000,
+      readySelector: "[data-test=\"modal-game-suspended\"]"
+    },
+    {
+      label: 'Limits Cooling Off popup',
+      url: `${host}#game-cooling-off`,
+      cookiePath,
+      delay: 3000,
+      readySelector: "[data-test=\"game-cooling-off\"]"
+    },
+    {
+      label: 'Deposit bonus balance info popup',
+      url: `${host}#deposit-bonus-balance-info`,
+      cookiePath,
+      delay: 3000,
+      readySelector: "[data-test=\"deposit-bonus-balance-info\"]"
+    },
+    {
+      label: 'Deposit insurance request denied popup',
+      url: `${host}#modal-deposit-insurance`,
+      cookiePath,
+      delay: 3000,
+      readySelector: "[data-test=\"modal-deposit-insurance\"]"
+    },
+    {
       label: "404",
       url: `${host}/sdfsdfsfsdf`,
     },
