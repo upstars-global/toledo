@@ -223,21 +223,16 @@ const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : pro
       url: `${host}/users/cabinet`,
       cookiePath,
       delay: 3000,
-      readySelector: '.header__wrapper'
+      readySelector: '.header__wrapper',
     },
     {
       label: 'Personal data auth',
       url: `${host}/users/cabinet`,
       cookiePath,
-      clickSelector: "[data-test='user-data-personal']",
-      postInteractionWait: 3000,
-    },
-    {
-      label: 'Personal address auth',
-      url: `${host}/users/cabinet`,
-      cookiePath,
-      clickSelector: "[data-test='user-data-address']",
-      postInteractionWait: 3000,
+      delay: 3000,
+      readySelector: '.header__wrapper',
+      clickSelector: "[data-test='personal-information-accordion-toggle']",
+      postInteractionWait: 3000
     },
     {
       label: 'Profile Promocode',
