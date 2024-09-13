@@ -336,5 +336,10 @@ export default function getScenarios(host: string) {
             url: `${host}/cookie-policy`,
             delay: 3000,
         },
+        {
+            label: 'Complaints',
+            url: `${host}/complaints`,
+            delay: 3000,
+        },
     ]
 }
