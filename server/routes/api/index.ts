@@ -1,25 +1,25 @@
-import express, { Router } from "express";
-import startRoute from './start'
-import testList from './test-list'
-import reference from './reference'
-import deleteRoute from './delete'
-import appList from './app-list'
-import spaseUsage from './spaseUsage'
-import {getScenariosProject} from "./test-scenarios";
+import express, { Router } from 'express';
+import startRoute from './start';
+import testList from './test-list';
+import reference from './reference';
+import deleteRoute from './delete';
+import appList from './app-list';
+import spaseUsage from './spaseUsage';
+import { getScenariosProject } from './test-scenarios';
 
 
 export default function apiRouter(): Router {
-    const apiRouter = express.Router();
+    const router = express.Router();
 
-    apiRouter.get('/start', startRoute)
-    apiRouter.post('/start-test-select-scenarios', startRoute)
-    apiRouter.get('/test-list', testList)
-    apiRouter.get('/app-list', appList)
-    apiRouter.get('/reference', reference)
-    apiRouter.post('/reference-select-scenarios', reference)
-    apiRouter.get('/delete', deleteRoute)
-    apiRouter.get('/spase-usage', spaseUsage)
-    apiRouter.get('/test-scenarios', getScenariosProject)
+    router.get('/start', startRoute);
+    router.post('/start-test-select-scenarios', startRoute);
+    router.get('/test-list', testList);
+    router.get('/app-list', appList);
+    router.get('/reference', reference);
+    router.post('/reference-select-scenarios', reference);
+    router.get('/delete', deleteRoute);
+    router.get('/spase-usage', spaseUsage);
+    router.get('/test-scenarios', getScenariosProject);
 
-    return apiRouter
+    return router;
 }

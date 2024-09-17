@@ -1,4 +1,4 @@
-import fs from "fs";
+import { readFileSync } from 'fs';
 
 interface ITestResult {
     passed: number,
@@ -7,18 +7,18 @@ interface ITestResult {
 
 export function getTestResult(testPath: string): ITestResult {
     try {
-        const file = fs.readFileSync([testPath, 'report.json'].join('/'), 'utf8')
+        const file = readFileSync([ testPath, 'report.json' ].join('/'), 'utf8');
 
         const parsedFile = JSON.parse(file);
 
-        return parsedFile.tests.reduce((accumulator: ITestResult, currentValue: any) => {
+        return parsedFile.tests.reduce((accumulator: ITestResult, currentValue: Record<string, unknown>) => {
             switch (currentValue.status) {
                 case 'pass':
-                    accumulator.passed += 1;
+                    accumulator.passed = accumulator.passed + 1;
                     break;
                 case 'fail':
                 default:
-                    accumulator.failed += 1;
+                    accumulator.failed = accumulator.failed + 1;
                     break;
             }
 
@@ -26,12 +26,13 @@ export function getTestResult(testPath: string): ITestResult {
         }, {
             passed: 0,
             failed: 0,
-        })
-    } catch (e) {
-        console.log(e)
+        });
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.log(error);
         return {
             passed: 0,
             failed: 0,
-        }
+        };
     }
 }

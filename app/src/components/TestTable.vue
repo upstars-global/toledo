@@ -91,9 +91,9 @@ export default {
           const folder = test.name
 
           let dateString = folder
-          if (folder.startsWith('frontera_')) {
+          if (folder.startsWith('frontera_') || folder.startsWith('frontera-thor_')) {
             [, dateString] = folder.split('_')
-          } else if (!folder.startsWith('v') && !folder.startsWith('master') && !folder.startsWith('ALPA-')) {
+          } else if (!folder.startsWith('v') && !folder.startsWith('master') && !folder.startsWith('ALPA-') && !folder.startsWith('FP-')) {
             dateString = `${folder.slice(0, 4)}-${folder.slice(4, 6)}-${folder.slice(6, 8)} ${folder.slice(9, 11)}:${folder.slice(11, 13)}:${folder.slice(13, 15)}`
           }
 

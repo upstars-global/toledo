@@ -1,59 +1,59 @@
-import getPages from './config/scenarios'
+import getPages from './config/scenarios';
 
-const backstop = require('backstopjs')
-const fs = require('fs')
+const backstop = require('backstopjs');
+const fs = require('fs');
 
-const defaultScenarios = JSON.parse(fs.readFileSync('./backstop/config/defaultScenarios.json'))
+const defaultScenarios = JSON.parse(fs.readFileSync('./backstop/config/defaultScenarios.json'));
 
 function getPaths(command, project, folder) {
-  return {
-    bitmaps_reference: command === 'reference'
-        ? `backstop/reference/${project}`
-        : `backstop/test/${project}/${folder}/reference`,
-    bitmaps_test: `backstop/test/${project}`,
-    html_report: `backstop/data/html_report/${project}`,
-    ci_report: `backstop/data/ci_report/${project}`,
-    engine_scripts: 'backstop/data/engine_scripts',
-  }
+    return {
+        bitmaps_reference: command === 'reference'
+            ? `backstop/reference/${project}`
+            : `backstop/test/${project}/${folder}/reference`,
+        bitmaps_test: `backstop/test/${project}`,
+        html_report: `backstop/data/html_report/${project}`,
+        ci_report: `backstop/data/ci_report/${project}`,
+        engine_scripts: 'backstop/data/engine_scripts',
+    };
 }
 
 function getScenarios(project, hostName) {
-  const pagesConfig = getPages(project, hostName)
-  const scenarios = []
+    const pagesConfig = getPages(project, hostName);
+    const scenarios = [];
 
-  pagesConfig.forEach(config => {
-    scenarios.push({
-      ...defaultScenarios,
-      ...config,
-    })
-  })
+    pagesConfig.forEach((config) => {
+        scenarios.push({
+            ...defaultScenarios,
+            ...config,
+        });
+    });
 
-  return scenarios
+    return scenarios;
 }
 
-import { NODE_ENV } from '@config'
+import { NODE_ENV } from '@config';
 
 export default function commandFn(command, { hostName, project, testId, selectedScenariosLabels = [] }) {
-  const file = JSON.parse(
-      fs.readFileSync(`./backstop/config/${NODE_ENV ? 'defaultConfigDev' : 'defaultConfig'}.json`)
-  )
+    const file = JSON.parse(
+        fs.readFileSync(`./backstop/config/${NODE_ENV ? 'defaultConfigDev' : 'defaultConfig'}.json`),
+    );
 
-  file.paths = getPaths(command, project, testId)
-  const allScenarios = getScenarios(project, hostName)
+    file.paths = getPaths(command, project, testId);
+    const allScenarios = getScenarios(project, hostName);
 
-  if (selectedScenariosLabels.length) {
-    file.scenarios = allScenarios.filter(({ label }) => {
-      return selectedScenariosLabels.includes(label)
-    })
-  } else {
-    file.scenarios = allScenarios
-  }
+    if (selectedScenariosLabels.length) {
+        file.scenarios = allScenarios.filter(({ label }) => {
+            return selectedScenariosLabels.includes(label);
+        });
+    } else {
+        file.scenarios = allScenarios;
+    }
 
-  if (testId) {
-    file.dynamicTestId = testId
-  }
+    if (testId) {
+        file.dynamicTestId = testId;
+    }
 
-  return backstop(command, {
-    config: file,
-  })
+    return backstop(command, {
+        config: file,
+    });
 }

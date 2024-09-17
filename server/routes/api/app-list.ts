@@ -1,15 +1,15 @@
-import {Request, Response} from 'express'
-import axios from 'axios'
-import { IS_AWS } from '@config'
+import { Request, Response } from 'express';
+import axios from 'axios';
+import { IS_AWS } from '@config';
 
-const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090'
+const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
 export default function appList(req: Request, res: Response) {
     const {
         project,
     } = req.query;
     let nameSpace = project;
     if (project === 'thor' && IS_AWS) {
-        nameSpace = 'thor-frontera'
+        nameSpace = 'thor-frontera';
     }
 
     const currentTime = new Date();
@@ -19,13 +19,14 @@ export default function appList(req: Request, res: Response) {
 
     axios.get(`${PROMETHEUS_ADDR}/api/v1/query?query=${query}`)
         .then((data) => {
-            res.send(data.data.data.result.map((item: any) => {
-                return item.metric.name
+            res.send(data.data.data.result.map((item: Record<string, unknown>) => {
+                return (item.metric as Record<string, string>).name;
             }).filter((item: string) => {
-                return /[0-9]/.test(item)
-            }))
-        }).catch((err) => {
-        console.log(err)
-        res.status(500).send(err)
-    })
+                return (/[0-9]/).test(item);
+            }));
+        }).catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log(error);
+            res.status(500).send(error);
+        });
 }

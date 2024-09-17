@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
-import fs from 'fs'
-import path from 'path'
+import { Request, Response } from 'express';
+import { rmSync } from 'fs';
+import path from 'path';
 
 export default function deleteRoute(req: Request, res: Response) {
     const {
@@ -8,8 +8,8 @@ export default function deleteRoute(req: Request, res: Response) {
         folder,
     } = req.query;
 
-    const pathName = path.join(__dirname, `../../backstop/test/${project}/${folder}`)
-    fs.rmSync(pathName, { recursive: true, force: true });
+    const pathName = path.join(__dirname, `../../backstop/test/${project}/${folder}`);
+    rmSync(pathName, { recursive: true, force: true });
 
-    res.send(folder)
+    res.send(folder);
 }
