@@ -1,5 +1,5 @@
-import {processHost} from '../../../helpers/cookiesHelper';
-import mobileViewports from "../viewports/mobile";
+import { processHost } from '../../../helpers/cookiesHelper';
+import mobileViewports from '../viewports/mobile';
 
 export default function getScenarios(host: string) {
     const cookiePath = processHost(host);
@@ -33,8 +33,8 @@ export default function getScenarios(host: string) {
             label: 'Deposit Step Payments list',
             url: `${host}/`,
             cookiePath,
-            clickSelector: ['[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]'],
-            clickSelectorsMobile: ['[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]'],
+            clickSelector: [ '[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]' ],
+            clickSelectorsMobile: [ '[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]' ],
             postInteractionWait: 5000,
             delay: 3000,
         },
@@ -46,13 +46,13 @@ export default function getScenarios(host: string) {
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__devcode_devcode-creditcard-36_creditcard"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             clickSelectorsMobile: [
                 '[data-test="bottom-menu__deposit-button"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__devcode_devcode-creditcard-36_creditcard"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             delay: 1000,
         },
@@ -64,13 +64,13 @@ export default function getScenarios(host: string) {
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__537541******4375"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             clickSelectorsMobile: [
                 '[data-test="bottom-menu__deposit-button"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__537541******4375"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             delay: 1000,
         },
@@ -82,13 +82,13 @@ export default function getScenarios(host: string) {
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__coinspaid_coinspaid-76_BTC_coinspaid"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             clickSelectorsMobile: [
                 '[data-test="bottom-menu__deposit-button"]',
                 '[data-test="cashbox-deposit__next-btn"]',
                 '[data-test="cashbox-item-item-brand__coinspaid_coinspaid-76_BTC_coinspaid"]',
-                '[data-test="cashbox-deposit__next-btn"]'
+                '[data-test="cashbox-deposit__next-btn"]',
             ],
             delay: 1000,
         },
@@ -96,31 +96,31 @@ export default function getScenarios(host: string) {
             label: 'Cashbox Dashboard',
             url: `${host}/cashbox`,
             cookiePath,
-            removeSelectors: [".ps__thumb-y"],
-            readySelector: [".cashbox-dashboard__user-balance"]
+            removeSelectors: [ '.ps__thumb-y' ],
+            readySelector: [ '.cashbox-dashboard__user-balance' ],
         },
         {
             label: 'Withdraw Step 1',
             url: `${host}/withdraw`,
             cookiePath,
-            readySelector: [".modal-cashbox-step-withdraw .user-balance"]
+            readySelector: [ '.modal-cashbox-step-withdraw .user-balance' ],
         },
         {
             label: 'Balance dropdown',
             url: `${host}/`,
             cookiePath,
             clickSelector: '.header__user-balance-arrow',
-            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow'],
+            clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow' ],
             postInteractionWait: 3000,
             delay: 3000,
-            "selectorExpansion": true,
-            "selectors": [".dropdown-balance"]
+            selectorExpansion: true,
+            selectors: [ '.dropdown-balance' ],
         },
         {
             label: 'SideBar',
             url: `${host}/`,
             viewports: mobileViewports,
-            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            clickSelector: [ '[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]' ],
             delay: 3000,
         },
         {
@@ -128,14 +128,14 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             cookiePath,
             viewports: mobileViewports,
-            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]'],
+            clickSelector: [ '[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]' ],
             delay: 3000,
         },
 
         {
             label: 'Search popup',
             url: `${host}/`,
-            clickSelector: "[data-test='open-search-button']",
+            clickSelector: '[data-test=\'open-search-button\']',
             postInteractionWait: 3000,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
@@ -145,8 +145,8 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             delay: 3000,
             readySelector: '.producers-block',
-            clickSelector: ".game-producers__activator",
-            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+            clickSelector: '.game-producers__activator',
+            clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.game-producers__activator' ],
 
         },
         {
@@ -154,8 +154,8 @@ export default function getScenarios(host: string) {
             url: `${host}/pokies/all`,
             delay: 3000,
             readySelector: '.games-list-toolbar__producers',
-            clickSelector: ".game-producers__activator",
-            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+            clickSelector: '.game-producers__activator',
+            clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.game-producers__activator' ],
 
         },
         {
@@ -163,8 +163,8 @@ export default function getScenarios(host: string) {
             url: `${host}/categories/all`,
             delay: 3000,
             readySelector: '.games-list-toolbar__producers',
-            clickSelector: ".game-producers__activator",
-            clickSelectorsMobile: ['[data-test="cookies-accept__accept-btn"]', '.game-producers__activator'],
+            clickSelector: '.game-producers__activator',
+            clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.game-producers__activator' ],
         },
 
         {
@@ -196,7 +196,7 @@ export default function getScenarios(host: string) {
             cookiePath,
             postInteractionWait: 2000,
             delay: 3000,
-            readySelector: ".loot-box-spin-wheel-container"
+            readySelector: '.loot-box-spin-wheel-container',
         },
         {
             label: 'Profile',
@@ -269,7 +269,7 @@ export default function getScenarios(host: string) {
             label: 'terms-and-conditions',
             url: `${host}/terms-and-conditions`,
             delay: 3000,
-            readySelector: ".static-page"
+            readySelector: '.static-page',
             // scrollToSelector: '.footer__copyright',
         },
         {
@@ -336,5 +336,5 @@ export default function getScenarios(host: string) {
             url: `${host}/cookie-policy`,
             delay: 3000,
         },
-    ]
+    ];
 }

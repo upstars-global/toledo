@@ -17,14 +17,14 @@
       <div class="buttons">
         <b-button
           variant="success"
-          :disabled="project === 'thor'"
+          :disabled="!isAws"
           @click.stop="startNewDynTest(item)"
         >
           Запуск теста
         </b-button>
         <b-button
           variant="secondary"
-          :disabled="project === 'thor'"
+          :disabled="!isAws"
           @click.stop="openReport(item)"
         >
           Результаты
@@ -66,6 +66,12 @@ export default {
     },
   },
 
+  data() {
+    return {
+      isAws: false,
+    }
+  },
+
   computed: {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
@@ -78,6 +84,10 @@ export default {
         this.$refs.table.refresh()
       },
     },
+  },
+
+  mounted() {
+    this.isAws = window.location.host.includes('wlabel.site')
   },
 
   methods: {
@@ -94,15 +104,15 @@ export default {
 
     getEnvUrl(key) {
       if (this.project === 'alpa') {
-        return `https://mock-${key}-ss.rocketplay.com`
+        return `https://mock-${key}.rocketplay.wlabel.site`
       }
 
-      return `https://${key}-thor.thor-develop.upstr.to`
+      return `https://mock-${key}-thor.development.wlabel.site`
     },
 
     startNewDynTest(item) {
       this.loading = true
-      fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${item.id.toUpperCase()}-ss`).then(() => {
+      fetch(`${this.apiAddr}api/start?project=${this.project}&dyn=${item.id.toUpperCase()}`).then(() => {
         this.loading = false
         this.$refs.table.refresh()
       })

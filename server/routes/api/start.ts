@@ -1,11 +1,11 @@
-import {Request, Response} from 'express'
-import command from '../../backstop'
-import SlackService from '../../services/SlackService'
-import {getTestUrlByTask} from '../../helpers/hostHelper'
-import fs from 'fs'
-import path from 'path'
-import { MOCK_ADDR, IS_AWS }from '@config'
-import { getTestResult } from '../../helpers/getTestResult'
+import { Request, Response } from 'express';
+import command from '../../backstop';
+import SlackService from '../../services/SlackService';
+import { getTestUrlByTask } from '../../helpers/hostHelper';
+import { cpSync } from 'fs';
+import path from 'path';
+import { MOCK_ADDR, IS_AWS } from '@config';
+import { getTestResult } from '../../helpers/getTestResult';
 
 function getCurrentFormattedTime() {
     const now = new Date();
@@ -20,43 +20,43 @@ function getCurrentFormattedTime() {
 }
 
 function copyReference(project: string, folder: string) {
-    const srcPathName = path.join(__dirname, `../../backstop/reference/${project}`)
-    const destPathName = path.join(__dirname, `../../backstop/test/${project}/${folder}/reference`)
-    fs.cpSync(srcPathName, destPathName, {recursive: true});
+    const srcPathName = path.join(__dirname, `../../backstop/reference/${project}`);
+    const destPathName = path.join(__dirname, `../../backstop/test/${project}/${folder}/reference`);
+    cpSync(srcPathName, destPathName, { recursive: true });
 }
 
 export default function startRoute(req: Request, res: Response) {
     const {
         project,
         testId,
-        dyn
+        dyn,
     } = req.query;
 
-    let taskId = String(dyn || '') || String(testId || '');
-    const projectName = String(project)
+    const taskId = String(dyn || '') || String(testId || '');
+    const projectName = String(project);
     const host = getTestUrlByTask({
         task: String(dyn || ''),
         project: projectName,
-        isAws: IS_AWS
-    })
+        isAws: IS_AWS,
+    });
 
-    const folder = taskId || getCurrentFormattedTime()
-    copyReference(projectName, folder)
+    const folder = taskId || getCurrentFormattedTime();
+    copyReference(projectName, folder);
 
-    console.log('Host: ', host)
+    console.log('Host: ', host);
     command('test', {
         hostName: MOCK_ADDR || host,
         project: projectName,
         testId: folder,
-        selectedScenariosLabels: req.body
+        selectedScenariosLabels: req.body,
     }).then(() => {
-        console.log('complete')
+        console.log('complete');
     }).catch((err: Error) => {
-        console.log(err)
-        console.log('error')
+        console.log(err);
+        console.log('error');
     }).finally(() => {
-        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`), IS_AWS)
-        res.setHeader('Access-Control-Allow-Origin', '*')
-        res.send('ok')
-    })
+        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`), IS_AWS);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send('ok');
+    });
 }
