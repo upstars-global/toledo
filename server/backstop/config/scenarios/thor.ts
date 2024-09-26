@@ -202,6 +202,30 @@ export default function getScenarios(host: string) {
             delay: 3000,
             readySelector: '.promo-banner',
         },
+        {
+            label: 'PWA instruction ios safari popup',
+            url: `${host}#pwa-instruction-ios-safari`,
+            delay: 3000,
+            readySelector: '[data-test="pwa-instruction-ios-safari"]',
+        },
+        {
+            label: 'PWA instruction macos safari popup',
+            url: `${host}#pwa-instruction-macos-safari`,
+            delay: 3000,
+            readySelector: '[data-test="pwa-instruction-macos-safari"]',
+        },
+        {
+            label: 'PWA instruction install app popup',
+            url: `${host}#pwa-instruction-install-app`,
+            delay: 3000,
+            readySelector: '[data-test="pwa-instruction-install-app"]',
+        },
+        {
+            label: 'PWA instruction copy link popup',
+            url: `${host}#pwa-instruction-copy-link`,
+            delay: 3000,
+            readySelector: '[data-test="pwa-instruction-copy-link"]',
+        },
         // Auth user
         {
             label: 'Homepage auth',
@@ -280,7 +304,7 @@ export default function getScenarios(host: string) {
             cookiePath,
             delay: 3000,
             clickSelectors: [ '.header__user-balance', '[data-test=\'cashbox-button--header\']' ],
-            postInteractionWait: 1000,
+            postInteractionWait: 3000,
         },
         {
             label: 'CashboxStepWithdraw',
@@ -288,7 +312,7 @@ export default function getScenarios(host: string) {
             cookiePath,
             delay: 3000,
             clickSelectors: [ '.header__user-balance', '[data-test=\'cashbox-button--header\']', '.cashbox-dashboard__buttons .fe-button' ],
-            postInteractionWait: 1000,
+            postInteractionWait: 3000,
         },
         {
             label: 'CashboxStepWithdrawAmount',
@@ -296,7 +320,7 @@ export default function getScenarios(host: string) {
             cookiePath,
             delay: 3000,
             clickSelectors: [ '.header__user-balance', '[data-test=\'cashbox-button--header\']', '.cashbox-dashboard__buttons .fe-button', '.payments-item' ],
-            postInteractionWait: 1000,
+            postInteractionWait: 3000,
         },
         {
             label: 'Cashbox deposit1',
