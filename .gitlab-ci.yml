@@ -1,8 +1,8 @@
 include:
-  - project: Queenwin1/app/common/gitlab-ci-templates
+  - project: common/gitlab-ci-templates
     file: "/build/common-variables-latest.yaml"
     ref: master
-  - project: Queenwin1/app/common/gitlab-ci-templates
+  - project: common/gitlab-ci-templates
     file: "/publish/publish-to-argocd-1.0.1.yaml"
     ref: master
 
