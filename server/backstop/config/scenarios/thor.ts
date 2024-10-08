@@ -273,7 +273,7 @@ export default function getScenarios(host: string) {
             label: 'Profile Level',
             url: `${host}/users/level`,
             cookiePath,
-            readySelector: '.profile .level-system-carousel__element',
+            readySelector: '.profile .level-card',
         },
         {
             label: 'PersonalLimits DepositLimits',
