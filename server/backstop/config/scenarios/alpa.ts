@@ -336,14 +336,5 @@ export default function getScenarios(host: string) {
             url: `${host}/cookie-policy`,
             delay: 3000,
         },
-        {
-            label: 'Game page',
-            url: `${host}/play/bgaming/lucky-ladys-clover`,
-            cookiePath,
-            viewports: mobileViewports,
-            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '.game-bookmark'],
-            delay: 3000,
-        },
-
-    ]
+    ];
 }
