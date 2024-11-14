@@ -8,7 +8,7 @@ export function processHost(host: string): string {
     const parsedFile = JSON.parse(file);
     parsedFile[0].domain = domain;
     parsedFile[0].name = (/rocketplay|alpa/).test(domain) ? '_casino_session' : 'default_token';
-    const fileName = `cookies-${domain.replace('https://', '').replace(/\./g, '-')}.json`;
+    const fileName = `cookies-${domain.replace('http://', '').replace(/\./g, '-')}.json`;
     writeFileSync(path.resolve(__dirname, pasePath, fileName), JSON.stringify(parsedFile));
 
     return `backstop/config/cookies/${fileName}`;
