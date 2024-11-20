@@ -9,13 +9,10 @@ function getChanelHook(project: string): string {
     return 'https://hooks.slack.com/services/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';
 }
 
-function getReportLink(project: string, testId: string, isAws?: boolean): string {
+function getReportLink(project: string, testId: string): string {
     const env = String(ENVIRONMENT);
-    if (project === 'alpa' || isAws) {
-        return `https://toledo-${ env }.wlabel.site/report/${ project }/${ testId }`;
-    }
 
-    return `https://toledo-${ env }.upstr.to/report/${ project }/${ testId }`;
+    return `https://toledo-${ env }.wlabel.site/report/${ project }/${ testId }`;
 }
 
 function getText(testId: string): string {
@@ -35,7 +32,7 @@ export default {
     send: function send(project: string, testId: string, result: {
         passed: number,
         failed: number
-    }, isAws?: boolean) {
+    }) {
         if (!testId) {
             return;
         }
@@ -98,7 +95,7 @@ export default {
                                 text: 'Result',
                             },
                             style: 'primary',
-                            url: getReportLink(project, testId, isAws),
+                            url: getReportLink(project, testId),
                         },
                     ],
                 },

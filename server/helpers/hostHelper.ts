@@ -2,8 +2,7 @@ import { ENVIRONMENT } from '@config';
 
 interface IHost {
     task?: string,
-    project: string,
-    isAws?: boolean
+    project: string
 }
 
 function getCookieUrlByTask(config: IHost): string {
@@ -15,7 +14,7 @@ function getCookieUrlByTask(config: IHost): string {
         return `frontera${ task }-mock.${ config.project }.svc.cluster.local`;
     }
 
-    if (config.project === 'thor' && config.isAws) {
+    if (config.project === 'thor') {
         if (config.task) {
             task = `-${ config.task?.toLowerCase() }-thor`;
             return `frontera${ task }-mock.thor-frontera.svc.cluster.local`;
