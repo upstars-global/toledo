@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
-import { IS_AWS } from '@config';
 
 const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
 export default function appList(req: Request, res: Response) {
@@ -8,7 +7,7 @@ export default function appList(req: Request, res: Response) {
         project,
     } = req.query;
     let nameSpace = project;
-    if (project === 'thor' && IS_AWS) {
+    if (project === 'thor') {
         nameSpace = 'thor-frontera';
     }
 

@@ -4,7 +4,7 @@ import SlackService from '../../services/SlackService';
 import { getTestUrlByTask } from '../../helpers/hostHelper';
 import { cpSync } from 'fs';
 import path from 'path';
-import { MOCK_ADDR, IS_AWS } from '@config';
+import { MOCK_ADDR } from '@config';
 import { getTestResult } from '../../helpers/getTestResult';
 
 function getCurrentFormattedTime() {
@@ -37,7 +37,6 @@ export default function startRoute(req: Request, res: Response) {
     const host = getTestUrlByTask({
         task: String(dyn || ''),
         project: projectName,
-        isAws: IS_AWS,
     });
 
     const folder = taskId || getCurrentFormattedTime();
@@ -55,7 +54,7 @@ export default function startRoute(req: Request, res: Response) {
         console.log(err);
         console.log('error');
     }).finally(() => {
-        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`), IS_AWS);
+        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`));
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.send('ok');
     });

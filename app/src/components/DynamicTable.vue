@@ -17,14 +17,12 @@
       <div class="buttons">
         <b-button
           variant="success"
-          :disabled="!isAws"
           @click.stop="startNewDynTest(item)"
         >
           Запуск теста
         </b-button>
         <b-button
           variant="secondary"
-          :disabled="!isAws"
           @click.stop="openReport(item)"
         >
           Результаты
@@ -66,12 +64,6 @@ export default {
     },
   },
 
-  data() {
-    return {
-      isAws: false,
-    }
-  },
-
   computed: {
     ...mapGetters('app', {
       apiAddr: 'apiAddr',
@@ -84,10 +76,6 @@ export default {
         this.$refs.table.refresh()
       },
     },
-  },
-
-  mounted() {
-    this.isAws = window.location.host.includes('wlabel.site')
   },
 
   methods: {
