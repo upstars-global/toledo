@@ -107,12 +107,13 @@ export default {
     },
 
     fetchTable(_, callback) {
+      const regex = /(un-\d+|alpa-\d+|fp-\d+|sre-\d+|revert-[0-9a-f]+)/
       fetch(`${this.apiAddr}api/app-list?project=${this.project}`).then(res => res.json()).then(res => {
         callback(
           res
             .filter(folder => !folder.startsWith('s3'))
-            .filter(folder => Boolean(folder.match(/(alpa-\d+|fp-\d+|sre-\d+|revert-[0-9a-f]+)/)))
-            .map(folder => ({ id: folder.match(/(alpa-\d+|fp-\d+|sre-\d+|revert-[0-9a-f]+)/)[0], origin: folder })),
+            .filter(folder => Boolean(folder.match(regex)))
+            .map(folder => ({ id: folder.match(regex)[0], origin: folder })),
         )
       })
     },
