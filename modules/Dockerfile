@@ -1,15 +1,10 @@
-ARG NODE_BASE_VERSION="node:16.19.1"
+ARG NODE_BASE_VERSION="node:22.11.0"
 
 FROM ${NODE_BASE_VERSION}-alpine AS dev
 
 WORKDIR /data
-COPY app/package.json ./app/package.json
-COPY app/yarn.lock ./app/yarn.lock
 COPY server/package.json ./server/package.json
 COPY server/yarn.lock ./server/yarn.lock
-
-WORKDIR /data/app
-RUN yarn
 
 WORKDIR /data/server
 RUN yarn
