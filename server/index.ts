@@ -39,12 +39,6 @@ app.get('/report', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, './assets/index.html'));
 });
 
-app.use(express.static('../app/dist'));
-
-app.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, '../app/dist/index.html'));
-});
-
 app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`Example app listening on port ${port}`);
