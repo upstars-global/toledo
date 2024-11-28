@@ -10,9 +10,7 @@ function getChanelHook(project: string): string {
 }
 
 function getReportLink(project: string, testId: string): string {
-    const env = String(ENVIRONMENT);
-
-    return `https://toledo-${ env }.wlabel.site/report/${ project }/${ testId }`;
+    return `https://backstop-panel.pages.dev/report/${ project }/${ testId }`;
 }
 
 function getText(testId: string): string {
