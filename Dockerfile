@@ -1,4 +1,4 @@
-ARG NODE_BASE_VERSION="registry.digitalocean.com/bbq/toledo:develop-modules"
+ARG NODE_BASE_VERSION="240729534178.dkr.ecr.eu-west-1.amazonaws.com/whitelabel:toledo_fp-1708_275373-modules"
 
 FROM ${NODE_BASE_VERSION} AS prod
 
