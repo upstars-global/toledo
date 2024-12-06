@@ -1,4 +1,3 @@
-import { ENVIRONMENT } from '@config';
 import axios from 'axios';
 
 function getChanelHook(project: string): string {
@@ -13,17 +12,17 @@ function getReportLink(project: string, testId: string): string {
     return `https://backstop-panel.pages.dev/report/${ project }/${ testId }`;
 }
 
-function getText(testId: string): string {
+function getText(testId: string, time: number): string {
     if (testId.startsWith('ALPA-') || testId.startsWith('FP-')) {
         return `Test for task <https://upstars.atlassian.net/browse/${ testId.toUpperCase() }|${ testId }> ended`;
     }
 
     const [ _, tagName, pipelineId ] = testId.split('_');
     if (tagName && pipelineId) {
-        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended`;
+        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended, and take: ${ time } minutes`;
     }
 
-    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended`;
+    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended, and take: ${ time } minutes`;
 }
 
 export default {
@@ -51,7 +50,7 @@ export default {
                 {
                     type: 'section',
                     text: {
-                        text: getText(testId),
+                        text: getText(testId, time / 60000),
                         type: 'mrkdwn',
                     },
                 },

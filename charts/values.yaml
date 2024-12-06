@@ -8,7 +8,7 @@ resources:
     cpu: 400m
     memory: 3000Mi
   limits:
-     memory: 3000Mi
+     memory: 6000Mi
 
 image:
   name: 'localhost'

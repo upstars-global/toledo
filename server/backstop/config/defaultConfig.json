@@ -23,7 +23,7 @@
     "args": ["--no-sandbox", "--disable-animations"],
     "headless": true
   },
-  "asyncCaptureLimit": 2,
+  "asyncCaptureLimit": 4,
   "asyncCompareLimit": 2,
   "debug": false,
   "debugWindow": false
