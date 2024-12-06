@@ -43,6 +43,7 @@ export default function startRoute(req: Request, res: Response) {
     copyReference(projectName, folder);
 
     console.log('Host: ', host);
+    const start = Date.now();
     command('test', {
         hostName: MOCK_ADDR || host,
         project: projectName,
@@ -54,7 +55,14 @@ export default function startRoute(req: Request, res: Response) {
         console.log(err);
         console.log('error');
     }).finally(() => {
-        SlackService.send(projectName, taskId, getTestResult(`backstop/test/${project}/${folder}`));
+        const end = Date.now();
+        console.log(`Test take: ${end - start} ms`)
+        SlackService.send({
+            project: projectName,
+            testId: taskId,
+            ...getTestResult(`backstop/test/${project}/${folder}`),
+            time: end - start
+        },);
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.send('ok');
     });

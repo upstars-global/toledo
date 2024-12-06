@@ -27,16 +27,25 @@ function getText(testId: string): string {
 }
 
 export default {
-    send: function send(project: string, testId: string, result: {
+    send: function send({
+        project,
+        testId,
+        passed,
+        failed,
+        time
+    }: {
+        project: string,
+        testId: string,
         passed: number,
-        failed: number
+        failed: number,
+        time: number,
     }) {
         if (!testId) {
             return;
         }
 
         axios.post(getChanelHook(project), {
-            text: `Test ${ testId } ended with errors`,
+            text: `Test ${ testId } ended with errors, and take: ${ time / 60000 } minutes`,
             pretty: 1,
             blocks: [
                 {
@@ -64,7 +73,7 @@ export default {
                                     elements: [
                                         {
                                             type: 'text',
-                                            text: `Passed: ${ result.passed }`,
+                                            text: `Passed: ${ passed }`,
                                         },
                                     ],
                                 },
@@ -73,7 +82,7 @@ export default {
                                     elements: [
                                         {
                                             type: 'text',
-                                            text: `Failed: ${ result.failed }`,
+                                            text: `Failed: ${ failed }`,
                                         },
                                     ],
                                 },
