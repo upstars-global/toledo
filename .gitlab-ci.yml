@@ -41,10 +41,6 @@ build-package:
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
   rules:
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
     - if: $CI_COMMIT_REF_NAME
 
 build-source:
@@ -79,10 +75,6 @@ publish to development:
   rules:
     - changes:
         paths:
-          - charts/**/*
-      when: never
-    - changes:
-        paths:
           - modules/Dockerfile
           - "**/package.json"
           - "**/yarn.lock"
@@ -97,10 +89,6 @@ publish to staging:
     DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
   stage: publish
   rules:
-    - changes:
-        paths:
-          - charts/**/*
-      when: never
     - changes:
         paths:
           - modules/Dockerfile

@@ -4,6 +4,34 @@ import path from 'path';
 
 const fs = require('fs');
 
+/**
+ * @swagger
+ *
+ * /api/test-list:
+ *   get:
+ *     summary: Получения списков прошедших тестов
+ *     description: Create new references
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: project
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [alpa, thor]
+ *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
+ *     responses:
+ *      200:
+ *         description: ok в любом случае
+ *         content:
+ *           text/plain:
+ *             schema:
+ *               type: string
+ *
+ * @param {Object} req - Express.js request object. The query parameters should include 'field1' and/or 'field2'.
+ * @param {Object} res - Express.js response object for sending back the generated results.
+ */
 export default function testList(req: Request, res: Response) {
     const projectPath = path.join(__dirname, `../../backstop/test/${req.query.project}`);
     fs.readdir(projectPath, null, (err: Error, files: string[]) => {

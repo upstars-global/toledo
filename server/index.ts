@@ -1,4 +1,6 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express'
+import swaggerUi from 'swagger-ui-express'
+import { swaggerSpec } from './config/swagger'
 
 import path from 'path';
 import fs from 'fs';
@@ -15,7 +17,7 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
 
 app.use(express.json());
 app.use('/api', apiRouter());
-
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get('/config.js', (req: Request, res: Response) => {
     const referrer = new URL(String(req.headers.referer));
 
