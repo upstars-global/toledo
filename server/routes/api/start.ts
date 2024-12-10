@@ -25,6 +25,45 @@ function copyReference(project: string, folder: string) {
     cpSync(srcPathName, destPathName, { recursive: true });
 }
 
+/**
+ * @swagger
+ * /api/start:
+ *   get:
+ *     summary: Запуск теста
+ *     description: Инициализирует процесс тестирования для указанного проекта и теста.
+ *     parameters:
+ *       - in: query
+ *         name: project
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [alpa, thor]
+ *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
+ *       - in: query
+ *         name: testId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Уникальный идентификатор теста
+ *       - in: query
+ *         name: dyn
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Динамическая настройка для теста (опционально)
+ *     responses:
+ *       200:
+ *         description: Тест успешно запущен
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Сообщение о результате
+ *                   example: "Тест успешно запущен"
+ */
 export default function startRoute(req: Request, res: Response) {
     const {
         project,

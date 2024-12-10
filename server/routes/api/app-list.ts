@@ -2,6 +2,40 @@ import { Request, Response } from 'express';
 import axios from 'axios';
 
 const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
+
+/**
+ * @swagger
+ *
+ * /api/app-list:
+ *   get:
+ *     summary: Получение перечня активных окружений
+ *     description: Get application list
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: project
+ *         required: true
+ *         schema:
+ *           type: string
+ *           enum: [alpa, thor]
+ *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved list
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               property1:
+ *                 type: string
+ *               property2:
+ *                 type: integer
+ *
+ * @param {Object} req - Express.js request object. The query parameters should include 'field1' and/or 'field2'.
+ * @param {Object} res - Express.js response object for sending back the generated results.
+ */
 export default function appList(req: Request, res: Response) {
     const {
         project,

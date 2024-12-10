@@ -12,6 +12,11 @@ metadata:
     {{- end }}
     nginx.org/client-max-body-size: 512m
     external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
+    nginx.org/location-snippets: |
+      if ($request_uri = '/') {
+        rewrite ^ /api/docs permanent;
+      }
+
 spec:
   ingressClassName: nginx
   tls:
