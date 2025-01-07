@@ -154,7 +154,7 @@ export default function getScenarios(host: string) {
                     clickSelector: '.games-list-toolbar-search',
                 },
                 {
-                    selector: '.game-search__input',
+                    selector: '.search-input__input',
                     keyPress: 'book',
                 },
             ],
