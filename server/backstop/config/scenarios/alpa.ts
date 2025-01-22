@@ -10,7 +10,6 @@ export default function getScenarios(host: string) {
             url: `${host}/`,
             delay: 3000,
             readySelector: '.trust-block',
-            // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'Homepage auth',
