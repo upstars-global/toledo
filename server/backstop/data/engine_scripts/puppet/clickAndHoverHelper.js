@@ -9,7 +9,7 @@ module.exports = async (page, scenario, vp) => {
   if (keyPressSelector) {
     for (const keyPressSelectorItem of [].concat(keyPressSelector)) {
       await page.waitForSelector(keyPressSelectorItem.selector);
-      
+
       if(keyPressSelectorItem?.clickSelector) {
         await page.click(keyPressSelectorItem.clickSelector);
       } else {
@@ -37,7 +37,8 @@ module.exports = async (page, scenario, vp) => {
   }
 
   if (postInteractionWait) {
-    await page.waitForTimeout(postInteractionWait);
+    // await page.waitForTimeout(postInteractionWait);
+    await new Promise(r => setTimeout(r, postInteractionWait))
   }
 
   if (scrollToSelector) {
