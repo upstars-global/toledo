@@ -93,16 +93,16 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Cashbox Dashboard',
-            url: `${host}/cashbox`,
+            url: `${ host }/cashbox`,
             cookiePath,
             removeSelectors: [ '.ps__thumb-y' ],
-            readySelector: [ '.cashbox-dashboard__user-balance' ],
+            readySelector: '.cashbox-dashboard__user-balance',
         },
         {
             label: 'Withdraw Step 1',
-            url: `${host}/withdraw`,
+            url: `${ host }/withdraw`,
             cookiePath,
-            readySelector: [ '.modal-cashbox-step-withdraw .user-balance' ],
+            readySelector: '.modal-cashbox-step-withdraw .user-balance',
         },
         {
             label: 'Balance dropdown',
