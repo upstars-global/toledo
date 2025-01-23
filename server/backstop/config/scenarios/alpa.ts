@@ -168,7 +168,7 @@ export default function getScenarios(host: string) {
 
         {
             label: 'Quest',
-            url: `${host}/action/quick-snatch`,
+            url: `${host}/action/starship`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
