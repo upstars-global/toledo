@@ -340,9 +340,20 @@ export default function getScenarios(host: string) {
             url: `${host}/play/bgaming/lucky-ladys-clover`,
             cookiePath,
             viewports: mobileViewports,
-            clickSelector: ['[data-test="cookies-accept__accept-btn"]', '.game-bookmark'],
-            delay: 3000,
-            readySelector: '.game-bookmark__popup',
+            clickSelector: ['[data-test="cookies-accept__accept-btn"] button', '.game-bookmark'],
+            delay: 1000,
+            postInteractionWait: 2000,
+        },
+        {
+            label: 'Support Widget Vip Manager Panel',
+            cookiePath,
+            url: `${host}/`,
+            clickSelector: '.support-widget .n-fe-button',
+            clickSelectorsMobile: "[data-test='bottom-menu__open-sidebar']",
+            selectors: [ '.vip-manager' ],
+            delay: 2000,
+            postInteractionWait: 2000,
+            selectorExpansion: true,
         },
 
     ]
