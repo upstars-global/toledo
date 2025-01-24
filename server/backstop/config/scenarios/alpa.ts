@@ -342,6 +342,7 @@ export default function getScenarios(host: string) {
             viewports: mobileViewports,
             clickSelector: ['[data-test="cookies-accept__accept-btn"]', '.game-bookmark'],
             delay: 3000,
+            readySelector: '.game-bookmark__popup',
         },
 
     ]
