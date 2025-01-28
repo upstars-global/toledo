@@ -1,3 +1,5 @@
+componentId: 'alpa'
+
 ingress:
   hostname: toledo-develop.wlabel.site
 
@@ -6,6 +8,3 @@ env_value: develop
 env:
   alpa_addr: frontera-develop-alpa-mock.alpa.svc.cluster.local:2004
   thor_addr: frontera-develop-thor-mock.thor.svc.cluster.local:2004
-  is_aws: "true"
-
-### change holder. Remove me when you will have finished
