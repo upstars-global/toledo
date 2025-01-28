@@ -68,7 +68,6 @@ async function listServices(namespace: string) {
         namespace = 'thor-frontera';
     }
 
-    console.log(namespace)
     try {
         // Создаём конфигурацию
         const kc = new KubeConfig();
@@ -79,7 +78,7 @@ async function listServices(namespace: string) {
 
         // Получаем список сервисов в указанном неймспейсе
         // @ts-ignore
-        const res = await k8sApi.listNamespacedService(namespace);
+        const res = await k8sApi.listNamespacedService({namespace});
         console.log('Services in namespace:', namespace);
         res.items.forEach((service: any) => {
             console.log(`- ${service.metadata?.name}`)
