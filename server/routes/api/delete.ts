@@ -31,6 +31,7 @@ export default function deleteRoute(req: Request, res: Response) {
     } = req.query;
 
     const pathName = path.join(__dirname, `../../backstop/test/${folder}`);
+    console.log(pathName);
     rmSync(pathName, { recursive: true, force: true });
 
     res.send(folder);
