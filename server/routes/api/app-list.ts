@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import k8s from '@kubernetes/client-node';
 import axios from 'axios';
 import { PROJECT } from "@config";
 
@@ -54,4 +55,36 @@ export default function appList(req: Request, res: Response) {
             console.log(error);
             res.status(500).send(error);
         });
+
+    listServices()
+}
+
+
+
+async function listServices(namespace: string = String(PROJECT)) {
+    // TODO Решить вопрос с не совпадением проекта и неймспейса
+    if (PROJECT === 'thor') {
+        namespace = 'thor-frontera';
+    }
+    // Создаём конфигурацию
+    const kc = new k8s.KubeConfig();
+    kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
+
+    // Создаём API-клиент для работы с сервисами
+    const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
+    try {
+        // Получаем список сервисов в указанном неймспейсе
+        // @ts-ignore
+        const res = await k8sApi.listNamespacedService(namespace);
+        console.log('Services in namespace:', namespace);
+        res.items.forEach((service: any) => {
+            console.log(`- ${service.metadata?.name}`)
+            if (service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock') {
+                console.log(`- mock`);
+            }
+        });
+    } catch (err) {
+        console.error('Error fetching services:', err);
+    }
 }

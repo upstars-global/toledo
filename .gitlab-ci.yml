@@ -59,7 +59,7 @@ build-source:
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME == "develop"
       changes:
         - modules/Dockerfile
         - "**/package.json"
