@@ -1,12 +1,22 @@
-const fs = require('fs');
-
 module.exports = async (page, scenario) => {
   let cookies = [];
-  const cookiePath = scenario.cookiePath;
 
   // READ COOKIES FROM FILE IF EXISTS
-  if (fs.existsSync(cookiePath)) {
-    cookies = JSON.parse(fs.readFileSync(cookiePath));
+  if (scenario.cookies) {
+    const { protocol, hostname} = new URL(scenario.url)
+    cookies = scenario.cookies.map(cookie => {
+      return {
+        "domain": `${protocol}://${hostname}`,
+        "path": "/",
+        ...cookie,
+        "expirationDate": 1798790400,
+        "hostOnly": false,
+        "httpOnly": false,
+        "secure": false,
+        "session": false,
+        "sameSite": "no_restriction"
+      }
+    })
   }
 
   // MUNGE COOKIE DOMAIN

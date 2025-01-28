@@ -1,9 +1,11 @@
-import { processHost } from '../../../helpers/cookiesHelper';
-import { MOCK_ADDR } from '@config';
+const cookies = [
+    {
+        "name": "default_token",
+        "value": "testpass@bbq.agency",
+    }
+]
 
 export default function getScenarios(host: string) {
-    const cookiePath = MOCK_ADDR ? 'backstop/config/cookies/cookies-thor.json' : processHost(host);
-
     return [
         {
             label: 'Homepage',
@@ -57,7 +59,7 @@ export default function getScenarios(host: string) {
             label: 'Promotions Casino Quests for user',
             url: `${host}/promotions/casino/quests`,
             delay: 3000,
-            cookiePath,
+            cookies,
             readySelector: '.header__wrapper',
         },
         {
@@ -224,28 +226,28 @@ export default function getScenarios(host: string) {
         {
             label: 'Homepage auth',
             url: `${host}`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.header__wrapper',
         },
         {
             label: 'Vip club Auth',
             url: `${host}/vip-club`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.header__wrapper',
         },
         {
             label: 'Profile auth',
             url: `${host}/users/cabinet`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.header__wrapper',
         },
         {
             label: 'Personal data auth',
             url: `${host}/users/cabinet`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.header__wrapper',
             clickSelector: '[data-test=\'personal-information-accordion-toggle\']',
@@ -254,32 +256,32 @@ export default function getScenarios(host: string) {
         {
             label: 'Profile Promocode',
             url: `${host}/users/promocode`,
-            cookiePath,
+            cookies,
             readySelector: '.profile [data-test=\'profile__input--promocode\']',
         },
         {
             label: 'Profile Verification',
             url: `${host}/users/verification`,
-            cookiePath,
+            cookies,
             readySelector: '.verification .verification-state-card',
         },
         {
             label: 'Profile Level',
             url: `${host}/users/level`,
-            cookiePath,
+            cookies,
             readySelector: '.profile .level-card',
         },
         {
             label: 'PersonalLimits DepositLimits',
             url: `${host}/users/limits`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.header__wrapper',
         },
         {
             label: 'PersonalLimits AddDepositLimit',
             url: `${host}/users/limits`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelector: '[data-test=\'add-deposit-limit-button\']',
             postInteractionWait: 3000,
@@ -287,7 +289,7 @@ export default function getScenarios(host: string) {
         {
             label: 'PersonalLimits ManageDepositLimit',
             url: `${host}/users/limits`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelector: '[data-test=\'manage-limit-daily-button\']',
             postInteractionWait: 3000,
@@ -296,34 +298,34 @@ export default function getScenarios(host: string) {
             label: 'FAQ',
             url: `${host}/faq`,
             delay: 3000,
-            cookiePath,
+            cookies,
             readySelector: '.header__wrapper',
         },
         {
             label: 'Verification',
             url: `${host}/verification`,
             delay: 3000,
-            cookiePath,
+            cookies,
             readySelector: '.header__wrapper',
         },
         {
             label: 'CashboxDashboard',
             url: `${host}#modal-cashbox`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox"]',
         },
         {
             label: 'CashboxStepWithdrawPayments',
             url: `${host}#modal-cashbox-withdraw`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox-withdraw"]',
         },
         {
             label: 'CashboxStepWithdrawAmount',
             url: `${host}#modal-cashbox-withdraw`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: [ '[data-test="modal-cashbox-withdraw"] .payments-item' ],
             postInteractionWait: 3000,
@@ -331,14 +333,14 @@ export default function getScenarios(host: string) {
         {
             label: 'CashboxStepDepositPayments',
             url: `${host}#modal-cashbox-deposit`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox-deposit"]',
         },
         {
             label: 'CashboxStepDepositAmount',
             url: `${host}#modal-cashbox-deposit`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: [ '[data-test="modal-cashbox-deposit"] .payments-item' ],
             postInteractionWait: 3000,
@@ -346,7 +348,7 @@ export default function getScenarios(host: string) {
         {
             label: 'CashboxStepDepositDeposit',
             url: `${host}#modal-cashbox-deposit`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: [ '[data-test="modal-cashbox-deposit"] .payments-item', '.deposit-button' ],
             postInteractionWait: 3000,
@@ -354,7 +356,7 @@ export default function getScenarios(host: string) {
         {
             label: 'CashboxStepWithdrawRequests',
             url: `${host}#modal-cashbox-withdraw-requests`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox-withdraw-requests"]',
             postInteractionWait: 3000,
@@ -362,7 +364,7 @@ export default function getScenarios(host: string) {
         {
             label: 'CashboxStepWithdrawMessages',
             url: `${host}#modal-cashbox-withdraw-messages`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox-withdraw-messages"]',
             postInteractionWait: 3000,
@@ -370,7 +372,7 @@ export default function getScenarios(host: string) {
         {
             label: 'CashboxServiceWorks',
             url: `${host}#modal-cashbox-service-works`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-cashbox-service-works"]',
             postInteractionWait: 3000,
@@ -378,7 +380,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Balance dropdown',
             url: `${host}`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelector: '.header__user-balance',
             postInteractionWait: 1000,
@@ -386,7 +388,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Support List',
             url: `${host}`,
-            cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: [ '.header [data-test=\'chat-button\']' ],
             clickSelectorsMobile: [ '[data-test=\'bottom-menu-more\']', '.sidebar [data-test=\'chat-button\']' ],
@@ -396,14 +398,14 @@ export default function getScenarios(host: string) {
         {
             label: 'Callback',
             url: `${host}#modal-callback`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-callback"]',
         },
         {
             label: 'Notifications List',
             url: `${host}`,
-            cookiePath,
+            cookies,
             delay: 1000,
             clickSelectors: [ '[data-test=\'notifications-button\']' ],
             clickSelectorsMobile: [ '[data-test=\'bottom-menu-more\']' ],
@@ -413,21 +415,21 @@ export default function getScenarios(host: string) {
         {
             label: 'Casino bonus in profile',
             url: `${host}/users/bonuses/casino`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test=\'bonus-item\']',
         },
         {
             label: 'Sport bonus in profile',
             url: `${host}/users/bonuses/sport`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test=\'bonus-item\']',
         },
         {
             label: 'Pop-up details casino bonus in profile',
             url: `${host}/users/bonuses/casino`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: [ '[data-test=\'bonus-item\'] [data-test=\'bonus-details-button\']' ],
             postInteractionWait: 3000,
@@ -435,14 +437,14 @@ export default function getScenarios(host: string) {
         {
             label: 'Cancel Pop-up casino bonus in profile',
             url: `${host}#bonus-cancel`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="bonus-cancel"]',
         },
         {
             label: 'Pop-up details sport bonus in profile',
             url: `${host}/users/bonuses/sport`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: '[data-test=\'bonus-item\'] [data-test=\'bonus-details-button\']',
             postInteractionWait: 3000,
@@ -450,7 +452,7 @@ export default function getScenarios(host: string) {
         {
             label: 'History casino bonus in profile',
             url: `${host}/users/bonuses/casino`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.profile-bonuses [data-test=\'profile-bonuses-history\']',
             clickSelectors: [ ' [data-test=\'profile-bonuses-history\'] .accordion-menu__activator' ],
@@ -460,7 +462,7 @@ export default function getScenarios(host: string) {
         {
             label: 'History sport bonus in profile',
             url: `${host}/users/bonuses/sport`,
-            cookiePath,
+            cookies,
             readySelector: '.profile-bonuses',
             clickSelector: [ '[data-test=\'profile-bonuses-history\'] .accordion-menu__activator' ],
             scrollToSelector: '[data-test=\'profile-bonuses-history\'] .bonus-item',
@@ -469,14 +471,14 @@ export default function getScenarios(host: string) {
         {
             label: 'Daily Deposit Insurance',
             url: `${host}/users/bonuses/insurance`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test=\'bonus-item\']',
         },
         {
             label: 'Daily Deposit Insurance Details Popup',
             url: `${host}/users/bonuses/insurance`,
-            cookiePath: cookiePath,
+            cookies,
             delay: 3000,
             clickSelectors: '[data-test=\'bonus-item\'] [data-test=\'bonus-details-button\']',
             postInteractionWait: 3000,
@@ -509,35 +511,35 @@ export default function getScenarios(host: string) {
         {
             label: 'Personal data auth Popup Leave now',
             url: `${host}#confirm-exit`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="confirm-exit"]',
         },
         {
             label: 'Limits Suspended popup',
             url: `${host}#modal-game-suspended`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-game-suspended"]',
         },
         {
             label: 'Limits Cooling Off popup',
             url: `${host}#game-cooling-off`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="game-cooling-off"]',
         },
         {
             label: 'Deposit bonus balance info popup',
             url: `${host}#deposit-bonus-balance-info`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="deposit-bonus-balance-info"]',
         },
         {
             label: 'Deposit insurance request denied popup',
             url: `${host}#modal-deposit-insurance`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '[data-test="modal-deposit-insurance"]',
         },
