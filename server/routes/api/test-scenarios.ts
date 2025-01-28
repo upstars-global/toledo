@@ -23,10 +23,7 @@ import getPages from '../../backstop/config/scenarios';
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export function getScenariosProject(req: Request, res: Response) {
-    const {
-        service,
-    } = req.query;
-    const host = getTestUrlByTask(String(service));
+    const host = getTestUrlByTask();
     const scenarios = getPages(host);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');
