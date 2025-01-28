@@ -27,6 +27,8 @@ spec:
           env:
             - name: ENVIRONMENT
               value: {{ .Values.env_value }}
+            - name: PROJECT
+              value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:

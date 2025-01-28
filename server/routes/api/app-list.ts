@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import axios from 'axios';
+import { PROJECT } from "@config";
 
 const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
 
@@ -12,13 +13,6 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  *     description: Get application list
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
  *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *       200:
@@ -37,11 +31,10 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export default function appList(req: Request, res: Response) {
-    const {
-        project,
-    } = req.query;
-    let nameSpace = project;
-    if (project === 'thor') {
+    let nameSpace = PROJECT;
+
+    // TODO Решить вопрос с не совпадением проекта и неймспейса
+    if (PROJECT === 'thor') {
         nameSpace = 'thor-frontera';
     }
 
