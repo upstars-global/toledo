@@ -37,6 +37,11 @@ function copyReference(folder: string) {
  *         schema:
  *           type: string
  *         description: Уникальный идентификатор теста
+ *       - in: query
+ *         name: folder
+ *         schema:
+ *           type: string
+ *         description: Папка для будущего теста
  *     responses:
  *       200:
  *         description: Тест успешно запущен
@@ -51,15 +56,16 @@ function copyReference(folder: string) {
  *                   example: "Тест успешно запущен"
  */
 export default function startRoute(req: Request, res: Response) {
-    const {
+    let {
         service,
+        folder
     } = req.query;
 
     const testId = String(service);
     const host = getTestUrlByTask(testId);
 
-    const folder = testId || getCurrentFormattedTime();
-    copyReference(folder);
+    folder = folder || testId || getCurrentFormattedTime();
+    copyReference(String(folder));
 
     console.log('Host: ', host);
     const start = Date.now();
