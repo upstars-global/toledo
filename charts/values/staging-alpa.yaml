@@ -1,0 +1,5 @@
+componentId: 'alpa'
+project: 'alpa'
+defaultService: 'frontera-alpa-staging-mock'
+ingress:
+  hostname: toledo-staging-alpa.wlabel.site

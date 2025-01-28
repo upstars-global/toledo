@@ -1,3 +1,0 @@
-ingress:
-  hostname: toledo-staging.wlabel.site
-defaultService: ''

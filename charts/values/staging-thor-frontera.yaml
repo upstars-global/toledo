@@ -1,0 +1,5 @@
+componentId: 'thor-frontera'
+project: 'thor'
+defaultService: 'frontera-thor-staging-mock'
+ingress:
+  hostname: toledo-staging-thor-frontera.wlabel.site
