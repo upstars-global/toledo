@@ -13,7 +13,6 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  *     description: Get application list
  *     produces:
  *       - application/json
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *       200:
  *         description: Successfully retrieved list
