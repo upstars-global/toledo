@@ -10,19 +10,19 @@ function getCookieUrlByTask(config?: IHost): string {
 
     if (config?.task && PROJECT === 'alpa') {
         task = `-${ config.task.toLowerCase() }-ss`;
-        return `frontera${ task }-mock.${ PROJECT }.svc.cluster.local`;
+        return `frontera${ task }-mock`;
     }
 
     if (PROJECT === 'thor') {
         if (config?.task) {
             task = `-${ config.task?.toLowerCase() }-thor`;
-            return `frontera${ task }-mock.thor-frontera.svc.cluster.local`;
+            return `frontera${ task }-mock`;
         }
         const _env = env === 'develop' ? 'development' : env;
-        return `frontera${ task }-${ PROJECT }-${ _env }-mock.thor-frontera.svc.cluster.local`;
+        return `frontera${ task }-${ PROJECT }-${ _env }-mock`;
     }
 
-    return `frontera${ task }-${ PROJECT }-${ env }-mock.${ PROJECT }.svc.cluster.local`;
+    return `frontera${ task }-${ PROJECT }-${ env }-mock`;
 }
 export function getTestUrlByTask(config?: IHost): string {
     return `http://${ getCookieUrlByTask(config) }:2004`;
