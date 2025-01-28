@@ -6,7 +6,7 @@ module.exports = async (page, scenario) => {
     const { protocol, hostname} = new URL(scenario.url)
     cookies = scenario.cookies.map(cookie => {
       return {
-        "domain": `${protocol}://${hostname}`,
+        "domain": `${protocol}//${hostname}`,
         "path": "/",
         ...cookie,
         "expirationDate": 1798790400,
