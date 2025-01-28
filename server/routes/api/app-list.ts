@@ -66,14 +66,15 @@ async function listServices(namespace: string = String(PROJECT)) {
     if (PROJECT === 'thor') {
         namespace = 'thor-frontera';
     }
-    // Создаём конфигурацию
-    const kc = new k8s.KubeConfig();
-    kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
-
-    // Создаём API-клиент для работы с сервисами
-    const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
     try {
+        // Создаём конфигурацию
+        const kc = new k8s.KubeConfig();
+        kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
+
+        // Создаём API-клиент для работы с сервисами
+        const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
         // Получаем список сервисов в указанном неймспейсе
         // @ts-ignore
         const res = await k8sApi.listNamespacedService(namespace);
