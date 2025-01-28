@@ -24,9 +24,9 @@ import getPages from '../../backstop/config/scenarios';
  */
 export function getScenariosProject(req: Request, res: Response) {
     const {
-        dyn,
+        service,
     } = req.query;
-    const host = getTestUrlByTask(String(dyn || ''));
+    const host = getTestUrlByTask(String(service));
     const scenarios = getPages(host);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');

@@ -32,17 +32,11 @@ function copyReference(folder: string) {
  *     description: Инициализирует процесс тестирования для указанного проекта и теста.
  *     parameters:
  *       - in: query
- *         name: testId
+ *         name: service
  *         required: true
  *         schema:
  *           type: string
  *         description: Уникальный идентификатор теста
- *       - in: query
- *         name: dyn
- *         required: false
- *         schema:
- *           type: string
- *         description: Динамическая настройка для теста (опционально)
  *     responses:
  *       200:
  *         description: Тест успешно запущен
@@ -58,14 +52,13 @@ function copyReference(folder: string) {
  */
 export default function startRoute(req: Request, res: Response) {
     const {
-        testId,
-        dyn,
+        service,
     } = req.query;
 
-    const taskId = String(dyn || '') || String(testId || '');
-    const host = getTestUrlByTask(String(dyn || ''));
+    const testId = String(service);
+    const host = getTestUrlByTask(testId);
 
-    const folder = taskId || getCurrentFormattedTime();
+    const folder = testId || getCurrentFormattedTime();
     copyReference(folder);
 
     console.log('Host: ', host);
@@ -83,7 +76,7 @@ export default function startRoute(req: Request, res: Response) {
         const end = Date.now();
         console.log(`Test take: ${end - start} ms`)
         SlackService.send({
-            testId: taskId,
+            testId,
             ...getTestResult(`backstop/test/${folder}`),
             time: end - start
         },);
