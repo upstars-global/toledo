@@ -1,6 +1,6 @@
 componentId: 'thor-frontera'
 
 ingress:
-  hostname: toledo-develop.wlabel.site
+  hostname: toledo-develop-thor-frontera.wlabel.site
 
 env_value: develop
