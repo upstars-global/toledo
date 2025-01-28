@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import k8s from '@kubernetes/client-node';
+import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
 import axios from 'axios';
 import { PROJECT } from "@config";
 
@@ -69,11 +69,11 @@ async function listServices(namespace: string = String(PROJECT)) {
 
     try {
         // Создаём конфигурацию
-        const kc = new k8s.KubeConfig();
+        const kc = new KubeConfig();
         kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
 
         // Создаём API-клиент для работы с сервисами
-        const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+        const k8sApi = kc.makeApiClient(CoreV1Api);
 
         // Получаем список сервисов в указанном неймспейсе
         // @ts-ignore
