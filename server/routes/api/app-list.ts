@@ -61,12 +61,14 @@ export default function appList(req: Request, res: Response) {
 
 
 
-async function listServices(namespace: string = String(PROJECT)) {
+async function listServices(namespace: string) {
+    namespace = String(PROJECT)
     // TODO Решить вопрос с не совпадением проекта и неймспейса
-    if (PROJECT === 'thor') {
+    if (namespace === 'thor') {
         namespace = 'thor-frontera';
     }
 
+    console.log(namespace)
     try {
         // Создаём конфигурацию
         const kc = new KubeConfig();
