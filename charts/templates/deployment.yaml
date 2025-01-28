@@ -25,10 +25,6 @@ spec:
       containers:
         - name: toledo
           env:
-            - name: ALPA_ADDR
-              value: {{ .Values.env.alpa_addr }}
-            - name: THOR_ADDR
-              value: {{ .Values.env.thor_addr }}
             - name: ENVIRONMENT
               value: {{ .Values.env_value }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

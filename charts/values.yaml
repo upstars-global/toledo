@@ -18,10 +18,6 @@ ingress:
 #  cfIpList: ''
   annotations: []
 
-env:
-  alpa_addr: localhost:2004
-  thor_addr: localhost:2004
-
 volume:
   size: 1Gi
   testSize: 20Gi
