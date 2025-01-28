@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import k8s from '@kubernetes/client-node';
 import axios from 'axios';
+import { PROJECT } from "@config";
 
 const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
 
@@ -12,14 +14,6 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  *     description: Get application list
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *       200:
  *         description: Successfully retrieved list
@@ -37,11 +31,10 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export default function appList(req: Request, res: Response) {
-    const {
-        project,
-    } = req.query;
-    let nameSpace = project;
-    if (project === 'thor') {
+    let nameSpace = PROJECT;
+
+    // TODO Решить вопрос с не совпадением проекта и неймспейса
+    if (PROJECT === 'thor') {
         nameSpace = 'thor-frontera';
     }
 
@@ -62,4 +55,36 @@ export default function appList(req: Request, res: Response) {
             console.log(error);
             res.status(500).send(error);
         });
+
+    listServices()
+}
+
+
+
+async function listServices(namespace: string = String(PROJECT)) {
+    // TODO Решить вопрос с не совпадением проекта и неймспейса
+    if (PROJECT === 'thor') {
+        namespace = 'thor-frontera';
+    }
+    // Создаём конфигурацию
+    const kc = new k8s.KubeConfig();
+    kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
+
+    // Создаём API-клиент для работы с сервисами
+    const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
+
+    try {
+        // Получаем список сервисов в указанном неймспейсе
+        // @ts-ignore
+        const res = await k8sApi.listNamespacedService(namespace);
+        console.log('Services in namespace:', namespace);
+        res.items.forEach((service: any) => {
+            console.log(`- ${service.metadata?.name}`)
+            if (service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock') {
+                console.log(`- mock`);
+            }
+        });
+    } catch (err) {
+        console.error('Error fetching services:', err);
+    }
 }

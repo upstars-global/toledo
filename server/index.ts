@@ -23,11 +23,10 @@ app.get('/config.js', (req: Request, res: Response) => {
 
     fs.readFile(path.join(
         __dirname,
-        `./backstop/test/${referrer.searchParams.get('project')}`,
+        `./backstop/test`,
         String(referrer.searchParams.get('test')),
         'report.json',
     ), { encoding: 'utf8' }, (_error: unknown, file: string) => {
-    // string = string.replace(/\.\./bitmaps_reference/, "");
         res.setHeader('Content-Type', 'application/javascript');
         res.send(`report(${file})`);
     });

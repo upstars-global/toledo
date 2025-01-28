@@ -1,9 +1,13 @@
-import { processHost } from '../../../helpers/cookiesHelper';
 import mobileViewports from '../viewports/mobile';
 
-export default function getScenarios(host: string) {
-    const cookiePath = processHost(host);
+const cookies = [
+    {
+        "name": "_casino_session",
+        "value": "testpass@bbq.agency",
+    }
+]
 
+export default function getScenarios(host: string) {
     return [
         {
             label: 'Homepage',
@@ -14,7 +18,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Homepage auth',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             delay: 3000,
             readySelector: '.trust-block',
             // scrollToSelector: '.footer__copyright',
@@ -22,7 +26,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Deposit',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: '[data-test="header__deposit-btn"]',
             clickSelectorsMobile: '[data-test="bottom-menu__deposit-button"]',
             postInteractionWait: 5000,
@@ -31,7 +35,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Deposit Step Payments list',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: [ '[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]' ],
             clickSelectorsMobile: [ '[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]' ],
             postInteractionWait: 5000,
@@ -40,7 +44,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Deposit Step render Card form',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
@@ -58,7 +62,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Deposit Step render Card form saved method',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
@@ -76,7 +80,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Deposit Step render Crypto method',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
                 '[data-test="cashbox-deposit__next-btn"]',
@@ -94,20 +98,20 @@ export default function getScenarios(host: string) {
         {
             label: 'Cashbox Dashboard',
             url: `${ host }/cashbox`,
-            cookiePath,
+            cookies,
             removeSelectors: [ '.ps__thumb-y' ],
             readySelector: '.cashbox-dashboard__user-balance',
         },
         {
             label: 'Withdraw Step 1',
             url: `${ host }/withdraw`,
-            cookiePath,
+            cookies,
             readySelector: '.modal-cashbox-step-withdraw .user-balance',
         },
         {
             label: 'Balance dropdown',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             clickSelector: '.header__user-balance-arrow',
             clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow' ],
             postInteractionWait: 3000,
@@ -125,7 +129,7 @@ export default function getScenarios(host: string) {
         {
             label: 'SideBar auth user',
             url: `${host}/`,
-            cookiePath,
+            cookies,
             viewports: mobileViewports,
             clickSelector: [ '[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]' ],
             delay: 3000,
@@ -192,7 +196,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Lootbox auth',
             url: `${host}/rocket-wheel`,
-            cookiePath,
+            cookies,
             postInteractionWait: 2000,
             delay: 3000,
             readySelector: '.loot-box-spin-wheel-container',
@@ -200,43 +204,43 @@ export default function getScenarios(host: string) {
         {
             label: 'Profile',
             url: `${host}/profile/`,
-            cookiePath,
+            cookies,
             delay: 3000,
         },
         {
             label: 'Profile level',
             url: `${host}/profile/level`,
-            cookiePath,
+            cookies,
             delay: 3000,
         },
         {
             label: 'Profile gifts',
             url: `${host}/profile/gifts`,
-            cookiePath,
+            cookies,
             delay: 3000,
         },
         {
             label: 'Profile verification',
             url: `${host}/profile/verification`,
-            cookiePath,
+            cookies,
             delay: 3000,
         },
         {
             label: 'Profile limits',
             url: `${host}/profile/limits`,
-            cookiePath,
+            cookies,
             delay: 5000,
         },
         {
             label: 'Profile security',
             url: `${host}/profile/security`,
-            cookiePath,
+            cookies,
             delay: 5000,
         },
         {
             label: 'Profile games-history',
             url: `${host}/profile/games-history`,
-            cookiePath,
+            cookies,
             delay: 5000,
         },
         {
@@ -338,7 +342,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Game page',
             url: `${host}/play/bgaming/lucky-ladys-clover`,
-            cookiePath,
+            cookies,
             viewports: mobileViewports,
             clickSelector: ['[data-test="cookies-accept__accept-btn"] button', '.game-bookmark'],
             delay: 1000,
@@ -346,7 +350,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Support Widget Vip Manager Panel',
-            cookiePath,
+            cookies,
             url: `${host}/`,
             clickSelector: '.support-widget .n-fe-button',
             clickSelectorsMobile: "[data-test='bottom-menu__open-sidebar']",

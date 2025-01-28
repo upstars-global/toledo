@@ -2,8 +2,3 @@ ingress:
   hostname: toledo-staging.wlabel.site
 
 env_value: staging
-
-env:
-  alpa_addr: frontera-alpa-staging-mock.alpa.svc.cluster.local:2004
-  thor_addr: frontera-thor-staging-mock.thor.svc.cluster.local:2004
-  is_aws: "true"

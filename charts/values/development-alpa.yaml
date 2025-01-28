@@ -1,0 +1,6 @@
+componentId: 'alpa'
+project: 'alpa'
+ingress:
+  hostname: toledo-develop-alpa.wlabel.site
+
+env_value: develop
