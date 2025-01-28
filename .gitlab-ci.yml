@@ -69,7 +69,7 @@ publish to development alpa:
   extends: .publish-to-argocd
   variables:
     APPSET_FILENAME: "${CI_PROJECT_NAME}-alpa-development.json"
-    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-production"
+    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-development"
     PUBLISH_TO_ENV: "development"
     HELM_VALUES_PATH: "./values/development-alpa.yaml"
     DESTINATION_NAMESPACE: "alpa"
