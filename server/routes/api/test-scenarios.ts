@@ -26,9 +26,7 @@ export function getScenariosProject(req: Request, res: Response) {
     const {
         dyn,
     } = req.query;
-    const host = getTestUrlByTask({
-        task: String(dyn || ''),
-    });
+    const host = getTestUrlByTask(String(dyn || ''));
     const scenarios = getPages(host);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');

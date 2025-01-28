@@ -4,7 +4,6 @@ import SlackService from '../../services/SlackService';
 import { getTestUrlByTask } from '../../helpers/hostHelper';
 import { cpSync } from 'fs';
 import path from 'path';
-import { MOCK_ADDR } from '@config';
 import { getTestResult } from '../../helpers/getTestResult';
 
 function getCurrentFormattedTime() {
@@ -64,9 +63,7 @@ export default function startRoute(req: Request, res: Response) {
     } = req.query;
 
     const taskId = String(dyn || '') || String(testId || '');
-    const host = getTestUrlByTask({
-        task: String(dyn || ''),
-    });
+    const host = getTestUrlByTask(String(dyn || ''));
 
     const folder = taskId || getCurrentFormattedTime();
     copyReference(folder);
@@ -74,7 +71,7 @@ export default function startRoute(req: Request, res: Response) {
     console.log('Host: ', host);
     const start = Date.now();
     command('test', {
-        hostName: MOCK_ADDR || host,
+        hostName: host,
         testId: folder,
         selectedScenariosLabels: req.body,
     }).then(() => {

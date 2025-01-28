@@ -1,9 +1,6 @@
 import { Request, Response } from 'express';
 import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
-// import axios from 'axios';
 import { PROJECT } from "@config";
-
-// const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
 
 /**
  * @swagger
@@ -31,31 +28,6 @@ import { PROJECT } from "@config";
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export default async function appList(req: Request, res: Response) {
-    // let nameSpace = PROJECT;
-    //
-    // // TODO Решить вопрос с не совпадением проекта и неймспейса
-    // if (PROJECT === 'thor') {
-    //     nameSpace = 'thor-frontera';
-    // }
-    //
-    // const currentTime = new Date();
-    // currentTime.setUTCMinutes(currentTime.getUTCMinutes() - 1);
-    //
-    // const query = `count+by+%28name%29+%28argocd_app_info%7Bdest_namespace%3D%22${nameSpace}%22%7D%29&time=${currentTime.toISOString()}`;
-    //
-    // axios.get(`${PROMETHEUS_ADDR}/api/v1/query?query=${query}`)
-    //     .then((data) => {
-    //         res.send(data.data.data.result.map((item: Record<string, unknown>) => {
-    //             return (item.metric as Record<string, string>).name;
-    //         }).filter((item: string) => {
-    //             return (/[0-9]/).test(item);
-    //         }));
-    //     }).catch((error) => {
-    //         // eslint-disable-next-line no-console
-    //         console.log(error);
-    //         res.status(500).send(error);
-    //     });
-
     const list = await listServices();
     res.send(list)
 }
@@ -70,29 +42,18 @@ async function listServices() {
     }
 
     try {
-        // Создаём конфигурацию
         const kc = new KubeConfig();
-        kc.loadFromDefault(); // Загружает конфигурацию из окружения или ~/.kube/config
-
-        // Создаём API-клиент для работы с сервисами
+        kc.loadFromDefault();
         const k8sApi = kc.makeApiClient(CoreV1Api);
 
-        // Получаем список сервисов в указанном неймспейсе
-        // @ts-ignore
         const res = await k8sApi.listNamespacedService({namespace});
-        console.log('Mock services in namespace:', namespace);
-        // res.items.forEach((service: any) => {
-        //
-        //     if (service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock') {
-        //         console.log(`- ${service.metadata?.name}`)
-        //     }
-        // });
-
         const filteredServices = res.items.filter((service: any) =>
             service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock'
         ).map((service: any) => service.metadata?.name);
 
+        console.log('Mock services in namespace:', namespace);
         console.log(filteredServices)
+
         return filteredServices;
     } catch (err) {
         console.error('Error fetching services:', err);

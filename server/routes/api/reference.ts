@@ -2,7 +2,6 @@
 import { Request, Response } from 'express';
 import command from '../../backstop';
 import { getTestUrlByTask } from '../../helpers/hostHelper';
-import { MOCK_ADDR } from '@config';
 
 /**
  * @swagger
@@ -26,7 +25,7 @@ import { MOCK_ADDR } from '@config';
  */
 export default function reference(req: Request, res: Response) {
     command('reference', {
-        hostName: MOCK_ADDR || getTestUrlByTask(),
+        hostName: getTestUrlByTask(),
         testId: '',
         selectedScenariosLabels: req.body,
     }).then(() => {

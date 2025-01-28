@@ -1,6 +1,5 @@
 componentId: 'thor-frontera'
 project: 'thor'
+defaultService: 'frontera-thor-staging-mock'
 ingress:
   hostname: toledo-develop-thor-frontera.wlabel.site
-
-env_value: develop

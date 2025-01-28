@@ -25,8 +25,8 @@ spec:
       containers:
         - name: toledo
           env:
-            - name: ENVIRONMENT
-              value: {{ .Values.env_value }}
+            - name: DEFAULT_SERVICE
+              value: {{ .Values.defaultService }}
             - name: PROJECT
               value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
