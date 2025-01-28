@@ -70,7 +70,7 @@ publish to development:
   variables:
     PUBLISH_TO_ENV: "development"
     HELM_VALUES_PATH: "./values/development.yaml"
-    DESTINATION_NAMESPACE: ${CI_PROJECT_NAME}
+    DESTINATION_NAMESPACE: "alpa"
   stage: publish
   rules:
     - changes:
