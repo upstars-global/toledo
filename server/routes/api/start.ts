@@ -19,9 +19,9 @@ function getCurrentFormattedTime() {
     return `${year}${month}${day}-${hours}${minutes}${seconds}`;
 }
 
-function copyReference(project: string, folder: string) {
-    const srcPathName = path.join(__dirname, `../../backstop/reference/${project}`);
-    const destPathName = path.join(__dirname, `../../backstop/test/${project}/${folder}/reference`);
+function copyReference(folder: string) {
+    const srcPathName = path.join(__dirname, `../../backstop/reference`);
+    const destPathName = path.join(__dirname, `../../backstop/test/${folder}/reference`);
     cpSync(srcPathName, destPathName, { recursive: true });
 }
 
@@ -32,13 +32,6 @@ function copyReference(project: string, folder: string) {
  *     summary: Запуск теста
  *     description: Инициализирует процесс тестирования для указанного проекта и теста.
  *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *       - in: query
  *         name: testId
  *         required: true
@@ -66,26 +59,22 @@ function copyReference(project: string, folder: string) {
  */
 export default function startRoute(req: Request, res: Response) {
     const {
-        project,
         testId,
         dyn,
     } = req.query;
 
     const taskId = String(dyn || '') || String(testId || '');
-    const projectName = String(project);
     const host = getTestUrlByTask({
         task: String(dyn || ''),
-        project: projectName,
     });
 
     const folder = taskId || getCurrentFormattedTime();
-    copyReference(projectName, folder);
+    copyReference(folder);
 
     console.log('Host: ', host);
     const start = Date.now();
     command('test', {
         hostName: MOCK_ADDR || host,
-        project: projectName,
         testId: folder,
         selectedScenariosLabels: req.body,
     }).then(() => {
@@ -97,9 +86,8 @@ export default function startRoute(req: Request, res: Response) {
         const end = Date.now();
         console.log(`Test take: ${end - start} ms`)
         SlackService.send({
-            project: projectName,
             testId: taskId,
-            ...getTestResult(`backstop/test/${project}/${folder}`),
+            ...getTestResult(`backstop/test/${folder}`),
             time: end - start
         },);
         res.setHeader('Access-Control-Allow-Origin', '*');

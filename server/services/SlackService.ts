@@ -1,15 +1,16 @@
 import axios from 'axios';
+import { PROJECT } from '@config';
 
-function getChanelHook(project: string): string {
-    if (project === 'alpa') {
+function getChanelHook(): string {
+    if (PROJECT === 'alpa') {
         return 'https://hooks.slack.com/services/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';
     }
 
     return 'https://hooks.slack.com/services/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';
 }
 
-function getReportLink(project: string, testId: string): string {
-    return `https://backstop-panel.pages.dev/report/${ project }/${ testId }`;
+function getReportLink(testId: string): string {
+    return `https://backstop-panel.pages.dev/report/${ PROJECT }/${ testId }`;
 }
 
 function getText(testId: string, time: number): string {
@@ -27,13 +28,11 @@ function getText(testId: string, time: number): string {
 
 export default {
     send: function send({
-        project,
         testId,
         passed,
         failed,
         time
     }: {
-        project: string,
         testId: string,
         passed: number,
         failed: number,
@@ -43,7 +42,7 @@ export default {
             return;
         }
 
-        axios.post(getChanelHook(project), {
+        axios.post(getChanelHook(), {
             text: `Test ${ testId } ended with errors, and take: ${ time / 60000 } minutes`,
             pretty: 1,
             blocks: [
@@ -101,7 +100,7 @@ export default {
                                 text: 'Result',
                             },
                             style: 'primary',
-                            url: getReportLink(project, testId),
+                            url: getReportLink(testId),
                         },
                     ],
                 },

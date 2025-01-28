@@ -13,14 +13,6 @@ import { MOCK_ADDR } from '@config';
  *     description: Create new references
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *      200:
  *         description: ok в любом случае
@@ -33,13 +25,8 @@ import { MOCK_ADDR } from '@config';
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export default function reference(req: Request, res: Response) {
-    const { project } = req.query;
-
     command('reference', {
-        hostName: MOCK_ADDR || getTestUrlByTask({
-            project: String(project),
-        }),
-        project,
+        hostName: MOCK_ADDR || getTestUrlByTask(),
         testId: '',
         selectedScenariosLabels: req.body,
     }).then(() => {
