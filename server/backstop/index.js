@@ -8,7 +8,7 @@ const defaultScenarios = JSON.parse(fs.readFileSync('./backstop/config/defaultSc
 function getPaths(command, folder) {
     return {
         bitmaps_reference: command === 'reference'
-            ? `backstop/reference`
+            ? `backstop/reference/images`
             : `backstop/test/${folder}/reference`,
         bitmaps_test: `backstop/test`,
         html_report: `backstop/data/html_report`,

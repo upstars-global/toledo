@@ -34,7 +34,7 @@ app.get('/config.js', (req: Request, res: Response) => {
 
 app.use('/assets', express.static('./assets'));
 app.use('/test', express.static('./backstop/test'));
-app.use('/reference', express.static('./backstop/reference'));
+app.use('/reference', express.static('./backstop/reference/images'));
 
 app.get('/report', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, './assets/index.html'));

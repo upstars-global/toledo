@@ -19,7 +19,7 @@ function getCurrentFormattedTime() {
 }
 
 function copyReference(folder: string) {
-    const srcPathName = path.join(__dirname, `../../backstop/reference`);
+    const srcPathName = path.join(__dirname, `../../backstop/reference/images`);
     const destPathName = path.join(__dirname, `../../backstop/test/${folder}/reference`);
     cpSync(srcPathName, destPathName, { recursive: true });
 }
