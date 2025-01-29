@@ -41,7 +41,7 @@ build-package:
         --context "${DOCKER_BUILD_CONTEXT}" \
         --single-snapshot
   rules:
-    - if: CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
 build-source:
   stage: build-source
