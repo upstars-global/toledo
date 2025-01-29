@@ -44,6 +44,10 @@ async function listServices() {
         kc.loadFromDefault();
         const k8sApi = kc.makeApiClient(CoreV1Api);
 
+        const currentContext = kc.getContextObject(kc.currentContext);
+        const namespace1 = currentContext?.namespace || 'default';
+        console.log(`Current namespace from context: ${namespace1}`);
+
         const res = await k8sApi.listNamespacedService({namespace});
         const filteredServices = res.items.filter((service: any) =>
             service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock'
