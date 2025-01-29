@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { getTestUrlByTask } from '../../helpers/hostHelper';
 import getScenarios from '../../backstop/config/scenarios';
 
 /**
@@ -23,9 +22,8 @@ import getScenarios from '../../backstop/config/scenarios';
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export function getScenariosProject(req: Request, res: Response) {
-    const host = getTestUrlByTask();
-    const scenarios = getScenarios(host);
+    const scenarios = getScenarios();
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');
-    res.status(201).send(JSON.stringify(scenarios));
+    res.send(JSON.stringify(scenarios));
 }

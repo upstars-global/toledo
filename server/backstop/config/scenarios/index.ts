@@ -7,10 +7,6 @@ const configs: Record<string, any> = {
     thor,
 };
 
-export default function getScenarios(host: string) {
-    let baseUrl = host;
-    if (!baseUrl.startsWith('http')) {
-        baseUrl = `http://${baseUrl}`;
-    }
-    return configs[String(PROJECT)](baseUrl);
+export default function getScenarios() {
+    return configs[String(PROJECT)]();
 }

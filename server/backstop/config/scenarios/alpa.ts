@@ -7,17 +7,17 @@ const cookies = [
     }
 ]
 
-export default function getScenarios(host: string) {
+export default function getScenarios() {
     return [
         {
             label: 'Homepage',
-            url: `${host}/`,
+            url: `/`,
             delay: 3000,
             readySelector: '.trust-block',
         },
         {
             label: 'Homepage auth',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             delay: 3000,
             readySelector: '.trust-block',
@@ -25,7 +25,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Deposit',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: '[data-test="header__deposit-btn"]',
             clickSelectorsMobile: '[data-test="bottom-menu__deposit-button"]',
@@ -34,7 +34,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Deposit Step Payments list',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: [ '[data-test="header__deposit-btn"]', '[data-test="cashbox-deposit__next-btn"]' ],
             clickSelectorsMobile: [ '[data-test="bottom-menu__deposit-button"]', '[data-test="cashbox-deposit__next-btn"]' ],
@@ -43,7 +43,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Deposit Step render Card form',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
@@ -61,7 +61,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Deposit Step render Card form saved method',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
@@ -79,7 +79,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Deposit Step render Crypto method',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: [
                 '[data-test="header__deposit-btn"]',
@@ -97,20 +97,20 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Cashbox Dashboard',
-            url: `${ host }/cashbox`,
+            url: `/cashbox`,
             cookies,
             removeSelectors: [ '.ps__thumb-y' ],
             readySelector: '.cashbox-dashboard__user-balance',
         },
         {
             label: 'Withdraw Step 1',
-            url: `${ host }/withdraw`,
+            url: `/withdraw`,
             cookies,
             readySelector: '.modal-cashbox-step-withdraw .user-balance',
         },
         {
             label: 'Balance dropdown',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             clickSelector: '.header__user-balance-arrow',
             clickSelectorsMobile: [ '[data-test="cookies-accept__accept-btn"]', '.header__user-balance-arrow' ],
@@ -121,14 +121,14 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'SideBar',
-            url: `${host}/`,
+            url: `/`,
             viewports: mobileViewports,
             clickSelector: [ '[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]' ],
             delay: 3000,
         },
         {
             label: 'SideBar auth user',
-            url: `${host}/`,
+            url: `/`,
             cookies,
             viewports: mobileViewports,
             clickSelector: [ '[data-test="cookies-accept__accept-btn"]', '[data-test="bottom-menu__open-sidebar"]' ],
@@ -137,7 +137,7 @@ export default function getScenarios(host: string) {
 
         {
             label: 'Search popup',
-            url: `${host}/`,
+            url: `/`,
             clickSelector: '[data-test=\'open-search-button\']',
             postInteractionWait: 3000,
             delay: 3000,
@@ -145,7 +145,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Producers popup Homepage',
-            url: `${host}/`,
+            url: `/`,
             delay: 3000,
             readySelector: '.producers-block',
             clickSelector: '.game-producers__activator',
@@ -154,7 +154,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Producers popup pokies',
-            url: `${host}/pokies/all`,
+            url: `/pokies/all`,
             delay: 3000,
             readySelector: '.games-list-toolbar__producers',
             clickSelector: '.game-producers__activator',
@@ -163,7 +163,7 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Producers popup categories',
-            url: `${host}/categories/all`,
+            url: `/categories/all`,
             delay: 3000,
             readySelector: '.games-list-toolbar__producers',
             clickSelector: '.game-producers__activator',
@@ -172,30 +172,30 @@ export default function getScenarios(host: string) {
 
         {
             label: 'Quest',
-            url: `${host}/action/quick-snatch`,
+            url: `/action/quick-snatch`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'Tournament',
-            url: `${host}/tournaments/1017`,
+            url: `/tournaments/1017`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'Tournament all',
-            url: `${host}/tournaments/all`,
+            url: `/tournaments/all`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'Promotions',
-            url: `${host}/promotions`,
+            url: `/promotions`,
             delay: 3000,
         },
         {
             label: 'Lootbox auth',
-            url: `${host}/rocket-wheel`,
+            url: `/rocket-wheel`,
             cookies,
             postInteractionWait: 2000,
             delay: 3000,
@@ -203,145 +203,145 @@ export default function getScenarios(host: string) {
         },
         {
             label: 'Profile',
-            url: `${host}/profile/`,
+            url: `/profile/`,
             cookies,
             delay: 3000,
         },
         {
             label: 'Profile level',
-            url: `${host}/profile/level`,
+            url: `/profile/level`,
             cookies,
             delay: 3000,
         },
         {
             label: 'Profile gifts',
-            url: `${host}/profile/gifts`,
+            url: `/profile/gifts`,
             cookies,
             delay: 3000,
         },
         {
             label: 'Profile verification',
-            url: `${host}/profile/verification`,
+            url: `/profile/verification`,
             cookies,
             delay: 3000,
         },
         {
             label: 'Profile limits',
-            url: `${host}/profile/limits`,
+            url: `/profile/limits`,
             cookies,
             delay: 5000,
         },
         {
             label: 'Profile security',
-            url: `${host}/profile/security`,
+            url: `/profile/security`,
             cookies,
             delay: 5000,
         },
         {
             label: 'Profile games-history',
-            url: `${host}/profile/games-history`,
+            url: `/profile/games-history`,
             cookies,
             delay: 5000,
         },
         {
             label: 'Login',
-            url: `${host}/login`,
+            url: `/login`,
             delay: 3000,
         },
         {
             label: 'Registration',
-            url: `${host}/registration`,
+            url: `/registration`,
             delay: 3000,
         },
         {
             label: 'Remind',
-            url: `${host}/remind`,
+            url: `/remind`,
             delay: 3000,
         },
         {
             label: 'New-password',
-            url: `${host}/new-password`,
+            url: `/new-password`,
             delay: 3000,
         },
         {
             label: 'Oops',
-            url: `${host}/oops`,
+            url: `/oops`,
             delay: 3000,
         },
         {
             label: 'terms-and-conditions',
-            url: `${host}/terms-and-conditions`,
+            url: `/terms-and-conditions`,
             delay: 3000,
             readySelector: '.static-page',
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'vip',
-            url: `${host}/vip`,
+            url: `/vip`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'mystic-jackpots',
-            url: `${host}/mystic-jackpots`,
+            url: `/mystic-jackpots`,
             delay: 3000,
         },
         {
             label: 'gift-for-review',
-            url: `${host}/gift-for-review`,
+            url: `/gift-for-review`,
             delay: 3000,
         },
         {
             label: 'share-your-experience',
-            url: `${host}/share-your-experience`,
+            url: `/share-your-experience`,
             delay: 3000,
         },
         {
             label: 'rocketplay-vipclub',
-            url: `${host}/rocketplay-vipclub`,
+            url: `/rocketplay-vipclub`,
             delay: 3000,
         },
         {
             label: 'benefits-of-crypto',
-            url: `${host}/benefits-of-crypto`,
+            url: `/benefits-of-crypto`,
             delay: 5000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'faq',
-            url: `${host}/faq`,
+            url: `/faq`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'support',
-            url: `${host}/support`,
+            url: `/support`,
             delay: 3000,
             // scrollToSelector: '.footer__copyright',
         },
         {
             label: 'sport/registration',
-            url: `${host}/sport/registration`,
+            url: `/sport/registration`,
             delay: 3000,
         },
         {
             label: 'sport/login',
-            url: `${host}/sport/login`,
+            url: `/sport/login`,
             delay: 3000,
         },
         {
             label: 'Vip Adventure',
-            url: `${host}/rocket-adventure`,
+            url: `/rocket-adventure`,
             delay: 3000,
         },
         {
             label: 'Cookie policy',
-            url: `${host}/cookie-policy`,
+            url: `/cookie-policy`,
             delay: 3000,
         },
         {
             label: 'Game page',
-            url: `${host}/play/bgaming/lucky-ladys-clover`,
+            url: `/play/bgaming/lucky-ladys-clover`,
             cookies,
             viewports: mobileViewports,
             clickSelector: ['[data-test="cookies-accept__accept-btn"] button', '.game-bookmark'],
@@ -351,7 +351,7 @@ export default function getScenarios(host: string) {
         {
             label: 'Support Widget Vip Manager Panel',
             cookies,
-            url: `${host}/`,
+            url: `/`,
             clickSelector: '.support-widget .n-fe-button',
             clickSelectorsMobile: "[data-test='bottom-menu__open-sidebar']",
             selectors: [ '.vip-manager' ],

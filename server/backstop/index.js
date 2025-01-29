@@ -17,8 +17,8 @@ function getPaths(command, folder) {
     };
 }
 
-function getScenarios(hostName) {
-    const pagesConfig = getPages(hostName);
+function getScenarios() {
+    const pagesConfig = getPages();
     const scenarios = [];
 
     pagesConfig.forEach((config) => {
@@ -39,7 +39,10 @@ export default function commandFn(command, { hostName, testId, selectedScenarios
     );
 
     file.paths = getPaths(command, testId);
-    const allScenarios = getScenarios(hostName);
+    const allScenarios = getScenarios();
+    allScenarios.map((scenario) => {
+        scenario.url = `${hostName}${scenario.url}`
+    })
 
     if (selectedScenariosLabels.length) {
         file.scenarios = allScenarios.filter(({ label }) => {
