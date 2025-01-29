@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
-import { PROJECT } from "@config";
 
 /**
  * @swagger
@@ -33,20 +32,13 @@ export default async function appList(req: Request, res: Response) {
 }
 
 async function listServices() {
-    let namespace = String(PROJECT)
-    // TODO Решить вопрос с не совпадением проекта и неймспейса
-    if (namespace === 'thor') {
-        namespace = 'thor-frontera';
-    }
-
     try {
         const kc = new KubeConfig();
         kc.loadFromDefault();
         const k8sApi = kc.makeApiClient(CoreV1Api);
 
         const currentContext = kc.getContextObject(kc.currentContext);
-        const namespace1 = currentContext?.namespace || 'default';
-        console.log(`Current namespace from context: ${namespace1}`);
+        const namespace = currentContext?.namespace || 'default';
 
         const res = await k8sApi.listNamespacedService({namespace});
         const filteredServices = res.items.filter((service: any) =>
