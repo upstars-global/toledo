@@ -60,7 +60,7 @@ export default function startRoute(req: Request, res: Response) {
         folder
     } = req.query;
 
-    const testId = String(service);
+    const testId = service as string;
     const host = getTestUrlByTask(testId);
 
     folder = folder || testId || getCurrentFormattedTime();
