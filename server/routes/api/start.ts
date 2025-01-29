@@ -85,7 +85,8 @@ export default function startRoute(req: Request, res: Response) {
             ...getTestResult(`backstop/test/${folder}`),
             time: end - start
         },);
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send('ok');
     });
+
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.send(`Test ${folder} started, on server ${host}`)
 }
