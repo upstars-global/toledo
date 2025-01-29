@@ -1,13 +1,5 @@
 import axios from 'axios';
-import { PROJECT } from '@config';
-
-function getChanelHook(): string {
-    if (PROJECT === 'alpa') {
-        return 'https://hooks.slack.com/services/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';
-    }
-
-    return 'https://hooks.slack.com/services/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';
-}
+import { PROJECT, SLACK_CHANEL } from '@config';
 
 function getReportLink(folder: string): string {
     return `https://backstop-panel.pages.dev/report/${ PROJECT }/${ folder }`;
@@ -56,11 +48,11 @@ export default {
         failed: number,
         time: number,
     }) {
-        if (!folder) {
+        if (!folder || !SLACK_CHANEL) {
             return;
         }
 
-        axios.post(getChanelHook(), {
+        axios.post(SLACK_CHANEL, {
             text: `Test ${ folder } ended with errors, and take: ${ time / 60000 } minutes`,
             pretty: 1,
             blocks: [

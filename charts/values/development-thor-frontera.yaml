@@ -1,5 +1,6 @@
 componentId: 'thor-frontera'
 project: 'thor'
+slackChanel: 'https://hooks.slack.com/services/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'
 defaultService: 'frontera-thor-staging-mock'
 ingress:
   hostname: toledo-develop-thor-frontera.wlabel.site

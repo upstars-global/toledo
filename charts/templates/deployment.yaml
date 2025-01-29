@@ -27,6 +27,8 @@ spec:
           env:
             - name: DEFAULT_SERVICE
               value: {{ .Values.defaultService }}
+            - name: SLACK_CHANEL
+              value: {{ .Values.slackChanel }}
             - name: PROJECT
               value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

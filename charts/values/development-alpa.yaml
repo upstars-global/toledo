@@ -1,5 +1,6 @@
 componentId: 'alpa'
 project: 'alpa'
+slackChanel: 'https://hooks.slack.com/services/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'
 defaultService: 'frontera-alpa-develop-mock'
 ingress:
   hostname: toledo-develop-alpa.wlabel.site
