@@ -29,6 +29,8 @@ spec:
               value: {{ .Values.defaultService }}
             - name: SLACK_CHANEL
               value: {{ .Values.slackChanel }}
+            - name: CLIENT_ADDR
+              value: {{ .Values.clientAddr }}
             - name: PROJECT
               value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"

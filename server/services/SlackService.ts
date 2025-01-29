@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { PROJECT, SLACK_CHANEL } from '@config';
+import { CLIENT_ADDR, SLACK_CHANEL } from '@config';
 
 function getReportLink(folder: string): string {
-    return `https://backstop-panel.pages.dev/report/${ PROJECT }/${ folder }`;
+    return `${ CLIENT_ADDR }/${ folder }`;
 }
 
 function getFolderParams(folder: string) {
