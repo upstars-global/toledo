@@ -32,8 +32,6 @@ export default async function appList(req: Request, res: Response) {
     res.send(list)
 }
 
-
-
 async function listServices() {
     let namespace = String(PROJECT)
     // TODO Решить вопрос с не совпадением проекта и неймспейса

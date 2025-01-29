@@ -27,10 +27,6 @@ function getFolderParams(folder: string) {
     }
 }
 
-// frontera_v9-3-359-ss_308626
-// frontera-alpa-develop-mock
-// frontera-fp-2421-thor-mock
-// frontera-thor-staging-mock
 function getText(testId: string, time: number): string {
     const {
         task,
