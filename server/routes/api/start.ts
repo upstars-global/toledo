@@ -82,7 +82,7 @@ export default function startRoute(req: Request, res: Response) {
         const end = Date.now();
         console.log(`Test take: ${end - start} ms`)
         SlackService.send({
-            testId,
+            folder: String(folder),
             ...getTestResult(`backstop/test/${folder}`),
             time: end - start
         },);
