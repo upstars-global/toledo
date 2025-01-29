@@ -33,7 +33,6 @@ function copyReference(folder: string) {
  *     parameters:
  *       - in: query
  *         name: service
- *         required: true
  *         schema:
  *           type: string
  *         description: Уникальный идентификатор теста
