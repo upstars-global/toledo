@@ -59,15 +59,16 @@ build-source:
   variables:
     DOCKER_BUILD_CONTEXT: "."
     DOCKER_FILEPATH: "./modules/Dockerfile"
-  script:
+  before_script:
     - echo "Building source container"
     - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+  script:
     - >
       /kaniko/executor \
         --dockerfile "${DOCKER_FILEPATH}" \
         --destination "${SOURCE_IMAGE_TAG}" \
-        --destination "${IMAGE}" \
         --context "${DOCKER_BUILD_CONTEXT}" \
+        --build-arg DOCKER_PUBLIC_REPO=${DOCKER_PUBLIC_REPO} \
         --single-snapshot
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
