@@ -31,8 +31,6 @@ spec:
               value: {{ .Values.slackChanel }}
             - name: CLIENT_ADDR
               value: {{ .Values.clientAddr }}
-            - name: PROJECT
-              value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
@@ -66,5 +64,5 @@ spec:
             claimName: {{ .Release.Name }}-pvc-tests
         - name: scenarios
           configMap:
-            name: {{ $.Release.Name }}-{{ .Values.project }}.json
+            name: {{ $.Release.Name }}-{{ .Values.scenarios }}.json
       serviceAccountName: {{ .Values.componentId }}
