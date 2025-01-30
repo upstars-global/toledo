@@ -4,7 +4,6 @@ import SlackService from '../../services/SlackService';
 import { getTestUrlByTask } from '../../helpers/hostHelper';
 import { cpSync } from 'fs';
 import path from 'path';
-import { MOCK_ADDR } from '@config';
 import { getTestResult } from '../../helpers/getTestResult';
 
 function getCurrentFormattedTime() {
@@ -19,9 +18,9 @@ function getCurrentFormattedTime() {
     return `${year}${month}${day}-${hours}${minutes}${seconds}`;
 }
 
-function copyReference(project: string, folder: string) {
-    const srcPathName = path.join(__dirname, `../../backstop/reference/${project}`);
-    const destPathName = path.join(__dirname, `../../backstop/test/${project}/${folder}/reference`);
+function copyReference(folder: string) {
+    const srcPathName = path.join(__dirname, `../../backstop/reference/images`);
+    const destPathName = path.join(__dirname, `../../backstop/test/${folder}/reference`);
     cpSync(srcPathName, destPathName, { recursive: true });
 }
 
@@ -30,27 +29,20 @@ function copyReference(project: string, folder: string) {
  * /api/start:
  *   get:
  *     summary: Запуск теста
+ *     tags:
+ *       - Основные API
  *     description: Инициализирует процесс тестирования для указанного проекта и теста.
  *     parameters:
  *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
- *       - in: query
- *         name: testId
- *         required: true
+ *         name: service
  *         schema:
  *           type: string
  *         description: Уникальный идентификатор теста
  *       - in: query
- *         name: dyn
- *         required: false
+ *         name: folder
  *         schema:
  *           type: string
- *         description: Динамическая настройка для теста (опционально)
+ *         description: Папка для будущего теста
  *     responses:
  *       200:
  *         description: Тест успешно запущен
@@ -65,27 +57,21 @@ function copyReference(project: string, folder: string) {
  *                   example: "Тест успешно запущен"
  */
 export default function startRoute(req: Request, res: Response) {
-    const {
-        project,
-        testId,
-        dyn,
+    let {
+        service,
+        folder
     } = req.query;
 
-    const taskId = String(dyn || '') || String(testId || '');
-    const projectName = String(project);
-    const host = getTestUrlByTask({
-        task: String(dyn || ''),
-        project: projectName,
-    });
+    const testId = service as string;
+    const host = getTestUrlByTask(testId);
 
-    const folder = taskId || getCurrentFormattedTime();
-    copyReference(projectName, folder);
+    folder = folder || testId || getCurrentFormattedTime();
+    copyReference(String(folder));
 
     console.log('Host: ', host);
     const start = Date.now();
     command('test', {
-        hostName: MOCK_ADDR || host,
-        project: projectName,
+        hostName: host,
         testId: folder,
         selectedScenariosLabels: req.body,
     }).then(() => {
@@ -97,12 +83,12 @@ export default function startRoute(req: Request, res: Response) {
         const end = Date.now();
         console.log(`Test take: ${end - start} ms`)
         SlackService.send({
-            project: projectName,
-            testId: taskId,
-            ...getTestResult(`backstop/test/${project}/${folder}`),
+            folder: String(folder),
+            ...getTestResult(`backstop/test/${folder}`),
             time: end - start
         },);
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send('ok');
     });
+
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.send(`Test ${folder} started, on server ${host}`)
 }

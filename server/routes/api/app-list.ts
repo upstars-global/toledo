@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import axios from 'axios';
-
-const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090';
+import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
 
 /**
  * @swagger
@@ -9,17 +7,11 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  * /api/app-list:
  *   get:
  *     summary: Получение перечня активных окружений
+ *     tags:
+ *       - Основные API
  *     description: Get application list
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *       200:
  *         description: Successfully retrieved list
@@ -36,30 +28,30 @@ const PROMETHEUS_ADDR = 'http://prometheus-kube-prometheus-prometheus.prometheus
  * @param {Object} req - Express.js request object. The query parameters should include 'field1' and/or 'field2'.
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
-export default function appList(req: Request, res: Response) {
-    const {
-        project,
-    } = req.query;
-    let nameSpace = project;
-    if (project === 'thor') {
-        nameSpace = 'thor-frontera';
+export default async function appList(req: Request, res: Response) {
+    const list = await listServices();
+    res.send(list)
+}
+
+async function listServices() {
+    try {
+        const kc = new KubeConfig();
+        kc.loadFromDefault();
+        const k8sApi = kc.makeApiClient(CoreV1Api);
+
+        const currentContext = kc.getContextObject(kc.currentContext);
+        const namespace = currentContext?.namespace || 'default';
+
+        const res = await k8sApi.listNamespacedService({namespace});
+        const filteredServices = res.items.filter((service: any) =>
+            service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock'
+        ).map((service: any) => service.metadata?.name);
+
+        console.log('Mock services in namespace:', namespace);
+        console.log(filteredServices)
+
+        return filteredServices;
+    } catch (err) {
+        console.error('Error fetching services:', err);
     }
-
-    const currentTime = new Date();
-    currentTime.setUTCMinutes(currentTime.getUTCMinutes() - 1);
-
-    const query = `count+by+%28name%29+%28argocd_app_info%7Bdest_namespace%3D%22${nameSpace}%22%7D%29&time=${currentTime.toISOString()}`;
-
-    axios.get(`${PROMETHEUS_ADDR}/api/v1/query?query=${query}`)
-        .then((data) => {
-            res.send(data.data.data.result.map((item: Record<string, unknown>) => {
-                return (item.metric as Record<string, string>).name;
-            }).filter((item: string) => {
-                return (/[0-9]/).test(item);
-            }));
-        }).catch((error) => {
-            // eslint-disable-next-line no-console
-            console.log(error);
-            res.status(500).send(error);
-        });
 }

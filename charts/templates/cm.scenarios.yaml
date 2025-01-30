@@ -1,0 +1,9 @@
+{{ range $path, $_ := .Files.Glob "scenarios/*.json" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Release.Name }}-{{ base $path }}
+binaryData:
+  {{ base "index.json" }}: {{ $.Files.Get $path | b64enc }}
+---
+{{ end }}

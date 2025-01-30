@@ -1,23 +1,34 @@
 import axios from 'axios';
+import { CLIENT_ADDR, SLACK_CHANEL } from '@config';
 
-function getChanelHook(project: string): string {
-    if (project === 'alpa') {
-        return 'https://hooks.slack.com/services/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';
-    }
-
-    return 'https://hooks.slack.com/services/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';
+function getReportLink(folder: string): string {
+    return `${ CLIENT_ADDR }/${ folder }`;
 }
 
-function getReportLink(project: string, testId: string): string {
-    return `https://backstop-panel.pages.dev/report/${ project }/${ testId }`;
+function getFolderParams(folder: string) {
+    if (folder.includes('_')) {
+        const [ _, tagName, pipelineId ] = folder.split('_');
+        return {
+            tagName,
+            pipelineId,
+        }
+    }
+
+    return {
+        task: folder.replace('frontera-', '').replace('-mock', '').replace('-thor', '').replace('-ss', '')
+    }
 }
 
 function getText(testId: string, time: number): string {
-    if (testId.startsWith('ALPA-') || testId.startsWith('FP-')) {
-        return `Test for task <https://upstars.atlassian.net/browse/${ testId.toUpperCase() }|${ testId }> ended`;
+    const {
+        task,
+        tagName,
+        pipelineId,
+    } = getFolderParams(testId)
+    if (task) {
+        return `Test for task <https://upstars.atlassian.net/browse/${ task }|${ task }> ended`;
     }
 
-    const [ _, tagName, pipelineId ] = testId.split('_');
     if (tagName && pipelineId) {
         return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended, and take: ${ time } minutes`;
     }
@@ -27,30 +38,28 @@ function getText(testId: string, time: number): string {
 
 export default {
     send: function send({
-        project,
-        testId,
+        folder,
         passed,
         failed,
         time
     }: {
-        project: string,
-        testId: string,
+        folder: string,
         passed: number,
         failed: number,
         time: number,
     }) {
-        if (!testId) {
+        if (!folder || !SLACK_CHANEL) {
             return;
         }
 
-        axios.post(getChanelHook(project), {
-            text: `Test ${ testId } ended with errors, and take: ${ time / 60000 } minutes`,
+        axios.post(SLACK_CHANEL, {
+            text: `Test ${ folder } ended with errors, and take: ${ time / 60000 } minutes`,
             pretty: 1,
             blocks: [
                 {
                     type: 'section',
                     text: {
-                        text: getText(testId, time / 60000),
+                        text: getText(folder, time / 60000),
                         type: 'mrkdwn',
                     },
                 },
@@ -101,7 +110,7 @@ export default {
                                 text: 'Result',
                             },
                             style: 'primary',
-                            url: getReportLink(project, testId),
+                            url: getReportLink(folder),
                         },
                     ],
                 },
