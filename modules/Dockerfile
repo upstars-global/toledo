@@ -1,6 +1,6 @@
-ARG NODE_VERSION=${DOCKER_PUBLIC_REPO}/node:22.11.0
+ARG NODE_VERSION="node:22.11.0-alpine"
 
-FROM ${NODE_BASE_VERSION}-alpine AS dev
+FROM ${DOCKER_PUBLIC_REPO}/${NODE_VERSION} AS dev
 
 WORKDIR /data
 COPY server/package.json ./server/package.json
