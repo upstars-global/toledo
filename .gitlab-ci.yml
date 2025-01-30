@@ -18,11 +18,14 @@ stages:
   - publish
 
 variables:
-  DO_REGISTRY: registry.digitalocean.com/bbq
-  DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
-  DO_SOURCE_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:develop
-  DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
-  GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+#  DO_REGISTRY: registry.digitalocean.com/bbq
+#  DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
+#  DO_SOURCE_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:develop
+#  DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
+  IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}
+  IMAGE_TAG_ALTERNATIVE: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}_${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
+  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.0.0
+#  GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
 
 build-package:
   stage: build
@@ -31,14 +34,15 @@ build-package:
     DOCKER_BUILD_CONTEXT: "."
   script:
     - echo "Building BackstopJS"
-    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+    - 'echo "{ \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
-        --destination ${DO_IMAGE_TAG} \
-        --destination ${DO_IMAGE_TAG_ALTERNATIVE} \
+        --destination ${IMAGE_TAG} \
+        --destination ${IMAGE_TAG_ALTERNATIVE} \
         --destination ${IMAGE} \
         --destination ${IMAGE_HASH} \
         --context "${DOCKER_BUILD_CONTEXT}" \
+        --build-arg DOCKER_PUBLIC_REPO=${SOURCE_IMAGE_TAG} \
         --single-snapshot
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
@@ -48,15 +52,17 @@ build-source:
   image: gcr.io/kaniko-project/executor:debug
   variables:
     DOCKER_BUILD_CONTEXT: "."
+    DOCKER_FILEPATH: "./modules/Dockerfile"
   script:
     - echo "Building source container"
-    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+    - 'echo "{ \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
-        --dockerfile "./modules/Dockerfile" \
-        --destination "${DO_SOURCE_IMAGE_TAG}-modules" \
-        --destination "${IMAGE}-modules" \
+        --dockerfile "${DOCKER_FILEPATH}" \
+        --destination "${SOURCE_IMAGE_TAG}" \
+        --destination "${IMAGE}" \
         --context "${DOCKER_BUILD_CONTEXT}" \
+        --build-arg DOCKER_PUBLIC_REPO=${DOCKER_PUBLIC_REPO} \
         --single-snapshot
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME == "develop"
