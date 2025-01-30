@@ -5,17 +5,12 @@ import path from 'path';
 /**
  * @swagger
  * /api/delete:
- *   delete:
+ *   get:
  *     summary: Удаление директории
+ *     tags:
+ *       - Основные API
  *     description: Удаляет указанную директорию в проекте на сервере.
  *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, в котором находится директория (только `alpa` или `thor`)
  *       - in: query
  *         name: folder
  *         required: true
@@ -34,11 +29,10 @@ import path from 'path';
  */
 export default function deleteRoute(req: Request, res: Response) {
     const {
-        project,
         folder,
     } = req.query;
 
-    const pathName = path.join(__dirname, `../../backstop/test/${project}/${folder}`);
+    const pathName = path.join(__dirname, `../../backstop/test/${folder}`);
     rmSync(pathName, { recursive: true, force: true });
 
     res.send(folder);

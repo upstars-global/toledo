@@ -10,17 +10,11 @@ const fs = require('fs');
  * /api/test-list:
  *   get:
  *     summary: Получения списков прошедших тестов
+ *     tags:
+ *       - Основные API
  *     description: Create new references
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: project
- *         required: true
- *         schema:
- *           type: string
- *           enum: [alpa, thor]
- *         description: Имя проекта, для которого запускается тест (только `alpa` или `thor`)
  *     responses:
  *      200:
  *         description: ok в любом случае
@@ -33,7 +27,7 @@ const fs = require('fs');
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export default function testList(req: Request, res: Response) {
-    const projectPath = path.join(__dirname, `../../backstop/test/${req.query.project}`);
+    const projectPath = path.join(__dirname, `../../backstop/test`);
     fs.readdir(projectPath, null, (err: Error, files: string[]) => {
         if (err) {
             throw err;
