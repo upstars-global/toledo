@@ -10,28 +10,15 @@ workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 stages:
   - build-source
   - build
-#  - publish
+  - publish
 
 variables:
-#  DO_REGISTRY: registry.digitalocean.com/bbq
-#  DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
-#  DO_SOURCE_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:develop
-#  DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
-#  IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}_${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
-#  IMAGE_TAG_ALTERNATIVE: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}_${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
-  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.0.0
-#  IMAGE_THOR: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}${IMAGE_POSTFIX}_${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
-#  IMAGE_SHA_THOR: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}${IMAGE_POSTFIX}-${CI_COMMIT_REF_SLUG}-${CI_COMMIT_SHORT_SHA}
-#  BASE_IMAGE_THOR: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}${IMAGE_POSTFIX}_v2.0.19
-
-#  IMAGE: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}${IMAGE_POSTFIX}_${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
-#  IMAGE_HASH: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}${IMAGE_POSTFIX}_${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
   GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.0.1
 
 build-package:
   stage: build
@@ -49,8 +36,6 @@ build-package:
         --context "${DOCKER_BUILD_CONTEXT}" \
         --build-arg DOCKER_PUBLIC_REPO=${SOURCE_IMAGE_TAG} \
         --single-snapshot
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
 build-source:
   stage: build-source
@@ -76,48 +61,48 @@ build-source:
         - "**/package.json"
         - "**/yarn.lock"
 
-#publish to development alpa:
-#  extends: .publish-to-argocd
-#  variables:
-#    APPSET_FILENAME: "${CI_PROJECT_NAME}-alpa-development.json"
-#    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-development"
-#    PUBLISH_TO_ENV: "development"
-#    HELM_VALUES_PATH: "./values/development-alpa.yaml"
-#    DESTINATION_NAMESPACE: "alpa"
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == "develop"
-#
-#publish to development thor-frontera:
-#  extends: .publish-to-argocd
-#  variables:
-#    APPSET_FILENAME: "${CI_PROJECT_NAME}-thor-frontera-development.json"
-#    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-thor-frontera-development"
-#    PUBLISH_TO_ENV: "development"
-#    HELM_VALUES_PATH: "./values/development-thor-frontera.yaml"
-#    DESTINATION_NAMESPACE: "thor-frontera"
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == "develop"
-#
-#publish to staging alpa:
-#  extends: .publish-to-argocd
-#  variables:
-#    APPSET_FILENAME: "${CI_PROJECT_NAME}-alpa-staging.json"
-#    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-staging"
-#    PUBLISH_TO_ENV: "staging"
-#    HELM_VALUES_PATH: "./values/staging-alpa.yaml"
-#    DESTINATION_NAMESPACE: "alpa"
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-#  when: manual
-#
-#publish to staging thor-frontera:
-#  extends: .publish-to-argocd
-#  variables:
-#    APPSET_FILENAME: "${CI_PROJECT_NAME}-thor-frontera-staging.json"
-#    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-thor-frontera-staging"
-#    PUBLISH_TO_ENV: "staging"
-#    HELM_VALUES_PATH: "./values/staging-thor-frontera.yaml"
-#    DESTINATION_NAMESPACE: "thor-frontera"
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
-#  when: manual
+publish to development alpa:
+  extends: .publish-to-argocd
+  variables:
+    APPSET_FILENAME: "${CI_PROJECT_NAME}-alpa-development.json"
+    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-development"
+    PUBLISH_TO_ENV: "development"
+    HELM_VALUES_PATH: "./values/development-alpa.yaml"
+    DESTINATION_NAMESPACE: "alpa"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_PIPELINE_SOURCE == "merge_request_event"
+
+publish to development thor-frontera:
+  extends: .publish-to-argocd
+  variables:
+    APPSET_FILENAME: "${CI_PROJECT_NAME}-thor-frontera-development.json"
+    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-thor-frontera-development"
+    PUBLISH_TO_ENV: "development"
+    HELM_VALUES_PATH: "./values/development-thor-frontera.yaml"
+    DESTINATION_NAMESPACE: "thor-frontera"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_PIPELINE_SOURCE == "merge_request_event"
+
+publish to staging alpa:
+  extends: .publish-to-argocd
+  variables:
+    APPSET_FILENAME: "${CI_PROJECT_NAME}-alpa-staging.json"
+    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-alpa-staging"
+    PUBLISH_TO_ENV: "staging"
+    HELM_VALUES_PATH: "./values/staging-alpa.yaml"
+    DESTINATION_NAMESPACE: "alpa"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  when: manual
+
+publish to staging thor-frontera:
+  extends: .publish-to-argocd
+  variables:
+    APPSET_FILENAME: "${CI_PROJECT_NAME}-thor-frontera-staging.json"
+    APP_DEPLOY_NAME: "${CI_PROJECT_NAME}-thor-frontera-staging"
+    PUBLISH_TO_ENV: "staging"
+    HELM_VALUES_PATH: "./values/staging-thor-frontera.yaml"
+    DESTINATION_NAMESPACE: "thor-frontera"
+  rules:
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  when: manual
