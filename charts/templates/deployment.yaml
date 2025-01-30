@@ -55,7 +55,7 @@ spec:
             - name: tests
               mountPath: /data/server/backstop/test/
             - name: scenarios
-              mountPath: /data/server/backstop/config/scenarios/thor.json
+              mountPath: /data/server/backstop/config/scenarios/
       restartPolicy: Always
       volumes:
         - name: data
@@ -66,5 +66,5 @@ spec:
             claimName: {{ .Release.Name }}-pvc-tests
         - name: scenarios
           configMap:
-            name: {{ $.Release.Name }}-thor.json
+            name: {{ $.Release.Name }}-{{ .Values.project }}.json
       serviceAccountName: {{ .Values.componentId }}

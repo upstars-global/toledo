@@ -6,6 +6,6 @@ metadata:
   labels:
     grafana_dashboard: '1'
 binaryData:
-  {{ base $path }}: {{ $.Files.Get $path | b64enc }}
+  {{ base index.json }}: {{ $.Files.Get $path | b64enc }}
 ---
 {{ end }}
