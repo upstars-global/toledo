@@ -31,8 +31,6 @@ spec:
               value: {{ .Values.slackChanel }}
             - name: CLIENT_ADDR
               value: {{ .Values.clientAddr }}
-            - name: PROJECT
-              value: {{ .Values.project }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
@@ -54,6 +52,8 @@ spec:
               mountPath: /data/server/backstop/reference/
             - name: tests
               mountPath: /data/server/backstop/test/
+            - name: scenarios
+              mountPath: /data/server/backstop/config/scenarios/
       restartPolicy: Always
       volumes:
         - name: data
@@ -62,4 +62,7 @@ spec:
         - name: tests
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc-tests
+        - name: scenarios
+          configMap:
+            name: {{ $.Release.Name }}-{{ .Values.scenarios }}.json
       serviceAccountName: {{ .Values.componentId }}

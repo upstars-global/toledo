@@ -1,5 +1,5 @@
 componentId: 'thor-frontera'
-project: 'thor'
+scenarios: 'thor'
 slackChanel: 'https://hooks.slack.com/services/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'
 clientAddr: 'https://backstop-panel.pages.dev/report/thor'
 defaultService: 'frontera-thor-staging-mock'

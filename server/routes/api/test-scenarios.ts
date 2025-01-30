@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import getScenarios from '../../backstop/config/scenarios';
+import scenarios from '../../backstop/config/scenarios/index.json';
 
 /**
  * @swagger
@@ -24,7 +24,6 @@ import getScenarios from '../../backstop/config/scenarios';
  * @param {Object} res - Express.js response object for sending back the generated results.
  */
 export function getScenariosProject(req: Request, res: Response) {
-    const scenarios = getScenarios();
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(scenarios));

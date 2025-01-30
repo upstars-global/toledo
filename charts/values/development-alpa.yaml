@@ -1,5 +1,5 @@
 componentId: 'alpa'
-project: 'alpa'
+scenarios: 'alpa'
 slackChanel: 'https://hooks.slack.com/services/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'
 clientAddr: 'https://backstop-panel.pages.dev/report/alpa'
 defaultService: 'frontera-alpa-develop-mock'
