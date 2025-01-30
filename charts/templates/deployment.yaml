@@ -25,12 +25,12 @@ spec:
       containers:
         - name: toledo
           env:
-            - name: ALPA_ADDR
-              value: {{ .Values.env.alpa_addr }}
-            - name: THOR_ADDR
-              value: {{ .Values.env.thor_addr }}
-            - name: ENVIRONMENT
-              value: {{ .Values.env_value }}
+            - name: DEFAULT_SERVICE
+              value: {{ .Values.defaultService }}
+            - name: SLACK_CHANEL
+              value: {{ .Values.slackChanel }}
+            - name: CLIENT_ADDR
+              value: {{ .Values.clientAddr }}
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
@@ -52,6 +52,8 @@ spec:
               mountPath: /data/server/backstop/reference/
             - name: tests
               mountPath: /data/server/backstop/test/
+            - name: scenarios
+              mountPath: /data/server/backstop/config/scenarios/
       restartPolicy: Always
       volumes:
         - name: data
@@ -60,4 +62,7 @@ spec:
         - name: tests
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-pvc-tests
+        - name: scenarios
+          configMap:
+            name: {{ $.Release.Name }}-{{ .Values.scenarios }}.json
       serviceAccountName: {{ .Values.componentId }}

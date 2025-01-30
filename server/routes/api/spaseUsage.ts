@@ -28,6 +28,8 @@ function getFolderSize(folderPath: string): Promise<number | 'error'> {
  * /api/spase-usage:
  *   get:
  *     summary: Получение данных о диске с тестами
+ *     tags:
+ *       - Основные API
  *     description: Get application list
  *     produces:
  *       - application/json
