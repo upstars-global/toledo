@@ -3,9 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ $.Release.Name }}-{{ base $path }}
-  labels:
-    grafana_dashboard: '1'
 binaryData:
-  {{ base index.json }}: {{ $.Files.Get $path | b64enc }}
+  {{ base "index.json" }}: {{ $.Files.Get $path | b64enc }}
 ---
 {{ end }}
