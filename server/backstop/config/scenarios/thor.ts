@@ -4,49 +4,49 @@ export default function getScenarios() {
             "label": "Homepage",
             "url": "/",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino",
             "url": "/casino",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Live",
             "url": "/live",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promotions Casino Current",
             "url": "/promotions/casino",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promotions Casino Actions",
             "url": "/promotions/casino/actions",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promotions Casino Tournaments",
             "url": "/promotions/casino/tournaments",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promotions Casino Quests for guest",
             "url": "/promotions/casino/quests",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Vip club Guest",
             "url": "/vip-club",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promotions Casino Quests for user",
@@ -58,91 +58,91 @@ export default function getScenarios() {
                     "value": "testpass@bbq.agency",
                 }
             ],
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "Bonus",
             "url": "/bonus",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Bonus sport",
             "url": "/bonus/sport",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Loyalty Program Page",
             "url": "/vip",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Tournament page",
             "url": "/tournaments/1690879800Newbies-Cup",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Promo page",
             "url": "/actions/marvel-stars",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino Categories Top",
             "url": "/casino/categories/top",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino Providers",
             "url": "/casino/providers",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino Provider netent",
             "url": "/casino/providers/netent",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino Theme",
             "url": "/casino/theme",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Casino Theme fruits",
             "url": "/casino/theme/fruits",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Live Providers",
             "url": "/live/providers",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Live Provider pragmatic play",
             "url": "/live/providers/pragmaticplaylive",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Live Categories",
             "url": "/live/categories",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Live Categories Top Live",
             "url": "/live/categories/toplive",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Search popup",
@@ -164,37 +164,37 @@ export default function getScenarios() {
             "label": "Benefits of Crypto",
             "url": "/benefits-of-crypto",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Aml Policy",
             "url": "/aml-policy",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Return Policy",
             "url": "/refund",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Responsible Gaming",
             "url": "/responsible-gaming",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Sports Betting Rules",
             "url": "/sports-betting-rules",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "Static Page",
             "url": "/kyc",
             "delay": 3000,
-            "readySelector": ".promo-banner",
+            "readySelector": "[data-test=\'promo-banner\']",
         },
         {
             "label": "PWA instruction ios safari popup",
@@ -231,7 +231,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "Vip club Auth",
@@ -243,7 +243,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "Profile auth",
@@ -255,7 +255,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "Personal data auth",
@@ -267,7 +267,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
             "clickSelector": "[data-test=\"personal-information-accordion-toggle\"]",
             "postInteractionWait": 3000,
         },
@@ -314,7 +314,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "PersonalLimits AddDepositLimit",
@@ -352,7 +352,7 @@ export default function getScenarios() {
                     "value": "testpass@bbq.agency",
                 }
             ],
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "Verification",
@@ -364,7 +364,7 @@ export default function getScenarios() {
                     "value": "testpass@bbq.agency",
                 }
             ],
-            "readySelector": ".header__wrapper",
+            "readySelector": "[data-test=\'header-wrapper\']",
         },
         {
             "label": "CashboxDashboard",
@@ -490,7 +490,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "clickSelector": ".header__user-balance",
+            "clickSelector": "[data-test=\'header-user-balance\']",
             "postInteractionWait": 1000,
         },
         {
@@ -503,7 +503,7 @@ export default function getScenarios() {
                 }
             ],
             "delay": 3000,
-            "clickSelectors": [ ".header [data-test=\"chat-button\"]" ],
+            "clickSelectors": [ "[data-test=\"chat-button\"]" ],
             "clickSelectorsMobile": [ "[data-test=\"bottom-menu-more\"]", ".sidebar [data-test=\"chat-button\"]" ],
             "scrollToSelector": ".sidebar .vip-manager",
             "postInteractionWait": 3000,
@@ -666,7 +666,7 @@ export default function getScenarios() {
         {
             "label": "Popup Leave now open",
             "url": "/registration",
-            "clickSelectors": [ ".logo" ],
+            "clickSelectors": [ "[data-test=\'logo\']" ],
             "postInteractionWait": 3000,
             "readySelector": ".popup",
         },
