@@ -44,8 +44,8 @@ build-package:
         --context "${DOCKER_BUILD_CONTEXT}" \
         --build-arg DOCKER_PUBLIC_REPO=${SOURCE_IMAGE_TAG} \
         --single-snapshot
-  rules:
-    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+#  rules:
+#    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
 build-source:
   stage: build-source
@@ -65,7 +65,7 @@ build-source:
         --build-arg DOCKER_PUBLIC_REPO=${DOCKER_PUBLIC_REPO} \
         --single-snapshot
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - modules/Dockerfile
         - "**/package.json"
