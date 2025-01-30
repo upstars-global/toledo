@@ -10,6 +10,8 @@ const fs = require('fs');
  * /api/test-list:
  *   get:
  *     summary: Получения списков прошедших тестов
+ *     tags:
+ *       - Основные API
  *     description: Create new references
  *     produces:
  *       - application/json

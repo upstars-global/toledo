@@ -9,6 +9,8 @@ import { getTestUrlByTask } from '../../helpers/hostHelper';
  * /api/reference:
  *   get:
  *     summary: Создание новых эталонов
+ *     tags:
+ *       - Основные API
  *     description: Create new references
  *     produces:
  *       - application/json

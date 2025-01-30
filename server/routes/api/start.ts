@@ -29,6 +29,8 @@ function copyReference(folder: string) {
  * /api/start:
  *   get:
  *     summary: Запуск теста
+ *     tags:
+ *       - Основные API
  *     description: Инициализирует процесс тестирования для указанного проекта и теста.
  *     parameters:
  *       - in: query

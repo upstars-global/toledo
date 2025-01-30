@@ -7,6 +7,8 @@ import path from 'path';
  * /api/delete:
  *   get:
  *     summary: Удаление директории
+ *     tags:
+ *       - Основные API
  *     description: Удаляет указанную директорию в проекте на сервере.
  *     parameters:
  *       - in: query

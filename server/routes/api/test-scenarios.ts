@@ -7,6 +7,8 @@ import getScenarios from '../../backstop/config/scenarios';
  * /api/test-scenarios:
  *   get:
  *     summary: Получения списка сценариев
+ *     tags:
+ *       - Основные API
  *     description: Create new references
  *     produces:
  *       - application/json

@@ -7,6 +7,8 @@ import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
  * /api/app-list:
  *   get:
  *     summary: Получение перечня активных окружений
+ *     tags:
+ *       - Основные API
  *     description: Get application list
  *     produces:
  *       - application/json
