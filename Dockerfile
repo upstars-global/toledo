@@ -1,4 +1,4 @@
-ARG NODE_BASE_VERSION="registry.digitalocean.com/bbq/toledo:develop-modules"
+ARG NODE_BASE_VERSION=${DOCKER_PUBLIC_REPO}
 
 FROM ${NODE_BASE_VERSION} AS prod
 
