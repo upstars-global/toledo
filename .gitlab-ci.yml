@@ -34,7 +34,7 @@ build-package:
     DOCKER_BUILD_CONTEXT: "."
   script:
     - echo "Building BackstopJS"
-    - 'echo "{ \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
         --destination ${IMAGE_TAG} \
@@ -55,7 +55,7 @@ build-source:
     DOCKER_FILEPATH: "./modules/Dockerfile"
   script:
     - echo "Building source container"
-    - 'echo "{ \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+    - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
     - >
       /kaniko/executor \
         --dockerfile "${DOCKER_FILEPATH}" \
