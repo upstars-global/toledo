@@ -10,7 +10,6 @@ workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 stages:
   - build-source
@@ -18,27 +17,24 @@ stages:
   - publish
 
 variables:
-  DO_REGISTRY: registry.digitalocean.com/bbq
-  DO_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_NAME}
-  DO_SOURCE_IMAGE_TAG: ${DO_REGISTRY}/${CI_PROJECT_NAME}:develop
-  DO_IMAGE_TAG_ALTERNATIVE: ${DO_REGISTRY}/${CI_PROJECT_NAME}:${CI_COMMIT_REF_SLUG}_${CI_PIPELINE_ID}
   GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.0.3
 
 build-package:
   stage: build
   image: gcr.io/kaniko-project/executor:debug
   variables:
     DOCKER_BUILD_CONTEXT: "."
-  script:
+  before_script:
     - echo "Building BackstopJS"
     - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+  script:
     - >
       /kaniko/executor \
-        --destination ${DO_IMAGE_TAG} \
-        --destination ${DO_IMAGE_TAG_ALTERNATIVE} \
         --destination ${IMAGE} \
         --destination ${IMAGE_HASH} \
         --context "${DOCKER_BUILD_CONTEXT}" \
+        --build-arg DOCKER_PUBLIC_REPO=${SOURCE_IMAGE_TAG} \
         --single-snapshot
   rules:
     - if: $CI_COMMIT_REF_NAME == "develop" || $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
@@ -48,18 +44,20 @@ build-source:
   image: gcr.io/kaniko-project/executor:debug
   variables:
     DOCKER_BUILD_CONTEXT: "."
-  script:
+    DOCKER_FILEPATH: "./modules/Dockerfile"
+  before_script:
     - echo "Building source container"
     - 'echo "{ \"auths\": { \"$DO_REGISTRY\": { \"username\": \"$DO_REGISTRY_TOKEN\", \"password\": \"$DO_REGISTRY_TOKEN\" } }, \"credHelpers\": { \"$DOCKER_REGISTRY\": \"ecr-login\" } }" > "/kaniko/.docker/config.json"'
+  script:
     - >
       /kaniko/executor \
-        --dockerfile "./modules/Dockerfile" \
-        --destination "${DO_SOURCE_IMAGE_TAG}-modules" \
-        --destination "${IMAGE}-modules" \
+        --dockerfile "${DOCKER_FILEPATH}" \
+        --destination "${SOURCE_IMAGE_TAG}" \
         --context "${DOCKER_BUILD_CONTEXT}" \
+        --build-arg DOCKER_PUBLIC_REPO=${DOCKER_PUBLIC_REPO} \
         --single-snapshot
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event" && $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       changes:
         - modules/Dockerfile
         - "**/package.json"
@@ -74,7 +72,7 @@ publish to development alpa:
     HELM_VALUES_PATH: "./values/development-alpa.yaml"
     DESTINATION_NAMESPACE: "alpa"
   rules:
-    - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_PIPELINE_SOURCE == "merge_request_event"
 
 publish to development thor-frontera:
   extends: .publish-to-argocd
@@ -85,7 +83,7 @@ publish to development thor-frontera:
     HELM_VALUES_PATH: "./values/development-thor-frontera.yaml"
     DESTINATION_NAMESPACE: "thor-frontera"
   rules:
-    - if: $CI_COMMIT_REF_NAME == "develop"
+    - if: $CI_COMMIT_REF_NAME == "develop" || $CI_PIPELINE_SOURCE == "merge_request_event"
 
 publish to staging alpa:
   extends: .publish-to-argocd
