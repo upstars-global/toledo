@@ -8,8 +8,8 @@
     {
         "label": "Casino",
         "url": "/casino",
-        "delay": 3000,
-        "readySelector": ".casino-page .producers-item"
+        "delay": 4000,
+        "readySelector": "[data-test=\"promo-banner\"]"
     },
     {
         "label": "Live",
@@ -731,7 +731,7 @@
                 "value": "testpass@bbq.agency"
             }
         ],
-        "delay": 3000,
+        "delay": 4000,
         "readySelector": "[data-test=\"modal-deposit-insurance\"]"
     },
     {
