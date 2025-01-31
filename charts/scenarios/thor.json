@@ -8,7 +8,7 @@
     {
         "label": "Casino",
         "url": "/casino",
-        "delay": 4000,
+        "delay": 3000,
         "readySelector": "[data-test=\"promo-banner\"]"
     },
     {
@@ -731,7 +731,7 @@
                 "value": "testpass@bbq.agency"
             }
         ],
-        "delay": 4000,
+        "delay": 3000,
         "readySelector": "[data-test=\"modal-deposit-insurance\"]"
     },
     {
