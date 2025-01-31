@@ -9,7 +9,7 @@
         "label": "Casino",
         "url": "/casino",
         "delay": 3000,
-        "readySelector": "[data-test=\"promo-banner\"]"
+        "readySelector": ".casino-page .producers-item"
     },
     {
         "label": "Live",
