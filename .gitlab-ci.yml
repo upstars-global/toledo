@@ -18,7 +18,7 @@ stages:
 
 variables:
   GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
-  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.0.3
+  SOURCE_IMAGE_TAG: ${DOCKER_REGISTRY}:${CI_PROJECT_NAME}-modules_v1.1.0
 
 build-package:
   stage: build
