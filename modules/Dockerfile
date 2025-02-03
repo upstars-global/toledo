@@ -1,4 +1,4 @@
-ARG NODE_VERSION="node:22.11.0-alpine3.19"
+ARG NODE_VERSION="node:22.13.1-alpine"
 
 FROM ${DOCKER_PUBLIC_REPO}/${NODE_VERSION} AS dev
 
@@ -9,4 +9,4 @@ COPY server/yarn.lock ./server/yarn.lock
 WORKDIR /data/server
 RUN yarn --frozen-lockfile
 
-RUN apk add chromium
+RUN apk add chromium=124.0.6367.257
