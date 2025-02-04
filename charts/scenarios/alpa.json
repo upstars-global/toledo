@@ -450,9 +450,11 @@
       }
     ],
     "url": "/",
-    "clickSelector": ".support-widget .n-fe-button",
+    "clickSelector": "[data-test=\"support-widget-button\"]",
     "clickSelectorsMobile": "[data-test=\"bottom-menu__open-sidebar\"]",
-    "selectors": [ ".vip-manager" ],
+    "selectors": [
+        "[data-test=\"vip-manager-panel\"]"
+    ],
     "delay": 2000,
     "postInteractionWait": 2000,
     "selectorExpansion": true
