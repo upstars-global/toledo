@@ -1,11 +1,10 @@
 name: Publish Helm Chart
 
 on:
-  push:
-    branches:
-      - "dev"
-    tags:
-      - "v*"
+  workflow_run:
+    workflows: ["Build and Push Docker Image"]
+    types:
+      - completed
 
 jobs:
   publish:
@@ -29,8 +28,8 @@ jobs:
 
       - name: Package Helm Chart
         run: |
-          helm package toledo-chart
+          helm package charts
 
       - name: Push Helm Chart to GHCR
         run: |
-          helm push toledo-chart-*.tgz oci://ghcr.io/${{ github.repository_owner }}
+          helm push charts-*.tgz oci://ghcr.io/${{ github.repository_owner }}
