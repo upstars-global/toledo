@@ -1,0 +1,36 @@
+name: Publish Helm Chart
+
+on:
+  push:
+    branches:
+      - "dev"
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: latest
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io --username ${{ github.actor }} --password-stdin
+
+      - name: Package Helm Chart
+        run: |
+          helm package toledo-chart
+
+      - name: Push Helm Chart to GHCR
+        run: |
+          helm push toledo-chart-*.tgz oci://ghcr.io/${{ github.repository_owner }}
