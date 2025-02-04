@@ -1,5 +1,5 @@
 include:
-  - component: $CI_SERVER_FQDN/components/security/trivy/trivy@@0.1.11
+  - component: $CI_SERVER_FQDN/components/security/trivy/trivy@0.1.11
     inputs:
       docker_image_to_scan: $IMAGE
       stage: scan
