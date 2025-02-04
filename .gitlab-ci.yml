@@ -1,4 +1,8 @@
 include:
+  - component: $CI_SERVER_FQDN/components/security/trivy/scan-image@0.1.13
+    inputs:
+      docker_image_to_scan: $IMAGE
+      stage: scan
   - project: common/gitlab-ci-templates
     file: "/build/common-variables-latest.yaml"
     ref: master
@@ -15,6 +19,7 @@ stages:
   - build-source
   - build
   - publish
+  - scan
 
 variables:
   GITLAB_IMAGE_TAG: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
