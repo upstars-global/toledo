@@ -64,5 +64,5 @@ spec:
             claimName: {{ .Release.Name }}-pvc-tests
         - name: scenarios
           configMap:
-            name: {{ $.Release.Name }}-{{ .Values.scenarios }}.json
+            name: {{ .Release.Name }}-index.json
       serviceAccountName: {{ .Values.componentId }}
