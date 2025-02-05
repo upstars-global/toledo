@@ -82,11 +82,15 @@ export default function startRoute(req: Request, res: Response) {
     }).finally(() => {
         const end = Date.now();
         console.log(`Test take: ${end - start} ms`)
-        SlackService.send({
-            folder: String(folder),
-            ...getTestResult(`backstop/test/${folder}`),
-            time: end - start
-        },);
+        try {
+            SlackService.send({
+                folder: String(folder),
+                ...getTestResult(`backstop/test/${folder}`),
+                time: end - start
+            },);
+        } catch (e) {
+            console.log(e);
+        }
     });
 
     res.setHeader('Access-Control-Allow-Origin', '*')

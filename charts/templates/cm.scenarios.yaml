@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ $.Release.Name }}-{{ base $path }}
-data:
-  {{ base "index.json" }}: {{ $.Files.Get $path }}
+binaryData:
+  {{ base "index.json" }}: {{ $.Files.Get $path | b64enc }}
 ---
 {{ end }}
