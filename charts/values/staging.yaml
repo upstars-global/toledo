@@ -1,0 +1,7 @@
+componentId: ''
+scenarios: []
+slackChanel: ''
+clientAddr: ''
+defaultService: ''
+ingress:
+  hostname: ''

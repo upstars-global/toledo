@@ -1,0 +1,7 @@
+componentId: ''
+scenarios: 'index.json'
+slackChanel: ''
+clientAddr: ''
+defaultService: ''
+ingress:
+  hostname: ''

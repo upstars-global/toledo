@@ -31,7 +31,7 @@ spec:
               value: {{ .Values.slackChanel }}
             - name: CLIENT_ADDR
               value: {{ .Values.clientAddr }}
-          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          image: "ghcr.io/upstars-global/toledo:dev"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.port }}
@@ -64,5 +64,5 @@ spec:
             claimName: {{ .Release.Name }}-pvc-tests
         - name: scenarios
           configMap:
-            name: {{ $.Release.Name }}-{{ .Values.scenarios }}.json
+            name: {{ $.Release.Name }}-{{ .Values.scenarios }}
       serviceAccountName: {{ .Values.componentId }}
