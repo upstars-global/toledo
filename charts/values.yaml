@@ -17,9 +17,9 @@ image:
 
 ingress:
   hostname: "localhost"
-#  cfIpList: ''
   annotations: []
 
 volume:
+  storageClassName: gp3
   size: 1Gi
   testSize: 20Gi

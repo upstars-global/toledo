@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
   name: {{ .Release.Name }}-pvc-tests
 spec:
-  storageClassName: gp3
+  storageClassName: {{ .Values.volume.storageClassName }}
   accessModes:
     - ReadWriteOnce
   resources:
