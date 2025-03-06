@@ -1,10 +1,14 @@
 import { Request, Response } from 'express';
+import PQueue from 'p-queue';
+import { cpSync } from 'fs';
+import path from 'path';
+
 import command from '../../backstop';
 import SlackService from '../../services/SlackService';
 import { getTestUrlByTask } from '../../helpers/hostHelper';
-import { cpSync } from 'fs';
-import path from 'path';
 import { getTestResult } from '../../helpers/getTestResult';
+
+const queue = new PQueue({ concurrency: 1 });
 
 function getCurrentFormattedTime() {
     const now = new Date();
@@ -69,30 +73,32 @@ export default function startRoute(req: Request, res: Response) {
     copyReference(String(folder));
 
     console.log('Host: ', host);
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.send(`Test ${folder} started, on server ${host}`)
+
+    queue.add(() => runTest(host, folder as string, req.body));
+}
+
+async function runTest(host: string, folder: string, selectedScenariosLabels: any) {
+    console.log(`Starting test for folder: ${folder}`);
     const start = Date.now();
-    command('test', {
-        hostName: host,
-        testId: folder,
-        selectedScenariosLabels: req.body,
-    }).then(() => {
-        console.log('complete');
-    }).catch((err: Error) => {
-        console.log(err);
-        console.log('error');
-    }).finally(() => {
+
+    try {
+        await command('test', { hostName: host, testId: folder, selectedScenariosLabels });
+    } catch (err) {
+        console.error('Test error:', err);
+    } finally {
         const end = Date.now();
-        console.log(`Test take: ${end - start} ms`)
+        console.log(`Test complete for folder: ${folder}`);
+        console.log(`Test took: ${end - start} ms`);
         try {
             SlackService.send({
                 folder: String(folder),
                 ...getTestResult(`backstop/test/${folder}`),
                 time: end - start
-            },);
+            });
         } catch (e) {
-            console.log(e);
+            console.error('Slack notification error:', e);
         }
-    });
-
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.send(`Test ${folder} started, on server ${host}`)
+    }
 }
