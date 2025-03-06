@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import scenarios from '../../backstop/config/scenarios/index.json';
+import getScenarios from '../../helpers/getScenarios';
 
 /**
  * @swagger
@@ -26,5 +26,5 @@ import scenarios from '../../backstop/config/scenarios/index.json';
 export function getScenariosProject(req: Request, res: Response) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(scenarios));
+    res.send(JSON.stringify(getScenarios()));
 }

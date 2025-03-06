@@ -1,4 +1,4 @@
-import scenariosBase from './config/scenarios/index.json';
+import getBaseScenarios from '../helpers/getScenarios';
 
 const backstop = require('backstopjs');
 const fs = require('fs');
@@ -20,7 +20,7 @@ function getPaths(command, folder) {
 function getScenarios() {
     const scenarios = [];
 
-    scenariosBase.forEach((config) => {
+    getBaseScenarios().forEach((config) => {
         scenarios.push({
             ...defaultScenarios,
             ...config,

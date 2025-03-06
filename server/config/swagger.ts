@@ -4,7 +4,7 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'Toledo API spec', // Название вашего API
+            title: 'Toledo v1.2.0 API spec', // Название вашего API
             version: '1.1.0', // Версия API
             description: 'Документация для Express API с использованием Swagger',
         },
