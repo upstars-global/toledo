@@ -4,18 +4,13 @@
 cd server
 yarn
 ```
-```bash
-cd app
-yarn
-yarn build
-```
-
-править тесты тут
-server/backstop/index.js 16
-
-
 запуск приложения
 ```bash
 cd server
 yarn server
 ```
+добавлять сценарии тут
+server/backstop/config/scenarios/index.json 
+
+перенести сценарии в 
+https://gitlab.upstr.to/whitelabel/toledo-thor/-/blob/main/charts/scenarios/thor.json
