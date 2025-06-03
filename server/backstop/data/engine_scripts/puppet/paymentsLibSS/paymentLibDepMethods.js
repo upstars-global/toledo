@@ -1,6 +1,6 @@
 module.exports = [
   {
-    'id': 'devcode_devcode-creditcard-36_creditcard',
+    'id': 'test_credit-card',
     'translationKey': 'creditcard',
     'title': null,
     'description': null,
@@ -38,7 +38,7 @@ module.exports = [
     'index': '00'
   },
   {
-    'id': 'devcode_devcode-creditcard-30_creditcard',
+    'id': 'test_credit-card',
     'translationKey': 'creditcard',
     'title': null,
     'description': null,
@@ -76,7 +76,7 @@ module.exports = [
     'index': '10'
   },
   {
-    'id': 'devcode_devcode-creditcard-36_creditcard',
+    'id': 'test_credit-card',
     'translationKey': 'creditcard',
     'title': null,
     'description': null,
@@ -106,7 +106,7 @@ module.exports = [
     'brand': 'creditcard'
   },
   {
-    'id': 'devcode_devcode-creditcard-30_creditcard',
+    'id': 'test_credit-card',
     'translationKey': 'creditcard',
     'title': null,
     'description': null,
@@ -136,7 +136,7 @@ module.exports = [
     'brand': 'creditcard'
   },
   {
-    'id': 'finteqhub_finteqhub-ezeewallet-91_ezeewallet',
+    'id': 'test_credit-card',
     'translationKey': 'ezeewallet',
     'title': null,
     'description': null,
@@ -166,7 +166,7 @@ module.exports = [
     'brand': 'ezeewallet'
   },
   {
-    'id': 'devcode_devcode-mifinity-23_mifinity',
+    'id': 'test_credit-card',
     'translationKey': 'mifinity',
     'title': null,
     'description': null,
@@ -196,7 +196,7 @@ module.exports = [
     'brand': 'mifinity'
   },
   {
-    'id': 'finteqhub_finteqhub-neteller-86_neteller',
+    'id': 'test_credit-card',
     'translationKey': 'neteller',
     'title': null,
     'description': null,
@@ -226,7 +226,7 @@ module.exports = [
     'brand': 'neteller'
   },
   {
-    'id': 'finteqhub_finteqhub-neosurf-85_neosurf',
+    'id': 'test_credit-card',
     'translationKey': 'neosurf',
     'title': null,
     'description': null,
@@ -256,7 +256,7 @@ module.exports = [
     'brand': 'neosurf'
   },
   {
-    'id': 'coinspaid_coinspaid-76_BTC_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -286,7 +286,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'coinspaid_coinspaid-76_BCH_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -316,7 +316,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'coinspaid_coinspaid-76_LTC_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -346,7 +346,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'coinspaid_coinspaid-76_ETH_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -376,7 +376,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'coinspaid_coinspaid-76_DOG_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -406,7 +406,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'coinspaid_coinspaid-76_USDT_coinspaid',
+    'id': 'test_crypto',
     'translationKey': 'coinspaid',
     'title': null,
     'description': null,
@@ -436,7 +436,7 @@ module.exports = [
     'brand': 'coinspaid'
   },
   {
-    'id': 'finteqhub_seamless_finteqhub_seamless-neosurf~neosurf-80_neosurf~neosurf',
+    'id': 'test_credit-card',
     'translationKey': 'neosurf~neosurf',
     'title': 'Neosurf',
     'description': 'Neosurf',
