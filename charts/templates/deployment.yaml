@@ -35,7 +35,7 @@ spec:
               value: {{ .Chart.AppVersion }}
             - name: Version
               value: {{ .Chart.Version }}
-          image: "ghcr.io/upstars-global/toledo:v{{ .Chart.Version }}"
+          image: "ghcr.io/upstars-global/toledo:{{ .Chart.Version }}"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.port }}
