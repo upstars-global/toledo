@@ -31,7 +31,11 @@ spec:
               value: {{ .Values.slackChanel }}
             - name: CLIENT_ADDR
               value: {{ .Values.clientAddr }}
-          image: "ghcr.io/upstars-global/toledo:v1.2.0"
+            - name: AppVersion
+              value: {{ .Chart.AppVersion }}
+            - name: Version
+              value: {{ .Chart.Version }}
+          image: "ghcr.io/upstars-global/toledo:v{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.port }}
