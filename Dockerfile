@@ -7,7 +7,8 @@ COPY server ./
 RUN yarn --frozen-lockfile
 
 RUN apk add chromium
-CMD yarn server
+ENTRYPOINT ["yarn"]
+CMD ["server"]
 
 EXPOSE 3000
 EXPOSE 9229
