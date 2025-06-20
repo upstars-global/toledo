@@ -1,4 +1,3 @@
-appVersion: ''
 componentId: ''
 defaultService: ''
 scenarios: ''
@@ -14,8 +13,7 @@ resources:
      memory: 6000Mi
 
 image:
-  name: 'localhost'
-  tag: 'master'
+  tag: ''
 
 ingress:
   hostname: "localhost"
