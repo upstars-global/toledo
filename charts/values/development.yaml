@@ -3,5 +3,6 @@ scenarios: 'index.json'
 slackChanel: ''
 clientAddr: ''
 defaultService: ''
+repoUrl: ''
 ingress:
   hostname: ''
