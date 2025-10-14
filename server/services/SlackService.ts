@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CLIENT_ADDR, SLACK_CHANEL } from '@config';
+import { CLIENT_ADDR, SLACK_CHANEL, REPO_URL } from '@config';
 
 function getReportLink(folder: string): string {
     return `${ CLIENT_ADDR }/${ folder }`;
@@ -14,26 +14,38 @@ function getFolderParams(folder: string) {
         }
     }
 
+    const regexTask = /[a-z]{2}-\d+/;
+    const regexEnv = /[a-z]{2}-\d+-.+$/;
+    const matchTask = folder.match(regexTask);
+    const matchEnv = folder.match(regexEnv);
+
     return {
-        task: folder.replace('frontera-', '').replace('-mock', '').replace('-thor', '').replace('-ss', '')
+        env: matchEnv ? matchEnv[0] : null,
+        task: matchTask ? matchTask[0] : folder,
     }
 }
 
 function getText(testId: string, time: number): string {
+    const repoUrl = REPO_URL ?? 'https://gitlab.upstr.to/whitelabel/frontera'
     const {
+        env,
         task,
         tagName,
         pipelineId,
     } = getFolderParams(testId)
+    if (task && env) {
+        return `Test for task <https://upstars.atlassian.net/browse/${ task.toUpperCase() }|${ env }> ended`;
+    }
+
     if (task) {
-        return `Test for task <https://upstars.atlassian.net/browse/${ task }|${ task }> ended`;
+        return `Test for <${ getReportLink(testId) }|${ task }> ended`;
     }
 
     if (tagName && pipelineId) {
-        return `Test for new release <https://gitlab.upstr.to/whitelabel/frontera/-/pipelines/${ pipelineId }|${ tagName }> ended, and take: ${ time } minutes`;
+        return `Test for new release <${repoUrl}/-/pipelines/${ pipelineId }|${ tagName }> ended, and take: ${ time.toFixed(2) } minutes`;
     }
 
-    return `Test for new tag <https://gitlab.upstr.to/whitelabel/frontera/-/tags/${ testId }|${ testId }> ended, and take: ${ time } minutes`;
+    return `Test for new tag <${repoUrl}/-/tags/${ testId }|${ testId }> ended, and take: ${ time.toFixed(2) } minutes`;
 }
 
 export default {
