@@ -5,6 +5,7 @@ module.exports = async (page, scenario, vp) => {
   const keyPressSelector = scenario.keyPressSelectors || scenario.keyPressSelector;
   const scrollToSelector = scenario.scrollToSelector;
   const postInteractionWait = scenario.postInteractionWait; // selector [str] | ms [int]
+  const betweenSelectorInteractionWait = scenario.betweenSelectorInteractionWait; // selector [str] | ms [int]
 
   if (keyPressSelector) {
     for (const keyPressSelectorItem of [].concat(keyPressSelector)) {
@@ -33,6 +34,9 @@ module.exports = async (page, scenario, vp) => {
     for (const clickSelectorIndex of [].concat(clickSelector)) {
       await page.waitForSelector(clickSelectorIndex);
       await page.click(clickSelectorIndex);
+      if(betweenSelectorInteractionWait) {
+        await new Promise(r => setTimeout(r, betweenSelectorInteractionWait))
+      }
     }
   }
 
