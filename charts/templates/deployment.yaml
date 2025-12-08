@@ -34,7 +34,7 @@ spec:
             - name: REPO_URL
               value: {{ .Values.repoUrl }}
             - name: MISMATCH_THRESHOLD
-              value: {{ .Values.misMatchThreshold }}
+              value: {{ .Values.misMatchThreshold | quote }}
           image: {{ printf "ghcr.io/upstars-global/toledo:%s" ( .Values.image.tag | default .Chart.AppVersion ) }}
           imagePullPolicy: IfNotPresent
           ports:
