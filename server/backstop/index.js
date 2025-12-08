@@ -1,4 +1,5 @@
 import getBaseScenarios from '../helpers/getScenarios';
+import { MISMATCH_THRESHOLD } from '../config';
 
 const backstop = require('backstopjs');
 const fs = require('fs');
@@ -24,6 +25,7 @@ function getScenarios() {
         scenarios.push({
             ...defaultScenarios,
             ...config,
+            misMatchThreshold: MISMATCH_THRESHOLD
         });
     });
 
