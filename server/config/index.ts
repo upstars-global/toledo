@@ -7,3 +7,4 @@ export const CLIENT_ADDR = process.env.CLIENT_ADDR;
 export const MOCK_ADDR = process.env.MOCK_ADDR;
 export const REPO_URL = process.env.REPO_URL;
 export const NODE_ENV = process.env.NODE_ENV;
+export const MISMATCH_THRESHOLD = process.env.MISMATCH_THRESHOLD || 0.5;

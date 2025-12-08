@@ -4,6 +4,7 @@ scenarios: ''
 clientAddr: ''
 slackChanel: ''
 repoUrl: ''
+misMatchThreshold: ''
 replicas: 1
 port: 3000
 

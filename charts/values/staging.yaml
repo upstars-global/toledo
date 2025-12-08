@@ -4,5 +4,6 @@ slackChanel: ''
 clientAddr: ''
 defaultService: ''
 repoUrl: ''
+misMatchThreshold: ''
 ingress:
   hostname: ''
