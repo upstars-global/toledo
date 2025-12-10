@@ -24,8 +24,8 @@ function getScenarios() {
     getBaseScenarios().forEach((config) => {
         scenarios.push({
             ...defaultScenarios,
+            misMatchThreshold: MISMATCH_THRESHOLD,
             ...config,
-            misMatchThreshold: MISMATCH_THRESHOLD
         });
     });
 

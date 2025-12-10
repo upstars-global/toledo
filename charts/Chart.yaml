@@ -2,4 +2,4 @@ apiVersion: v2
 appVersion: "1.2.0"
 description: toledo base helm
 name: toledo
-version: 1.7.2
+version: 1.7.3
