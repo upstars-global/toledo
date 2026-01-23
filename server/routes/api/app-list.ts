@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CoreV1Api, KubeConfig } from '@kubernetes/client-node';
+import { MOCK_KUBERNETES_IO_NAME } from '@config';
 
 /**
  * @swagger
@@ -44,7 +45,7 @@ async function listServices() {
 
         const res = await k8sApi.listNamespacedService({namespace});
         const filteredServices = res.items.filter((service: any) =>
-            service.metadata?.labels?.['app.kubernetes.io/name'] === 'frontera-mock'
+            service.metadata?.labels?.['app.kubernetes.io/name'] === MOCK_KUBERNETES_IO_NAME
         ).map((service: any) => service.metadata?.name);
 
         console.log('Mock services in namespace:', namespace);
