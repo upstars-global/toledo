@@ -26,3 +26,5 @@ volume:
   storageClassName: gp3
   size: 1Gi
   testSize: 20Gi
+
+mockKubernetesName: "frontera-mock"
