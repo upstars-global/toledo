@@ -9,6 +9,11 @@ import configRouter from './routes/config';
 const app = express();
 const port = 3000;
 
+copyFilesSafe(
+    '../charts/engine_scripts',
+    './server/backstop/data/engine_scripts'
+);
+
 app.use((_req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Cache-Control', 'private');
     next();
