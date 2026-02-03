@@ -1,7 +1,7 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-async function copyFilesSafe(fromDir, toDir) {
+export async function copyFilesSafe(fromDir: string, toDir: string) {
     try {
         // does the source directory exist?
         await fs.access(fromDir);
