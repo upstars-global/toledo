@@ -1,7 +1,7 @@
 module.exports = async (page, scenario, vp) => {
-    await require('./loadCookies')(page, scenario)
-    await require('./setLocalStorage')(page, scenario)
-    await require('./overrideCSS')(page, scenario)
+    await require('./settingScenarioCookies')(page, scenario)
+    await require('./injectLocalStorage')(page, scenario)
+    await require('./injectCSS')(page, scenario)
 
     // wait for stabilization fonts
     await page.evaluate(async () => {
