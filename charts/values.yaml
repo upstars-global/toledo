@@ -28,3 +28,5 @@ volume:
   testSize: 20Gi
 
 mockKubernetesName: "frontera-mock"
+
+createEngineScriptsConfigMap: false

@@ -5,9 +5,15 @@ import { swaggerSpec } from './config/swagger'
 import apiRouter from './routes/api';
 import reportRouter from './routes/report';
 import configRouter from './routes/config';
+import {copyFilesSafe} from './helpers/copyFilesSafe';
 
 const app = express();
 const port = 3000;
+
+copyFilesSafe(
+    '../charts/engine_scripts',
+    './backstop/data/engine_scripts/puppet'
+);
 
 app.use((_req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Cache-Control', 'private');

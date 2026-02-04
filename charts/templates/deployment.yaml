@@ -60,6 +60,10 @@ spec:
               mountPath: /data/server/backstop/test/
             - name: scenarios
               mountPath: /data/server/backstop/config/scenarios/
+{{- if .Values.createEngineScriptsConfigMap }}
+            - name: engine-scripts
+              mountPath: /data/server/backstop/data/engine_scripts/puppet/
+{{- end }}
       restartPolicy: Always
       volumes:
         - name: data
@@ -71,4 +75,9 @@ spec:
         - name: scenarios
           configMap:
             name: {{ $.Release.Name }}-{{ .Values.scenarios }}
+{{- if .Values.createEngineScriptsConfigMap }}
+        - name: engine-scripts
+          configMap:
+            name: {{ $.Release.Name }}-engine-scripts
+{{- end }}
       serviceAccountName: {{ .Values.componentId }}

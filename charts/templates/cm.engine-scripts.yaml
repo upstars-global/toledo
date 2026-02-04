@@ -1,0 +1,14 @@
+{{- if .Values.createEngineScriptsConfigMap }}
+{{- $files := .Files.Glob "engine_scripts/*.js" }}
+{{- if $files }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $.Release.Name }}-engine-scripts
+data:
+{{- range $path, $_ := $files }}
+  {{ base $path }}: |
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
+{{- end }}
