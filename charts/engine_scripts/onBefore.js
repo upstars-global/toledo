@@ -1,4 +1,5 @@
 module.exports = async (page, scenario, vp) => {
+    console.log("/toledo/charts/engine_scripts/onBefore.js")
     await require('./settingScenarioCookies')(page, scenario)
     await require('./injectLocalStorage')(page, scenario)
     await require('./injectCSS')(page, scenario)
