@@ -60,6 +60,8 @@ spec:
               mountPath: /data/server/backstop/test/
             - name: scenarios
               mountPath: /data/server/backstop/config/scenarios/
+            - name: engine_scripts
+              mountPath: /data/server/backstop/data/engine_scripts/
       restartPolicy: Always
       volumes:
         - name: data

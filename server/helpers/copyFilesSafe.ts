@@ -21,7 +21,7 @@ export async function copyFilesSafe(fromDir: string, toDir: string) {
 
         const stat = await fs.stat(src);
         if (!stat.isFile()) continue; // skip folders
-
+        console.log(src, 'copy to  -->', dest)
         await fs.copyFile(src, dest);
     }
 }
