@@ -14,8 +14,8 @@ function getFolderParams(folder: string) {
         }
     }
 
-    const regexTask = /[a-z]{2}-\d+/;
-    const regexEnv = /[a-z]{2}-\d+-.+$/;
+    const regexTask = /[a-z]{2,3}-\d+/;
+    const regexEnv = /[a-z]{2,3}-\d+-.+$/;
     const matchTask = folder.match(regexTask);
     const matchEnv = folder.match(regexEnv);
 
