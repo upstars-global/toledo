@@ -13,11 +13,15 @@ interface IReferenceListItem {
     image: string | null
 }
 
+interface IReferenceImages {
+    [label: string]: string
+}
+
 const REFERENCE_IMAGES_PATH = path.join(__dirname, '../../backstop/reference/images');
-const LOCAL_CHART_SCENARIOS_PATH = path.join(__dirname, '../../../charts/scenarios/index.json');
 const REFERENCE_IMAGE_ROUTE = '/reference';
 const CONFIG_ID = 'backstop_default';
 const IMAGE_EXTENSION_REGEXP = /\.(png|jpe?g)$/i;
+const DESKTOP_IMAGE_REGEXP = /_desktop\.(png|jpe?g)$/i;
 
 function makeSafeLabel(label: string): string {
     return label
@@ -29,36 +33,39 @@ function escapeRegExp(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function getReferenceImage(label: string, files: string[]): string | null {
-    const scenarioPattern = new RegExp(`^${escapeRegExp(CONFIG_ID)}_${escapeRegExp(makeSafeLabel(label))}_\\d+_`);
-    const scenarioFiles = files.filter((file) => (
-        scenarioPattern.test(file)
-    ));
+function getReferenceImages(files: string[], scenarios: IScenario[]): IReferenceImages {
+    const labels = Array.from(new Set(
+        scenarios
+            .map(({ label }) => label && makeSafeLabel(label))
+            .filter(Boolean) as string[]
+    )).sort((a, b) => b.length - a.length);
 
-    const image = scenarioFiles.find((file) => /_desktop\.(png|jpe?g)$/i.test(file)) || scenarioFiles[0];
+    if (!labels.length) {
+        return {};
+    }
 
-    return image ? `${REFERENCE_IMAGE_ROUTE}/${image}` : null;
+    const labelPattern = labels
+        .map(escapeRegExp)
+        .join('|');
+    const scenarioPattern = new RegExp(`^${escapeRegExp(CONFIG_ID)}_(${labelPattern})_\\d+_`);
+
+    return files.reduce<IReferenceImages>((accumulator, file) => {
+        const [, label] = file.match(scenarioPattern) || [];
+
+        if (!label || (accumulator[label] && !DESKTOP_IMAGE_REGEXP.test(file))) {
+            return accumulator;
+        }
+
+        accumulator[label] = file;
+
+        return accumulator;
+    }, {});
 }
 
-function getReferenceScenarios(): IScenario[] {
-    let scenarios: IScenario[] = [];
+function getReferenceImage(label: string, images: IReferenceImages): string | null {
+    const image = images[makeSafeLabel(label)];
 
-    try {
-        scenarios = getScenarios() as IScenario[];
-    } catch (err) {
-        console.log(err);
-    }
-
-    if (scenarios.length) {
-        return scenarios;
-    }
-
-    try {
-        return JSON.parse(fs.readFileSync(LOCAL_CHART_SCENARIOS_PATH, 'utf8')) as IScenario[];
-    } catch (err) {
-        console.log(err);
-        return scenarios;
-    }
+    return image ? `${REFERENCE_IMAGE_ROUTE}/${image}` : null;
 }
 
 /**
@@ -76,7 +83,7 @@ function getReferenceScenarios(): IScenario[] {
  *      200:
  *         description: Список сценариев с референсными изображениями
  */
-export default function referenceList(req: Request, res: Response) {
+export default function referenceList(_req: Request, res: Response) {
     let files: string[] = [];
 
     try {
@@ -86,20 +93,22 @@ export default function referenceList(req: Request, res: Response) {
         console.log(err);
     }
 
-    const list = getReferenceScenarios().reduce<IReferenceListItem[]>((accumulator, scenario) => {
+    const scenarios = getScenarios() as IScenario[];
+    const images = getReferenceImages(files, scenarios);
+
+    const list = scenarios.reduce<IReferenceListItem[]>((accumulator, scenario) => {
         if (!scenario.label) {
             return accumulator;
         }
 
         accumulator.push({
             name: scenario.label,
-            image: getReferenceImage(scenario.label, files),
+            image: getReferenceImage(scenario.label, images),
         });
 
         return accumulator;
     }, []);
 
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'application/json');
-    res.send(list);
+    res.json(list);
 }
