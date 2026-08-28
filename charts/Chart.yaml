@@ -3,7 +3,7 @@ apiVersion: v2
 # bump below). Consumer charts (toledo-alpa, etc.) should not override image.tag in their own
 # values.yaml — deployment.yaml falls back to this field, so bumping it here is the only pin
 # that needs to move for a new toledo image to actually reach a deployed pod.
-appVersion: "v1.11.0"
+appVersion: "v1.11.1"
 description: toledo base helm
 name: toledo
-version: 1.11.0
+version: 1.11.1
