@@ -33,19 +33,22 @@ function getText(testId: string, time: number): string {
         tagName,
         pipelineId,
     } = getFolderParams(testId)
+
+    let timeResult =  time ? `, and take: ${ time.toFixed(2) } minutes`: ""
+
     if (task && env) {
-        return `Test for task <https://upstars.atlassian.net/browse/${ task.toUpperCase() }|${ env }> ended`;
+        return `Test for task <https://upstars.atlassian.net/browse/${ task.toUpperCase() }|${ env }> ended${timeResult}`;
     }
 
     if (task) {
-        return `Test for <${ getReportLink(testId) }|${ task }> ended`;
+        return `Test for <${ getReportLink(testId) }|${ task }> ended${timeResult}`;
     }
 
     if (tagName && pipelineId) {
-        return `Test for new release <${repoUrl}/-/pipelines/${ pipelineId }|${ tagName }> ended, and take: ${ time.toFixed(2) } minutes`;
+        return `Test for new release <${repoUrl}/-/pipelines/${ pipelineId }|${ tagName }> ended${timeResult}`;
     }
 
-    return `Test for new tag <${repoUrl}/-/tags/${ testId }|${ testId }> ended, and take: ${ time.toFixed(2) } minutes`;
+    return `Test for new tag <${repoUrl}/-/tags/${ testId }|${ testId }> ended${timeResult}`;
 }
 
 export default {
