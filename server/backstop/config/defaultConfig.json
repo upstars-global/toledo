@@ -24,7 +24,7 @@
     "headless": true
   },
   "asyncCaptureLimit": 4,
-  "asyncCompareLimit": 2,
+  "asyncCompareLimit": 4,
   "debug": false,
   "debugWindow": false
 }
