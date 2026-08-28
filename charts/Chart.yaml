@@ -1,5 +1,9 @@
 apiVersion: v2
+# Keep this equal to the vX.Y.Z git tag you push for this release (same commit as the version
+# bump below). Consumer charts (toledo-alpa, etc.) should not override image.tag in their own
+# values.yaml — deployment.yaml falls back to this field, so bumping it here is the only pin
+# that needs to move for a new toledo image to actually reach a deployed pod.
 appVersion: "1.2.0"
 description: toledo base helm
 name: toledo
-version: 1.9.1
+version: 1.10.11
