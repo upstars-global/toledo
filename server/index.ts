@@ -5,7 +5,9 @@ import { swaggerSpec } from './config/swagger'
 import apiRouter from './routes/api';
 import reportRouter from './routes/report';
 import configRouter from './routes/config';
-import {copyFilesSafe} from './helpers/copyFilesSafe';
+import { copyFilesSafe } from './helpers/copyFilesSafe';
+import { NODE_ENV } from "@config";
+import { readFile } from 'node:fs';
 
 const app = express();
 const port = 3000;
@@ -33,7 +35,13 @@ app.use('/assets', express.static('./assets'));
 app.use('/test', express.static('./backstop/test'));
 app.use('/reference', express.static('./backstop/reference/images'));
 
+
+readFile(`./backstop/config/${ NODE_ENV ? 'defaultConfigDev' : 'defaultConfig' }.json`, (err, data) => {
+    if (err) throw err;
+    console.log(JSON.parse(data));
+})
+
 app.listen(port, () => {
     // eslint-disable-next-line no-console
-    console.log(`Example app listening on port ${port}`);
+    console.log(`Example app listening on port ${ port }`);
 });

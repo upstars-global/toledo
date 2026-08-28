@@ -9,3 +9,14 @@ export const REPO_URL = process.env.REPO_URL;
 export const NODE_ENV = process.env.NODE_ENV;
 export const MISMATCH_THRESHOLD = process.env.MISMATCH_THRESHOLD || 0.5;
 export const MOCK_KUBERNETES_IO_NAME = process.env.MOCK_KUBERNETES_IO_NAME || 'frontera-mock';
+
+console.log({
+    NODE_ENV,
+    DEFAULT_SERVICE,
+    SLACK_CHANEL,
+    CLIENT_ADDR,
+    MOCK_ADDR,
+    REPO_URL,
+    MISMATCH_THRESHOLD,
+    MOCK_KUBERNETES_IO_NAME
+})
