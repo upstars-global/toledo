@@ -12,6 +12,8 @@ import { readFile } from 'node:fs';
 const app = express();
 const port = 3000;
 
+console.log("Server started on port");
+
 copyFilesSafe(
     '../charts/engine_scripts',
     './backstop/data/engine_scripts/puppet'
