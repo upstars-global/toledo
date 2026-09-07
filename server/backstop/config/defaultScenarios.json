@@ -2,6 +2,7 @@
   "referenceUrl": "",
   "readyEvent": "",
   "readySelector": "",
+  "readySelectorInFrame": "",
   "delay": 0,
   "hideSelectors": [],
   "removeSelectors": [],
