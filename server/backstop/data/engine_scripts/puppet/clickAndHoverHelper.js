@@ -103,7 +103,7 @@ module.exports = async (page, scenario, vp, config = {}) => {
 
   if (keyPressSelector) {
     for (const keyPressSelectorItem of [].concat(keyPressSelector)) {
-      await page.waitForSelector(keyPressSelectorItem.selector);
+      await page.waitForSelector(keyPressSelectorItem.selector, { timeout: readyTimeout });
 
       if (keyPressSelectorItem?.clickSelector) {
         await page.click(keyPressSelectorItem.clickSelector);
@@ -115,7 +115,7 @@ module.exports = async (page, scenario, vp, config = {}) => {
 
   if (hoverSelector) {
     for (const hoverSelectorIndex of [].concat(hoverSelector)) {
-      await page.waitForSelector(hoverSelectorIndex);
+      await page.waitForSelector(hoverSelectorIndex, { timeout: readyTimeout });
       await page.hover(hoverSelectorIndex);
     }
   }
@@ -126,7 +126,7 @@ module.exports = async (page, scenario, vp, config = {}) => {
 
   if (clickSelector) {
     for (const clickSelectorIndex of [].concat(clickSelector)) {
-      await page.waitForSelector(clickSelectorIndex);
+      await page.waitForSelector(clickSelectorIndex, { timeout: readyTimeout });
       await page.click(clickSelectorIndex);
       if (betweenSelectorInteractionWait) {
         await wait(betweenSelectorInteractionWait);
@@ -139,7 +139,7 @@ module.exports = async (page, scenario, vp, config = {}) => {
   }
 
   if (scrollToSelector) {
-    await page.waitForSelector(scrollToSelector);
+    await page.waitForSelector(scrollToSelector, { timeout: readyTimeout });
     await page.evaluate(scrollToSelector => {
       document.querySelector(scrollToSelector).scrollIntoView();
     }, scrollToSelector);

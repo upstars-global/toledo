@@ -15,6 +15,7 @@
   "openReport": false,
   "onBeforeScript": "puppet/onBefore.js",
   "onReadyScript": "puppet/onReady.js",
+  "readyTimeout": 15000,
   "scenarios": [],
   "report": ["CI"],
   "engine": "puppeteer",
