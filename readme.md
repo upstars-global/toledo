@@ -20,6 +20,75 @@ https://gitlab.upstr.to/whitelabel/toledo-thor/-/blob/main/charts/scenarios/thor
 дока по запуску Toledo локально
 https://upstars.atlassian.net/wiki/spaces/FRONT/pages/446300163/Thor+Toledo
 
+## Ожидание готовности страницы
+
+Сценарий должен описывать наблюдаемое состояние интерфейса, при котором можно делать
+скриншот. Фиксированные таймеры (`delay` и числовые ожидания) оставлены для обратной
+совместимости, но использовать их стоит только тогда, когда у состояния нет надёжного
+DOM-признака.
+
+Порядок выполнения сценария:
+
+1. Toledo открывает URL и ждёт `readyEvent` и `readySelector`, если они заданы.
+2. Применяется `delay`, затем скрываются существующие элементы из `removeSelectors`.
+3. `onReady` выполняет ввод, hover и клики из сценария.
+4. После каждого клика применяется `betweenSelectorInteractionWait`, после всех действий —
+   `postInteractionWait`.
+5. Применяется прокрутка, а для `removeSelectors` добавляется CSS, который скрывает также
+   элементы, смонтированные с задержкой.
+6. После завершения `onReady` BackstopJS делает скриншот.
+
+Поля готовности:
+
+- `readySelector` — CSS-селектор начального состояния страницы до взаимодействий. Это
+  штатное ожидание BackstopJS: оно проверяет наличие элемента в DOM.
+- `postInteractionWait` — финальное состояние после кликов, hover или ввода. Поле можно
+  использовать и без взаимодействий как усиленную проверку содержимого перед скриншотом.
+- `betweenSelectorInteractionWait` — состояние между последовательными кликами. Ожидание
+  выполняется после каждого элемента массива `clickSelector`.
+- `readySelectorInFrame` — состояние внутри iframe. При его использовании `readySelector`
+  должен указывать на сам `iframe`.
+- `readyTimeout` — таймаут каждой операции `readyEvent`, `readySelector`, `readySelectorInFrame` и
+  строковых `postInteractionWait`/`betweenSelectorInteractionWait`, а также ожиданий элементов
+  для клика, hover, ввода и прокрутки. Глобальное значение Toledo — 15 секунд; отдельный
+  сценарий может переопределить его своим `readyTimeout`. Это предел каждой операции
+  ожидания, а не общий лимит времени всего сценария.
+
+`postInteractionWait` и `betweenSelectorInteractionWait` принимают CSS-селектор или число
+миллисекунд. Для строкового значения Toledo ждёт видимый элемент, завершение загрузки
+документа и шрифтов, загрузку и декодирование не скрытых через `display: none` или
+`visibility: hidden` элементов `img` внутри выбранного содержимого, два кадра браузерного
+рендера, а затем повторно проверяет состояние. Число сохраняет прежнее поведение и создаёт
+фиксированную паузу.
+
+Если селектор готовности не появился за отведённое время, текущий screenshot-case получает
+engine error, а Toledo продолжает остальные case. `readyEvent` — исключение в BackstopJS:
+по его таймауту ошибка записывается в лог, после чего сценарий продолжает выполнение.
+
+Если готовность зависит от нескольких частей страницы, условия можно объединить стандартным
+CSS `:has()`:
+
+```json
+{
+  "readySelector": "body:has([data-test=\"header\"]):has([data-test=\"footer\"]) main .catalog",
+  "clickSelector": "[data-test=\"open-modal\"]",
+  "postInteractionWait": ".modal:has(.results-list .result-card)"
+}
+```
+
+Для содержимого внутри iframe:
+
+```json
+{
+  "readySelector": ".widget iframe",
+  "readySelectorInFrame": "#app:has(.content-ready)"
+}
+```
+
+Селектор должен обозначать именно финальное состояние, которое попадёт в скриншот.
+Ожидание изображений распространяется на элементы `img`; CSS background images и
+продолжающиеся анимации автоматически не отслеживаются.
+
 ## Создание новой приложения на базе toledo
 
 toledo — это базовый Helm-чарт, который используется как зависимость для конкретных приложений (например, toledo-alpa, toledo-thor и т.д.).
@@ -67,7 +136,7 @@ mkdir -p charts/engine_scripts
 
 Создайте файл `charts/templates/cm.engine-scripts.yaml`:
 
-```yaml
+```gotmpl
 apiVersion: v1
 kind: ConfigMap
 metadata:
