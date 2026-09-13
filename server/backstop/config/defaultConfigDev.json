@@ -19,10 +19,11 @@
   "report": ["CI"],
   "engine": "puppeteer",
   "engineOptions": {
-    "args": ["--no-sandbox", "--disable-animations"]
+    "args": ["--no-sandbox", "--disable-animations"],
+    "headless": true
   },
-  "asyncCaptureLimit": 1,
-  "asyncCompareLimit": 1,
-  "debug": true,
-  "debugWindow": true
+  "asyncCaptureLimit": 4,
+  "asyncCompareLimit": 4,
+  "debug": false,
+  "debugWindow": false
 }
