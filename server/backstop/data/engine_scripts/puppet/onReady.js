@@ -4,6 +4,7 @@ module.exports = async (page, scenario, vp, isReference, browser, config) => {
   // await require('./paymentsLibSS')(page) commit for king
 
   await require('./clickAndHoverHelper')(page, scenario, vp, config)
+  await require('./stabilizeScreenshot')(page, scenario)
 
   // add more ready handlers here...
 }
