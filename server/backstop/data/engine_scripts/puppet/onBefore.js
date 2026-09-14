@@ -1,4 +1,5 @@
 module.exports = async (page, scenario, vp) => {
+  await require('./blockThirdPartyRequests')(page)
   await require('./loadCookies')(page, scenario)
   await require('./setLocalStorage')(page, scenario)
 

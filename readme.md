@@ -67,7 +67,7 @@ mkdir -p charts/engine_scripts
 
 Создайте файл `charts/templates/cm.engine-scripts.yaml`:
 
-```yaml
+```gotemplate
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -96,6 +96,18 @@ toledo:
 ### Пример: toledo-alpa
 
 См. репозиторий [toledo-alpa](https://gitlab.upstr.to/whitelabel/toledo-alpa) для примера реализации.
+
+### Стабилизация скриншотов
+
+Перед загрузкой страницы Toledo блокирует сторонние запросы Freshdesk, GTM, Google Analytics,
+DoubleClick, FullStory, Hotjar и отдельно загружаемый Web Vitals. После сценарных действий
+Toledo повторно применяет `removeSelectors`, ожидает загрузку шрифтов и короткий период
+стабильной высоты страницы. Это штатная часть каждого визуального теста и не требует настройки
+в проекте.
+
+Если проект монтирует собственный каталог `engine_scripts`, он заменяет базовые hooks из
+образа. В таком проекте добавьте в ConfigMap эти helpers и их вызовы из собственных
+`onBefore.js`/`onReady.js`.
 
 ## Релиз
 
